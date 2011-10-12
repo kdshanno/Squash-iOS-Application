@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50343BD214452F6900EDC043 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50343BD114452F6900EDC043 /* UIKit.framework */; };
+		50343BD414452F6900EDC043 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50343BD314452F6900EDC043 /* Foundation.framework */; };
+		50343BD614452F6900EDC043 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50343BD514452F6900EDC043 /* CoreGraphics.framework */; };
+		50343BD814452F6900EDC043 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50343BD714452F6900EDC043 /* CoreData.framework */; };
+		50343BDE14452F6900EDC043 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50343BDC14452F6900EDC043 /* InfoPlist.strings */; };
+		50343BE014452F6900EDC043 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50343BDF14452F6900EDC043 /* main.m */; };
+		50343BE414452F6900EDC043 /* SCRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50343BE314452F6900EDC043 /* SCRAppDelegate.m */; };
+		50343BE714452F6900EDC043 /* Squash_Court_Report.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50343BE514452F6900EDC043 /* Squash_Court_Report.xcdatamodeld */; };
+		50343BEA14452F6900EDC043 /* SCRMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50343BE914452F6900EDC043 /* SCRMasterViewController.m */; };
+		50343BED14452F6900EDC043 /* SCRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50343BEC14452F6900EDC043 /* SCRDetailViewController.m */; };
+		50343BF014452F6A00EDC043 /* SCRMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50343BEE14452F6A00EDC043 /* SCRMasterViewController.xib */; };
+		50343BF314452F6A00EDC043 /* SCRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50343BF114452F6A00EDC043 /* SCRDetailViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		50343BCD14452F6900EDC043 /* Squash Court Report.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squash Court Report.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50343BD114452F6900EDC043 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		50343BD314452F6900EDC043 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		50343BD514452F6900EDC043 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		50343BD714452F6900EDC043 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		50343BDB14452F6900EDC043 /* Squash Court Report-Info.plist */ = {isa = PBXFileReference; path = "Squash Court Report-Info.plist"; sourceTree = "<group>"; };
+		50343BDD14452F6900EDC043 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		50343BDF14452F6900EDC043 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		50343BE114452F6900EDC043 /* Squash Court Report-Prefix.pch */ = {isa = PBXFileReference; path = "Squash Court Report-Prefix.pch"; sourceTree = "<group>"; };
+		50343BE214452F6900EDC043 /* SCRAppDelegate.h */ = {isa = PBXFileReference; path = SCRAppDelegate.h; sourceTree = "<group>"; };
+		50343BE314452F6900EDC043 /* SCRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCRAppDelegate.m; sourceTree = "<group>"; };
+		50343BE614452F6900EDC043 /* Squash_Court_Report.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Squash_Court_Report.xcdatamodel; sourceTree = "<group>"; };
+		50343BE814452F6900EDC043 /* SCRMasterViewController.h */ = {isa = PBXFileReference; path = SCRMasterViewController.h; sourceTree = "<group>"; };
+		50343BE914452F6900EDC043 /* SCRMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCRMasterViewController.m; sourceTree = "<group>"; };
+		50343BEB14452F6900EDC043 /* SCRDetailViewController.h */ = {isa = PBXFileReference; path = SCRDetailViewController.h; sourceTree = "<group>"; };
+		50343BEC14452F6900EDC043 /* SCRDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCRDetailViewController.m; sourceTree = "<group>"; };
+		50343BEF14452F6A00EDC043 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SCRMasterViewController.xib; sourceTree = "<group>"; };
+		50343BF214452F6A00EDC043 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SCRDetailViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50343BCA14452F6900EDC043 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50343BD214452F6900EDC043 /* UIKit.framework in Frameworks */,
+				50343BD414452F6900EDC043 /* Foundation.framework in Frameworks */,
+				50343BD614452F6900EDC043 /* CoreGraphics.framework in Frameworks */,
+				50343BD814452F6900EDC043 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50343BC214452F6900EDC043 = {
+			isa = PBXGroup;
+			children = (
+				50343BD914452F6900EDC043 /* Squash Court Report */,
+				50343BD014452F6900EDC043 /* Frameworks */,
+				50343BCE14452F6900EDC043 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50343BCE14452F6900EDC043 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50343BCD14452F6900EDC043 /* Squash Court Report.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50343BD014452F6900EDC043 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50343BD114452F6900EDC043 /* UIKit.framework */,
+				50343BD314452F6900EDC043 /* Foundation.framework */,
+				50343BD514452F6900EDC043 /* CoreGraphics.framework */,
+				50343BD714452F6900EDC043 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50343BD914452F6900EDC043 /* Squash Court Report */ = {
+			isa = PBXGroup;
+			children = (
+				50343BE214452F6900EDC043 /* SCRAppDelegate.h */,
+				50343BE314452F6900EDC043 /* SCRAppDelegate.m */,
+				50343BE814452F6900EDC043 /* SCRMasterViewController.h */,
+				50343BE914452F6900EDC043 /* SCRMasterViewController.m */,
+				50343BEB14452F6900EDC043 /* SCRDetailViewController.h */,
+				50343BEC14452F6900EDC043 /* SCRDetailViewController.m */,
+				50343BEE14452F6A00EDC043 /* SCRMasterViewController.xib */,
+				50343BF114452F6A00EDC043 /* SCRDetailViewController.xib */,
+				50343BE514452F6900EDC043 /* Squash_Court_Report.xcdatamodeld */,
+				50343BDA14452F6900EDC043 /* Supporting Files */,
+			);
+			path = "Squash Court Report";
+			sourceTree = "<group>";
+		};
+		50343BDA14452F6900EDC043 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				50343BDB14452F6900EDC043 /* Squash Court Report-Info.plist */,
+				50343BDC14452F6900EDC043 /* InfoPlist.strings */,
+				50343BDF14452F6900EDC043 /* main.m */,
+				50343BE114452F6900EDC043 /* Squash Court Report-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50343BCC14452F6900EDC043 /* Squash Court Report */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50343BF614452F6A00EDC043 /* Build configuration list for PBXNativeTarget "Squash Court Report" */;
+			buildPhases = (
+				50343BC914452F6900EDC043 /* Sources */,
+				50343BCA14452F6900EDC043 /* Frameworks */,
+				50343BCB14452F6900EDC043 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Squash Court Report";
+			productName = "Squash Court Report";
+			productReference = 50343BCD14452F6900EDC043 /* Squash Court Report.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50343BC414452F6900EDC043 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 50343BC714452F6900EDC043 /* Build configuration list for PBXProject "Squash Court Report" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 50343BC214452F6900EDC043;
+			productRefGroup = 50343BCE14452F6900EDC043 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50343BCC14452F6900EDC043 /* Squash Court Report */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50343BCB14452F6900EDC043 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50343BDE14452F6900EDC043 /* InfoPlist.strings in Resources */,
+				50343BF014452F6A00EDC043 /* SCRMasterViewController.xib in Resources */,
+				50343BF314452F6A00EDC043 /* SCRDetailViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50343BC914452F6900EDC043 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50343BE014452F6900EDC043 /* main.m in Sources */,
+				50343BE414452F6900EDC043 /* SCRAppDelegate.m in Sources */,
+				50343BE714452F6900EDC043 /* Squash_Court_Report.xcdatamodeld in Sources */,
+				50343BEA14452F6900EDC043 /* SCRMasterViewController.m in Sources */,
+				50343BED14452F6900EDC043 /* SCRDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		50343BDC14452F6900EDC043 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50343BDD14452F6900EDC043 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		50343BEE14452F6A00EDC043 /* SCRMasterViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50343BEF14452F6A00EDC043 /* en */,
+			);
+			name = SCRMasterViewController.xib;
+			sourceTree = "<group>";
+		};
+		50343BF114452F6A00EDC043 /* SCRDetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50343BF214452F6A00EDC043 /* en */,
+			);
+			name = SCRDetailViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50343BF414452F6A00EDC043 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		50343BF514452F6A00EDC043 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		50343BF714452F6A00EDC043 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
+				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		50343BF814452F6A00EDC043 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
+				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50343BC714452F6900EDC043 /* Build configuration list for PBXProject "Squash Court Report" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50343BF414452F6A00EDC043 /* Debug */,
+				50343BF514452F6A00EDC043 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50343BF614452F6A00EDC043 /* Build configuration list for PBXNativeTarget "Squash Court Report" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50343BF714452F6A00EDC043 /* Debug */,
+				50343BF814452F6A00EDC043 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		50343BE514452F6900EDC043 /* Squash_Court_Report.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				50343BE614452F6900EDC043 /* Squash_Court_Report.xcdatamodel */,
+			);
+			currentVersion = 50343BE614452F6900EDC043 /* Squash_Court_Report.xcdatamodel */;
+			path = Squash_Court_Report.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 50343BC414452F6900EDC043 /* Project object */;
+}
