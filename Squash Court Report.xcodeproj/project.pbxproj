@@ -37,7 +37,6 @@
 		50A0EC27144553E100A8B3CF /* Wood_Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EC25144553E100A8B3CF /* Wood_Background@2x.png */; };
 		50A0EC3214455D3B00A8B3CF /* PlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC3114455D3B00A8B3CF /* PlayersViewController.m */; };
 		50A0EC36144562B400A8B3CF /* PlayerProfileEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC34144562B400A8B3CF /* PlayerProfileEditController.m */; };
-		50A0EC37144562B400A8B3CF /* PlayerProfileController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EC35144562B400A8B3CF /* PlayerProfileController.xib */; };
 		50A0EC3A1445695F00A8B3CF /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC391445695E00A8B3CF /* TextFieldCell.m */; };
 		50A0EC3D14457CA900A8B3CF /* PlayerProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC3C14457CA800A8B3CF /* PlayerProfileController.m */; };
 /* End PBXBuildFile section */
@@ -89,7 +88,6 @@
 		50A0EC3114455D3B00A8B3CF /* PlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayersViewController.m; sourceTree = "<group>"; };
 		50A0EC33144562B300A8B3CF /* PlayerProfileEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileEditController.h; sourceTree = "<group>"; };
 		50A0EC34144562B400A8B3CF /* PlayerProfileEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileEditController.m; sourceTree = "<group>"; };
-		50A0EC35144562B400A8B3CF /* PlayerProfileController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerProfileController.xib; sourceTree = "<group>"; };
 		50A0EC381445695E00A8B3CF /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		50A0EC391445695E00A8B3CF /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		50A0EC3B14457CA800A8B3CF /* PlayerProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileController.h; sourceTree = "<group>"; };
@@ -190,6 +188,39 @@
 			name = "Core Data Model";
 			sourceTree = "<group>";
 		};
+		5034ED5514460BE000895D86 /* List of Players */ = {
+			isa = PBXGroup;
+			children = (
+				50A0EBE8144545D300A8B3CF /* PlayersViewCell.h */,
+				50A0EBE9144545D300A8B3CF /* PlayersViewCell.m */,
+				50A0EC3014455D3B00A8B3CF /* PlayersViewController.h */,
+				50A0EC3114455D3B00A8B3CF /* PlayersViewController.m */,
+				5034ED5814460C0600895D86 /* Player Profile Edit */,
+				5034ED5714460BF100895D86 /* Player Profile */,
+			);
+			name = "List of Players";
+			sourceTree = "<group>";
+		};
+		5034ED5714460BF100895D86 /* Player Profile */ = {
+			isa = PBXGroup;
+			children = (
+				50A0EC3B14457CA800A8B3CF /* PlayerProfileController.h */,
+				50A0EC3C14457CA800A8B3CF /* PlayerProfileController.m */,
+			);
+			name = "Player Profile";
+			sourceTree = "<group>";
+		};
+		5034ED5814460C0600895D86 /* Player Profile Edit */ = {
+			isa = PBXGroup;
+			children = (
+				50A0EC381445695E00A8B3CF /* TextFieldCell.h */,
+				50A0EC391445695E00A8B3CF /* TextFieldCell.m */,
+				50A0EC33144562B300A8B3CF /* PlayerProfileEditController.h */,
+				50A0EC34144562B400A8B3CF /* PlayerProfileEditController.m */,
+			);
+			name = "Player Profile Edit";
+			sourceTree = "<group>";
+		};
 		50A0EBDC1445425300A8B3CF /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,17 +248,7 @@
 		50A0EBEC14454A6800A8B3CF /* Players */ = {
 			isa = PBXGroup;
 			children = (
-				50A0EBE8144545D300A8B3CF /* PlayersViewCell.h */,
-				50A0EBE9144545D300A8B3CF /* PlayersViewCell.m */,
-				50A0EC3014455D3B00A8B3CF /* PlayersViewController.h */,
-				50A0EC3114455D3B00A8B3CF /* PlayersViewController.m */,
-				50A0EC381445695E00A8B3CF /* TextFieldCell.h */,
-				50A0EC391445695E00A8B3CF /* TextFieldCell.m */,
-				50A0EC3B14457CA800A8B3CF /* PlayerProfileController.h */,
-				50A0EC3C14457CA800A8B3CF /* PlayerProfileController.m */,
-				50A0EC33144562B300A8B3CF /* PlayerProfileEditController.h */,
-				50A0EC34144562B400A8B3CF /* PlayerProfileEditController.m */,
-				50A0EC35144562B400A8B3CF /* PlayerProfileController.xib */,
+				5034ED5514460BE000895D86 /* List of Players */,
 			);
 			name = Players;
 			sourceTree = "<group>";
@@ -294,7 +315,6 @@
 				50A0EBE4144544A600A8B3CF /* Raquet_Icon.png in Resources */,
 				50A0EC26144553E100A8B3CF /* Wood_Background.png in Resources */,
 				50A0EC27144553E100A8B3CF /* Wood_Background@2x.png in Resources */,
-				50A0EC37144562B400A8B3CF /* PlayerProfileController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
