@@ -1,5 +1,5 @@
 //
-//  SCRMasterViewController.h
+//  MainViewController.h
 //  Squash Court Report
 //
 //  Created by Max Shaw on 10/11/11.
@@ -7,17 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreDataModel.h"
 
-@class SCRDetailViewController;
 
-#import <CoreData/CoreData.h>
+@interface MainViewController : UITableViewController
 
-@interface SCRMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
-
-@property (strong, nonatomic) SCRDetailViewController *detailViewController;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
-
 
 @end

@@ -1,0 +1,38 @@
+//
+//  Player.h
+//  Squash Court Report
+//
+//  Created by Max Shaw on 10/11/11.
+//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+typedef enum {
+    kLeftHanded,
+    kRightHanded
+} handedness;
+
+@interface Player : NSManagedObject
+
+@property (nonatomic, retain) NSDate * dateBorn;
+@property (nonatomic, retain) NSNumber * handedness;
+@property (nonatomic, retain) NSString * firstName;
+@property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSSet *matches;
+@end
+
+@interface Player (CoreDataGeneratedAccessors)
+
+- (void)setHanded:(int)handedness;
+- (int)getHanded;
+
+- (NSString *)getFullName;
+
+- (void)addMatchesObject:(NSManagedObject *)value;
+- (void)removeMatchesObject:(NSManagedObject *)value;
+- (void)addMatches:(NSSet *)values;
+- (void)removeMatches:(NSSet *)values;
+
+@end

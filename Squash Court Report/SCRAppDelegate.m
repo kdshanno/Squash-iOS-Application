@@ -9,6 +9,7 @@
 #import "SCRAppDelegate.h"
 
 #import "SCRMasterViewController.h"
+#import "MainViewController.h"
 
 @implementation SCRAppDelegate
 
@@ -23,9 +24,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    SCRMasterViewController *masterViewController = [[SCRMasterViewController alloc] initWithNibName:@"SCRMasterViewController" bundle:nil];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-    masterViewController.managedObjectContext = self.managedObjectContext;
+    MainViewController *mainController = [[MainViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:mainController];
+    [self.navigationController.navigationBar setTintColor:[UIColor redColor]];
+    mainController.managedObjectContext = self.managedObjectContext;
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -41,6 +43,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [self saveContext];
+
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -49,6 +53,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [self.managedObjectContext save:nil];
+
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
@@ -65,6 +71,7 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+
 }
 
 - (void)saveContext
