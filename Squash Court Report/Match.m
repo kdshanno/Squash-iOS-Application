@@ -19,5 +19,13 @@
 @dynamic player1;
 @dynamic player2;
 @dynamic games;
+@dynamic city;
+@dynamic complex;
+@dynamic country;
+@dynamic drawRound;
+@dynamic matchType;
+@dynamic provinceState;
+@dynamic recordingType;
+@dynamic tournamentName;
 
 @end

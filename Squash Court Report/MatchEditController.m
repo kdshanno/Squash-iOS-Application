@@ -1,30 +1,21 @@
 //
-//  MainViewController.m
+//  MatchEditController.m
 //  Squash Court Report
 //
-//  Created by Max Shaw on 10/11/11.
+//  Created by Maxwell Shaw on 10/14/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "MainViewController.h"
-#import "MainViewCell.h"
-#import "PlayersViewController.h"
-#import "ShotEntryController.h"
+#import "MatchEditController.h"
 
-@implementation MainViewController
 
-@synthesize fetchedResultsController = __fetchedResultsController;
-@synthesize managedObjectContext = __managedObjectContext;
-
+@implementation MatchEditController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedString(@"Court Report", @"Court Report");
-        [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Wood_Background.png"]]];
-
     }
     return self;
 }
@@ -65,15 +56,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    /*
-    Player *player = [NSEntityDescription insertNewObjectForEntityForName:@"Player" inManagedObjectContext:self.managedObjectContext];
-    player.firstName = @"Kelly";
-    player.lastName = @"Shannon";
-    player.dateBorn = [NSDate date];
-    player.handedness = [NSNumber numberWithInt:kLeftHanded];
-    
-    [self.managedObjectContext save:nil];
-    */
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -96,56 +78,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 4;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    MainViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[MainViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    switch (indexPath.row) {
-        case 0: {
-            cell.mainLabel.text = @"Log New Match";
-            [cell.leftImageView setImage:[UIImage imageNamed:@"Person_Icon"]];
-
-            break;
-        }
-        case 1: {
-            cell.mainLabel.text = @"Players";
-            [cell.leftImageView setImage:[UIImage imageNamed:@"Person_Icon"]];
-            break;
-        }
-
-        case 2: {
-            cell.mainLabel.text = @"Matches";
-            [cell.leftImageView setImage:[UIImage imageNamed:@"Raquet_Icon"]];
-
-            break;
-        }
-
-        case 3: {
-            cell.mainLabel.text = @"Options";
-            [cell.leftImageView setImage:[UIImage imageNamed:@"Person_Icon"]];
-
-
-            break;
-        }
-
-            
-        default:
-            break;
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -196,30 +147,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-            
-        case 0: {
-            ShotEntryController *shotEntryController = [[ShotEntryController alloc] init];
-            shotEntryController.managedObjectContext = self.managedObjectContext;
-            [self.navigationController pushViewController:shotEntryController animated:YES];
-            break;
-        }
-        
-        case 1: {
-            PlayersViewController *playersViewController = [[PlayersViewController alloc] initWithStyle:UITableViewStylePlain];
-            playersViewController.managedObjectContext = self.managedObjectContext;
-            [self.navigationController pushViewController:playersViewController animated:YES];
-    
-            break;
-        }
-            
-        default:
-            break;
-    }
-    
-
-    
-    
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
 }
 
 @end

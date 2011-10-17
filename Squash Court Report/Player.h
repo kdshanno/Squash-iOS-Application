@@ -20,7 +20,15 @@ typedef enum {
 @property (nonatomic, retain) NSNumber * handedness;
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
-@property (nonatomic, retain) NSSet *matches;
+@property (nonatomic, retain) NSSet * matches;
+@property (nonatomic, retain) NSString * city;
+@property (nonatomic, retain) NSString * country;
+@property (nonatomic, retain) NSString * headCoach;
+@property (nonatomic, retain) NSString * homeClub;
+@property (nonatomic, retain) NSString * stateProvince;
+@property (nonatomic, retain) NSString * style;
+
+
 @end
 
 @interface Player (CoreDataGeneratedAccessors)

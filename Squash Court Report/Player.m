@@ -16,6 +16,12 @@
 @dynamic firstName;
 @dynamic lastName;
 @dynamic matches;
+@dynamic city;
+@dynamic country;
+@dynamic headCoach;
+@dynamic homeClub;
+@dynamic stateProvince;
+@dynamic style;
 
 - (void)setHanded:(int)handedness {
     self.handedness = [NSNumber numberWithInt:handedness];

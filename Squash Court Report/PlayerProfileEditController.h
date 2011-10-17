@@ -22,6 +22,15 @@
 
 @property (strong, nonatomic) UITextField *firstNameField;
 @property (strong, nonatomic) UITextField *lastNameField;
+@property (strong, nonatomic) UITextField *playerStyle;
+@property (strong, nonatomic) UITextField *city;
+@property (strong, nonatomic) UITextField *stateProvince;
+@property (strong, nonatomic) UITextField *country;
+@property (strong, nonatomic) UITextField *homeClub;
+@property (strong, nonatomic) UITextField *headCoach;
+
+
+
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (retain) id delegate;

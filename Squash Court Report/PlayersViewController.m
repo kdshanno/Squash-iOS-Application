@@ -10,6 +10,7 @@
 #import "PlayersViewCell.h"
 #import "PlayerProfileController.h"
 #import "PlayerProfileEditController.h"
+#import "PlayerProfileTableViewController.h"
 
 @interface PlayersViewController ()
 - (void)configureCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -151,10 +152,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PlayerProfileController *playerProfile = [[PlayerProfileController alloc] initWithStyle:UITableViewStyleGrouped];
+    PlayerProfileTableViewController *playerProfile = [[PlayerProfileTableViewController alloc] initWithStyle:UITableViewStylePlain];
     Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
     playerProfile.player = player;
-    playerProfile.title = [player getFullName];
+    //playerProfile.title = [player getFullName];
     [self.navigationController pushViewController:playerProfile animated:YES];
     
 }

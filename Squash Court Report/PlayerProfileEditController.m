@@ -11,7 +11,7 @@
 
 @implementation PlayerProfileEditController
 
-@synthesize firstNameField, lastNameField, player, delegate;
+@synthesize firstNameField, lastNameField, player, delegate, playerStyle, city, stateProvince, country, homeClub, headCoach;
 @synthesize managedObjectContext = __managedObjectContext;
 
 
@@ -70,7 +70,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
     
-    self.title = (self.player == nil) ? @"Add New Player" : [self.player getFullName];
+    self.title = @"Edit Player";
 }
 
 - (void)viewDidUnload
@@ -117,7 +117,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,6 +146,59 @@
             }
             break;
         }
+        case 2: {
+            cell.identifierLabel.text = @"Style";
+            self.playerStyle = cell.textField;
+            if (self.player != nil) {
+                self.playerStyle.text = self.player.firstName;
+            }
+            break;
+        }
+        case 3: {
+            cell.identifierLabel.text = @"City";
+            self.city = cell.textField;
+            if (self.player != nil) {
+                self.city.text = self.player.lastName;
+            }
+            break;
+        }
+        case 4: {
+            cell.identifierLabel.text = @"State / Province";
+            self.stateProvince = cell.textField;
+            if (self.player != nil) {
+                self.stateProvince.text = self.player.lastName;
+            }
+            break;
+        }
+
+        case 5: {
+            cell.identifierLabel.text = @"Country";
+            self.country = cell.textField;
+            if (self.player != nil) {
+                self.country.text = self.player.lastName;
+            }
+            break;
+        }
+        case 6: {
+            cell.identifierLabel.text = @"Home Club";
+            self.homeClub = cell.textField;
+            if (self.player != nil) {
+                self.homeClub.text = self.player.lastName;
+            }
+            break;
+        }
+
+        case 7: {
+            cell.identifierLabel.text = @"Head Coach";
+            self.headCoach = cell.textField;
+            if (self.player != nil) {
+                self.lastNameField.text = self.player.lastName;
+            }
+            break;
+        }
+
+
+
         default:
             break;
     }

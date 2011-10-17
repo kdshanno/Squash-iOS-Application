@@ -11,6 +11,16 @@
 
 @class Player;
 
+typedef enum {
+    kPractice,
+    kTournament
+} matchType;
+
+typedef enum {
+    kFilm,
+    kLive
+} recordingType;
+
 @interface Match : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * numberOfGames;
@@ -20,6 +30,16 @@
 @property (nonatomic, retain) Player *player1;
 @property (nonatomic, retain) Player *player2;
 @property (nonatomic, retain) NSSet *games;
+@property (nonatomic, retain) NSString * city;
+@property (nonatomic, retain) NSString * complex;
+@property (nonatomic, retain) NSString * country;
+@property (nonatomic, retain) NSString * drawRound;
+@property (nonatomic, retain) NSString * provinceState;
+@property (nonatomic, retain) NSString * tournamentName;
+@property (nonatomic, retain) NSNumber * matchType;
+@property (nonatomic, retain) NSNumber * recordingType;
+
+
 @end
 
 @interface Match (CoreDataGeneratedAccessors)

@@ -1,0 +1,18 @@
+//
+//  PlayerProfileCell.h
+//  Squash Court Report
+//
+//  Created by Maxwell Shaw on 10/15/11.
+//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#define PLAYERCELLHEIGHT 30
+
+@interface PlayerProfileCell : UITableViewCell
+
+@property (strong, nonatomic) UILabel *leftLabel;
+@property (strong, nonatomic) UILabel *rightLabel;
+
+
+@end
