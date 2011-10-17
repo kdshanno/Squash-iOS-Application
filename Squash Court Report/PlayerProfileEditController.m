@@ -111,13 +111,27 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 8;
+    switch (section) {
+        case 0:
+            return 3;
+            break;
+        case 1:
+            return 1;
+            break;
+        case 2:
+            return 5;
+            break;
+            
+        default:
+            break;
+    };
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,81 +143,107 @@
         cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    switch (indexPath.row) {
+    switch (indexPath.section) {
         case 0: {
-            cell.identifierLabel.text = @"First Name";
-            self.firstNameField = cell.textField;
-            if (self.player != nil) {
-                self.firstNameField.text = self.player.firstName;
-            }
+            switch (indexPath.row) {
+                case 0: {
+                    cell.identifierLabel.text = @"First Name";
+                    self.firstNameField = cell.textField;
+                    if (self.player != nil) {
+                        self.firstNameField.text = self.player.firstName;
+                    }
+                    break;
+                }
+                case 1: {
+                    cell.identifierLabel.text = @"Last Name";
+                    self.lastNameField = cell.textField;
+                    if (self.player != nil) {
+                        self.lastNameField.text = self.player.lastName;
+                    }
+                    break;
+                }
+                case 2: {
+                    cell.identifierLabel.text = @"Style";
+                    self.playerStyle = cell.textField;
+                    if (self.player != nil) {
+                        self.playerStyle.text = self.player.firstName;
+                    }
+                    break;
+                }
+                    
+                default:
+                    break;
+            }   
+            
             break;
         }
+            
         case 1: {
-            cell.identifierLabel.text = @"Last Name";
-            self.lastNameField = cell.textField;
-            if (self.player != nil) {
-                self.lastNameField.text = self.player.lastName;
-            }
+            UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Left-Handed", @"Right-Handed", nil]];
+            segControl.frame = CGRectMake(0, 0, 300, cell.contentView.frame.size.height) ;
+            [segControl setTintColor:[UIColor redColor]];
+            [cell.contentView addSubview:segControl];
+            
             break;
         }
+            
         case 2: {
-            cell.identifierLabel.text = @"Style";
-            self.playerStyle = cell.textField;
-            if (self.player != nil) {
-                self.playerStyle.text = self.player.firstName;
+            switch (indexPath.row) {
+                case 0: {
+                    cell.identifierLabel.text = @"City";
+                    self.city = cell.textField;
+                    if (self.player != nil) {
+                        self.city.text = self.player.lastName;
+                    }
+                    break;
+                }
+                case 1: {
+                    cell.identifierLabel.text = @"State / Province";
+                    self.stateProvince = cell.textField;
+                    if (self.player != nil) {
+                        self.stateProvince.text = self.player.lastName;
+                    }
+                    break;
+                }
+                    
+                case 2: {
+                    cell.identifierLabel.text = @"Country";
+                    self.country = cell.textField;
+                    if (self.player != nil) {
+                        self.country.text = self.player.lastName;
+                    }
+                    break;
+                }
+                case 3: {
+                    cell.identifierLabel.text = @"Home Club";
+                    self.homeClub = cell.textField;
+                    if (self.player != nil) {
+                        self.homeClub.text = self.player.lastName;
+                    }
+                    break;
+                }
+                    
+                case 4: {
+                    cell.identifierLabel.text = @"Head Coach";
+                    self.headCoach = cell.textField;
+                    if (self.player != nil) {
+                        self.lastNameField.text = self.player.lastName;
+                    }
+                    break;
+                }
+                    
+                    
+                default:
+                    break;
             }
             break;
         }
-        case 3: {
-            cell.identifierLabel.text = @"City";
-            self.city = cell.textField;
-            if (self.player != nil) {
-                self.city.text = self.player.lastName;
-            }
-            break;
-        }
-        case 4: {
-            cell.identifierLabel.text = @"State / Province";
-            self.stateProvince = cell.textField;
-            if (self.player != nil) {
-                self.stateProvince.text = self.player.lastName;
-            }
-            break;
-        }
-
-        case 5: {
-            cell.identifierLabel.text = @"Country";
-            self.country = cell.textField;
-            if (self.player != nil) {
-                self.country.text = self.player.lastName;
-            }
-            break;
-        }
-        case 6: {
-            cell.identifierLabel.text = @"Home Club";
-            self.homeClub = cell.textField;
-            if (self.player != nil) {
-                self.homeClub.text = self.player.lastName;
-            }
-            break;
-        }
-
-        case 7: {
-            cell.identifierLabel.text = @"Head Coach";
-            self.headCoach = cell.textField;
-            if (self.player != nil) {
-                self.lastNameField.text = self.player.lastName;
-            }
-            break;
-        }
-
-
-
+            
         default:
             break;
     }
-    
-    return cell;
+            
+            return cell;
 }
 
 /*

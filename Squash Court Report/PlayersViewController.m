@@ -47,7 +47,7 @@
     // Set up the edit and add buttons.
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    self.clearsSelectionOnViewWillAppear = NO;
+    //self.clearsSelectionOnViewWillAppear = NO;
 
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];

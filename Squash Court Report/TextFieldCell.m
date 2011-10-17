@@ -20,7 +20,7 @@
     if (self) {
         int cellWidth = self.contentView.frame.size.width;
         int cellHeight = self.contentView.frame.size.height;
-        int labelWidth = 80;
+        int labelWidth = 100;
         
         // Set Up Cell
         self.selectionStyle = UITableViewCellSelectionStyleNone;
