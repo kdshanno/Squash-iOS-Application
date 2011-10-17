@@ -38,6 +38,14 @@
 #pragma mark - View lifecycle
 
 - (void)saveNewPlayer {
+    
+    if(self.firstNameField.text == NULL || self.lastNameField.text == NULL || [self.firstNameField.text compare:@""] == NSOrderedSame || [self.lastNameField.text compare:@""] == NSOrderedSame)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter a first and last name." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Okay", nil];
+        [alert show];
+        return;
+    }
+    
     Player *newPlayer;
     if (self.player == nil) {
         newPlayer = [NSEntityDescription insertNewObjectForEntityForName:@"Player" inManagedObjectContext:self.managedObjectContext];
@@ -45,6 +53,7 @@
     }
     else newPlayer = self.player;
         
+
     newPlayer.firstName = self.firstNameField.text;
     newPlayer.lastName = self.lastNameField.text;
 

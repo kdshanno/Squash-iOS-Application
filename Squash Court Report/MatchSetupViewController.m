@@ -105,15 +105,16 @@
     NSArray *newPlayers =[moc executeFetchRequest:request error:&error];
     
     int i = 0;
+    BOOL playerAdded = (players.count != newPlayers.count);
     for(; i < players.count; i++)
     {
         if([players objectAtIndex:i] != [newPlayers objectAtIndex:i])
             break;
     }
     
-    //if i <  players.count, then a player was added. in newPlayers, index i is the new element.
+    //in newPlayers, index i is the new element.
     
-    if (i < players.count)
+    if (playerAdded)
     {
         
         [players insertObject:[newPlayers objectAtIndex:i] atIndex:i];
