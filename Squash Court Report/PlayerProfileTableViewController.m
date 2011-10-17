@@ -37,6 +37,18 @@
 
 #pragma mark - View lifecycle
 
+- (void)editButtonPressed {
+    PlayerProfileEditController *editController = [[PlayerProfileEditController alloc] initWithStyle:UITableViewStyleGrouped];
+    editController.managedObjectContext = self.managedObjectContext;
+    editController.player = self.player;
+    editController.delegate = self;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
+    navController.navigationBar.tintColor = [UIColor redColor];
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,7 +58,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed)];}
 
 - (void)viewDidUnload
 {
@@ -244,5 +256,12 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+#pragma mark - Edit Controller Degegate
+
+- (void)didChangeData {
+    [self.tableView reloadData];    
+}
+
 
 @end

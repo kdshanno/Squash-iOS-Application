@@ -70,7 +70,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
     
-    self.title = @"Edit Player";
+       self.title = @"Edit Player";
 }
 
 - (void)viewDidUnload
@@ -180,7 +180,8 @@
             
         case 1: {
             UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Left-Handed", @"Right-Handed", nil]];
-            segControl.frame = CGRectMake(0, 0, 300, cell.contentView.frame.size.height) ;
+            segControl.frame = CGRectMake(0, 0, 300, cell.contentView.frame.size.height+5) ;
+            [segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
             [segControl setTintColor:[UIColor redColor]];
             [cell.contentView addSubview:segControl];
             
