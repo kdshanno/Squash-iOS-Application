@@ -54,6 +54,9 @@
 		50A96B5A144A16EB003AC92D /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B59144A16EB003AC92D /* SectionHeaderView.m */; };
 		50A96B5F144A1A45003AC92D /* PlayerProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B5E144A1A44003AC92D /* PlayerProfileCell.m */; };
 		50A96B62144A1E0D003AC92D /* PlayerProfileTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B61144A1E0C003AC92D /* PlayerProfileTopCell.m */; };
+		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
+		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
+		5BF1F746144CDBED000455BC /* MatchSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1F743144CDBED000455BC /* MatchSetupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +131,10 @@
 		50A96B5E144A1A44003AC92D /* PlayerProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileCell.m; sourceTree = "<group>"; };
 		50A96B60144A1E0C003AC92D /* PlayerProfileTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileTopCell.h; sourceTree = "<group>"; };
 		50A96B61144A1E0C003AC92D /* PlayerProfileTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileTopCell.m; sourceTree = "<group>"; };
+		5BF1F740144CDBED000455BC /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
+		5BF1F741144CDBED000455BC /* MatchSetupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchSetupView.xib; sourceTree = "<group>"; };
+		5BF1F742144CDBED000455BC /* MatchSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchSetupViewController.h; sourceTree = "<group>"; };
+		5BF1F743144CDBED000455BC /* MatchSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchSetupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +200,7 @@
 				50343C051445355800EDC043 /* Core Data Model */,
 				50343BE214452F6900EDC043 /* SCRAppDelegate.h */,
 				50343BE314452F6900EDC043 /* SCRAppDelegate.m */,
+				5BF1F73E144CDBBB000455BC /* Log New Match */,
 				5002AA621448D3F400FB0B8F /* Shot Entry */,
 				50A0EBEB14454A5700A8B3CF /* Main View */,
 				50A0EBEC14454A6800A8B3CF /* Players */,
@@ -282,6 +290,7 @@
 		50A0EBDC1445425300A8B3CF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5BF1F740144CDBED000455BC /* button_back.png */,
 				50A96B4B144A0565003AC92D /* ProfileBar.png */,
 				50A96B50144A14A6003AC92D /* PlayerProfileCell.png */,
 				50A96B51144A14A6003AC92D /* PlayerProfileLastFooter.png */,
@@ -317,6 +326,16 @@
 				5034ED5514460BE000895D86 /* List of Players */,
 			);
 			name = Players;
+			sourceTree = "<group>";
+		};
+		5BF1F73E144CDBBB000455BC /* Log New Match */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1F741144CDBED000455BC /* MatchSetupView.xib */,
+				5BF1F742144CDBED000455BC /* MatchSetupViewController.h */,
+				5BF1F743144CDBED000455BC /* MatchSetupViewController.m */,
+			);
+			name = "Log New Match";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,6 +408,8 @@
 				50A96B55144A14A6003AC92D /* PlayerProfileLastFooter.png in Resources */,
 				50A96B56144A14A6003AC92D /* PlayerProfileSectionDivider.png in Resources */,
 				50A96B57144A14A6003AC92D /* PlayerProfileTop.png in Resources */,
+				5BF1F744144CDBED000455BC /* button_back.png in Resources */,
+				5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +442,7 @@
 				50A96B5A144A16EB003AC92D /* SectionHeaderView.m in Sources */,
 				50A96B5F144A1A45003AC92D /* PlayerProfileCell.m in Sources */,
 				50A96B62144A1E0D003AC92D /* PlayerProfileTopCell.m in Sources */,
+				5BF1F746144CDBED000455BC /* MatchSetupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

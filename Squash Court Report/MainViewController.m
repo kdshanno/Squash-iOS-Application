@@ -10,6 +10,7 @@
 #import "MainViewCell.h"
 #import "PlayersViewController.h"
 #import "ShotEntryController.h"
+#import "MatchSetupViewController.h"
 
 @implementation MainViewController
 
@@ -103,7 +104,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,6 +143,16 @@
 
             break;
         }
+            
+        case 4: {
+            cell.mainLabel.text = @"Shot Entry (temporary)";
+            [cell.leftImageView setImage:[UIImage imageNamed:@"Person_Icon"]];
+            
+            
+            break;
+        }
+            
+            
 
             
         default:
@@ -199,12 +210,13 @@
     switch (indexPath.row) {
             
         case 0: {
-            ShotEntryController *shotEntryController = [[ShotEntryController alloc] init];
-            shotEntryController.managedObjectContext = self.managedObjectContext;
-            [self.navigationController pushViewController:shotEntryController animated:YES];
+            
+            MatchSetupViewController *msvc = [[MatchSetupViewController alloc] initWithNibName:@"MatchSetupView" bundle:nil];
+            [self.navigationController pushViewController:msvc animated:YES];
+            
             break;
         }
-        
+            
         case 1: {
             PlayersViewController *playersViewController = [[PlayersViewController alloc] initWithStyle:UITableViewStylePlain];
             playersViewController.managedObjectContext = self.managedObjectContext;
@@ -212,6 +224,17 @@
     
             break;
         }
+            
+            
+        case 4: {
+            ShotEntryController *shotEntryController = [[ShotEntryController alloc] init];
+            shotEntryController.managedObjectContext = self.managedObjectContext;
+            [self.navigationController pushViewController:shotEntryController animated:YES];
+            break;
+        }
+
+            
+
             
         default:
             break;
