@@ -15,6 +15,12 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) Match *match;
 @property (strong, nonatomic) IBOutlet UIImageView *courtImage;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *titleButton;
+@property (strong, nonatomic) IBOutlet UIView *entryView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *playerSegmentedControl;
+
+
 
 -(IBAction)animateImage:(id)sender;
 

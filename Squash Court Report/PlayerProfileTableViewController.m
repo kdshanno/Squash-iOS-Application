@@ -86,14 +86,37 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    
-    return section==0 ? 1 : 8;
+    int numberOfRows = 0;
+    switch (section) {
+        case 0:
+            numberOfRows = 1;
+            break;
+        case 1:
+            numberOfRows = 3;
+
+            break;
+
+        case 2:
+            numberOfRows = 7;
+
+            break;
+            
+        case 3:
+            numberOfRows = 1;
+            
+            break;
+
+            
+        default:
+            break;
+    }
+    return numberOfRows;
     
 }
 
@@ -110,6 +133,16 @@
         return cell;
         
 
+    }
+    else if (indexPath.section == self.tableView.numberOfSections-1) {
+        static NSString *CellIdentifier = @"bottomCell";
+
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PlayerProfileLastFooter.png"]];
+        return cell;
     }
     else {
         static NSString *CellIdentifier = @"Cell";
@@ -130,7 +163,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {    
-    if (section == 0) {
+    if (section == 0 || section == self.tableView.numberOfSections-1) {
         return NULL;
     }
     else {
@@ -140,10 +173,11 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {    if (section == 0) {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {    
+    if (section == 0 || section == self.tableView.numberOfSections-1) {
         return 0;
     }
-    else return 21;
+    else return 22;
 }
 
 
@@ -151,6 +185,9 @@
 {
     if (indexPath.section == 0) {
         return kPlayerTopCellHeight;
+    }
+    else if (indexPath.section == self.tableView.numberOfSections-1) {
+        return 17;
     }
     return PLAYERCELLHEIGHT;
     

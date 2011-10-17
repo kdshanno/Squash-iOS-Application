@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#define kPlayerTopCellHeight 137
+#define kPlayerTopCellHeight 145
 @interface PlayerProfileTopCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *leftImage;

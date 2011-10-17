@@ -10,7 +10,7 @@
 
 @implementation ShotEntryController
 
-@synthesize managedObjectContext, match, courtImage;
+@synthesize managedObjectContext, match, courtImage, toolbar, titleButton, entryView, playerSegmentedControl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,9 +38,26 @@
 
 #pragma mark - View lifecycle
 
+- (void)initEntryView {
+    //[self.entryView setFrame:CGRectMake(0, 100, self.entryView.frame.size.width, self.entryView.frame.size.height)];
+
+    [self.view addSubview:self.entryView];
+    
+    [self.toolbar setTintColor:[UIColor redColor]];
+
+    //[self.playerSegmentedControl setTintColor:[UIColor redColor]];
+    self.playerSegmentedControl.tintColor = [UIColor redColor];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    
+    [self initEntryView];
+    
+    [self.view addSubview:self.entryView];
     // Do any additional setup after loading the view from its nib.
 }
 

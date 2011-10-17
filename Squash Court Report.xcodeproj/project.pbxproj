@@ -54,6 +54,7 @@
 		50A96B5A144A16EB003AC92D /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B59144A16EB003AC92D /* SectionHeaderView.m */; };
 		50A96B5F144A1A45003AC92D /* PlayerProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B5E144A1A44003AC92D /* PlayerProfileCell.m */; };
 		50A96B62144A1E0D003AC92D /* PlayerProfileTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B61144A1E0C003AC92D /* PlayerProfileTopCell.m */; };
+		50A96B64144CA8EA003AC92D /* steve-jobs1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50A96B63144CA8EA003AC92D /* steve-jobs1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 		50A96B5E144A1A44003AC92D /* PlayerProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileCell.m; sourceTree = "<group>"; };
 		50A96B60144A1E0C003AC92D /* PlayerProfileTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileTopCell.h; sourceTree = "<group>"; };
 		50A96B61144A1E0C003AC92D /* PlayerProfileTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileTopCell.m; sourceTree = "<group>"; };
+		50A96B63144CA8EA003AC92D /* steve-jobs1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "steve-jobs1.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 		50A0EBDC1445425300A8B3CF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50A96B63144CA8EA003AC92D /* steve-jobs1.jpg */,
 				50A96B4B144A0565003AC92D /* ProfileBar.png */,
 				50A96B50144A14A6003AC92D /* PlayerProfileCell.png */,
 				50A96B51144A14A6003AC92D /* PlayerProfileLastFooter.png */,
@@ -389,6 +392,7 @@
 				50A96B55144A14A6003AC92D /* PlayerProfileLastFooter.png in Resources */,
 				50A96B56144A14A6003AC92D /* PlayerProfileSectionDivider.png in Resources */,
 				50A96B57144A14A6003AC92D /* PlayerProfileTop.png in Resources */,
+				50A96B64144CA8EA003AC92D /* steve-jobs1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

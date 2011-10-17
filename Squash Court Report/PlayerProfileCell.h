@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#define PLAYERCELLHEIGHT 30
+#define PLAYERCELLHEIGHT 34
 
 @interface PlayerProfileCell : UITableViewCell
 
