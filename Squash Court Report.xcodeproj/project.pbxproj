@@ -195,6 +195,7 @@
 				50343C051445355800EDC043 /* Core Data Model */,
 				50343BE214452F6900EDC043 /* SCRAppDelegate.h */,
 				50343BE314452F6900EDC043 /* SCRAppDelegate.m */,
+				5BF1F73E144CDBBB000455BC /* Log New Match */,
 				5002AA621448D3F400FB0B8F /* Shot Entry */,
 				50A0EBEB14454A5700A8B3CF /* Main View */,
 				50A0EBEC14454A6800A8B3CF /* Players */,
@@ -322,6 +323,16 @@
 			name = Players;
 			sourceTree = "<group>";
 		};
+		5BF1F73E144CDBBB000455BC /* Log New Match */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1F741144CDBED000455BC /* MatchSetupView.xib */,
+				5BF1F742144CDBED000455BC /* MatchSetupViewController.h */,
+				5BF1F743144CDBED000455BC /* MatchSetupViewController.m */,
+			);
+			name = "Log New Match";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -425,6 +436,7 @@
 				50A96B5A144A16EB003AC92D /* SectionHeaderView.m in Sources */,
 				50A96B5F144A1A45003AC92D /* PlayerProfileCell.m in Sources */,
 				50A96B62144A1E0D003AC92D /* PlayerProfileTopCell.m in Sources */,
+				5BF1F746144CDBED000455BC /* MatchSetupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
