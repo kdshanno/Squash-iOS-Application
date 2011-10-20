@@ -9,10 +9,11 @@
 #import "MatchSetupViewController.h"
 #import "SCRAppDelegate.h"
 #import "PlayerProfileEditController.h"
+#import "MatchProfileViewController.h"
 
 @implementation MatchSetupViewController
 
-@synthesize player1Label, player2Label, players, player1Index, player2Index, picker, selectionButton, playerBeingEdited;
+@synthesize player1Label, player2Label, players, player1Index, player2Index, picker, selectionButton, playerBeingEdited, matchProfileButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +38,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = NSLocalizedString(@"New Match Setup", @"New Match Setup");
+    self.title = NSLocalizedString(@"Match Setup", @"Match Setup");
     
     // Store the player list ahead of time
     players = [[NSMutableArray alloc] init];
@@ -68,13 +69,11 @@
     player1Index = -1;
     player2Index = -1;
     
-    picker = [[UIPickerView alloc] init];
+    picker = [[AnimatedUIPickerView alloc] init];
     picker.showsSelectionIndicator = YES;
     picker.dataSource = self;
     picker.delegate = self;
-    [self.view addSubview:picker];
-    picker.frame = CGRectMake(0, picker.superview.frame.size.height, picker.frame.size.width, picker.frame.size.height);
-    [picker setHidden:YES];    
+    [picker addToView:self.view];
     [selectionButton setHidden:YES];
     
     playerBeingEdited = 0;
@@ -127,6 +126,7 @@
             
             if(player2Index >= i) //the index of the other player has shifted
                 player2Index++;
+            
         }
         else if(playerBeingEdited == 2)
         {
@@ -138,8 +138,12 @@
         }
         else
         {
-            NSLog(@"error!"); abort();
+            NSLog(@"error!"); 
+            abort();
         }
+        
+        [picker enterSuperviewAnimatedWithRow:i];
+        [selectionButton setHidden:NO];
     }
     
     playerBeingEdited = 0;
@@ -165,25 +169,14 @@
     picker.tag = 1;
     if(picker.hidden)
     {
-        picker.hidden = NO;
-        CGRect endFrame = CGRectMake(0, picker.superview.frame.size.height - picker.frame.size.height, picker.frame.size.width, picker.frame.size.height);
-        [UIView animateWithDuration:0.45 delay:0 
-                            options:UIViewAnimationOptionCurveEaseInOut 
-                         animations:^{picker.frame = endFrame;}  
-                         completion:^(BOOL finished){
-                             if(player1Index > -1)
-                             {
-                                 [self pickerView:picker didSelectRow:player1Index inComponent:0]; 
-                                 [picker selectRow:player1Index inComponent:0 animated:NO];
-                             } 
-                             else  
-                             {
-                                 [self pickerView:picker didSelectRow:0 inComponent:0]; 
-                                 [picker selectRow:0 inComponent:0 animated:NO];
-                             }
-                         }];
-        [selectionButton setHidden:NO];
+        if(player1Index > -1)
+            [picker enterSuperviewAnimatedWithRow:player1Index];
+        else  
+            [picker enterSuperviewAnimatedWithRow:0];
+        
+            [selectionButton setHidden:NO];
     }
+    else
     {
         if(player1Index > -1)
         {
@@ -203,25 +196,14 @@
     picker.tag = 2;
     if(picker.hidden)
     {
-        picker.hidden = NO;
-        CGRect endFrame = CGRectMake(0, picker.superview.frame.size.height - picker.frame.size.height, picker.frame.size.width, picker.frame.size.height);
-        [UIView animateWithDuration:0.45 delay:0 
-                            options:UIViewAnimationOptionCurveEaseInOut 
-                         animations:^{picker.frame = endFrame;}  
-                         completion:^(BOOL finished){
-                             if(player2Index > -1)
-                             {
-                                 [self pickerView:picker didSelectRow:player2Index inComponent:0]; 
-                                 [picker selectRow:player2Index inComponent:0 animated:NO];
-                             } 
-                             else  
-                             {
-                                 [self pickerView:picker didSelectRow:0 inComponent:0]; 
-                                 [picker selectRow:0 inComponent:0 animated:NO];
-                             }
-                         }];
+        if(player2Index > -1)
+            [picker enterSuperviewAnimatedWithRow:player2Index];
+        else  
+            [picker enterSuperviewAnimatedWithRow:0];
+        
         [selectionButton setHidden:NO];
     }
+    else
     {
         if(player2Index > -1)
         {
@@ -259,15 +241,18 @@
 
 -(IBAction)finishSelection
 {
-    CGRect endFrame = CGRectMake(0, picker.superview.frame.size.height, picker.frame.size.width, picker.frame.size.height);
-    [UIView animateWithDuration:0.45 delay:0 
-                        options:UIViewAnimationOptionCurveEaseInOut 
-                     animations:^{picker.frame = endFrame;}  
-                     completion:^(BOOL finished){picker.hidden = YES; [picker selectRow:0 inComponent:0 animated:NO];
-                     }];
+    [picker exitSuperviewAnimated];
     [selectionButton setHidden:YES];
-    
     picker.tag = 0;
+    
+    if(player1Index > -1 && player2Index > -1) //both players have been selected
+        [matchProfileButton setHidden:NO];
+}
+
+- (IBAction)setupMatchProfile
+{
+    MatchProfileViewController *mpvc = [[MatchProfileViewController alloc] initWithNibName:@"MatchProfileView" bundle:nil player1:(Player *)[players objectAtIndex:player1Index] player2:(Player *)[players objectAtIndex:player2Index]];
+    [self.navigationController pushViewController:mpvc animated:YES];
 }
 
 #pragma mark - UIPickerViewDataSource
