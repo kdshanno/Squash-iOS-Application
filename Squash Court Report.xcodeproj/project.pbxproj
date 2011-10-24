@@ -62,6 +62,8 @@
 		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
 		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
 		5BF1F746144CDBED000455BC /* MatchSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1F743144CDBED000455BC /* MatchSetupViewController.m */; };
+		5BF66721144DC0620085DD1D /* MatchProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF6671F144DC0620085DD1D /* MatchProfileViewController.m */; };
+		5BF66722144DC0620085DD1D /* MatchProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF66720144DC0620085DD1D /* MatchProfileView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +150,9 @@
 		5BF1F741144CDBED000455BC /* MatchSetupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchSetupView.xib; sourceTree = "<group>"; };
 		5BF1F742144CDBED000455BC /* MatchSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchSetupViewController.h; sourceTree = "<group>"; };
 		5BF1F743144CDBED000455BC /* MatchSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchSetupViewController.m; sourceTree = "<group>"; };
+		5BF6671E144DC0620085DD1D /* MatchProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchProfileViewController.h; sourceTree = "<group>"; };
+		5BF6671F144DC0620085DD1D /* MatchProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchProfileViewController.m; sourceTree = "<group>"; };
+		5BF66720144DC0620085DD1D /* MatchProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchProfileView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,14 +363,35 @@
 			name = Players;
 			sourceTree = "<group>";
 		};
+		5B5A59AC144F875100AD90A3 /* Animated UIPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				5B5A59AD144F87CC00AD90A3 /* AnimatedUIPickerView.h */,
+				5B5A59AE144F87CC00AD90A3 /* AnimatedUIPickerView.m */,
+			);
+			name = "Animated UIPickerView";
+			sourceTree = "<group>";
+		};
 		5BF1F73E144CDBBB000455BC /* Log New Match */ = {
 			isa = PBXGroup;
 			children = (
-				5BF1F741144CDBED000455BC /* MatchSetupView.xib */,
+				5B5A59AC144F875100AD90A3 /* Animated UIPickerView */,
 				5BF1F742144CDBED000455BC /* MatchSetupViewController.h */,
 				5BF1F743144CDBED000455BC /* MatchSetupViewController.m */,
+				5BF1F741144CDBED000455BC /* MatchSetupView.xib */,
+				5BF6671C144DC0020085DD1D /* Match Profile Setup */,
 			);
 			name = "Log New Match";
+			sourceTree = "<group>";
+		};
+		5BF6671C144DC0020085DD1D /* Match Profile Setup */ = {
+			isa = PBXGroup;
+			children = (
+				5BF6671E144DC0620085DD1D /* MatchProfileViewController.h */,
+				5BF6671F144DC0620085DD1D /* MatchProfileViewController.m */,
+				5BF66720144DC0620085DD1D /* MatchProfileView.xib */,
+			);
+			name = "Match Profile Setup";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
