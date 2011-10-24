@@ -10,7 +10,7 @@
 
 @implementation ShotEntryController
 
-@synthesize managedObjectContext, match, courtImage, toolbar, titleButton, entryView, playerSegmentedControl;
+@synthesize managedObjectContext, match, courtImage, toolbar, titleButton, entryView, playerSegmentedControl, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,22 +30,21 @@
     
 }
 
--(IBAction)animateImage:(id)sender {
-    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveEaseInOut animations:^(void) {
-        [self.courtImage setFrame:CGRectMake(40, 40, 100, 100)];
-    }completion:NULL];
-}
-
 #pragma mark - View lifecycle
 
 - (void)initEntryView {
-    //[self.entryView setFrame:CGRectMake(0, 100, self.entryView.frame.size.width, self.entryView.frame.size.height)];
-
-    [self.view addSubview:self.entryView];
     
     [self.toolbar setTintColor:[UIColor redColor]];
+    [self.entryScrollView setContentSize:CGSizeMake(320, 800)];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(courtTapped:)];
+    tapRecognizer.numberOfTapsRequired = 1;
+    UIImageView *newCourt = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+    newCourt.frame = imageFrameBig;
+    newCourt.layer.zPosition = [[self.view.superview subviews] count]+5;
+    [self.view addSubview:newCourt];
+    [newCourt setUserInteractionEnabled:YES];
+    [newCourt addGestureRecognizer:tapRecognizer];
 
-    //[self.playerSegmentedControl setTintColor:[UIColor redColor]];
     self.playerSegmentedControl.tintColor = [UIColor redColor];
 }
 
@@ -55,9 +54,19 @@
     
     [self.view setBackgroundColor:[UIColor blackColor]];
     
-    [self initEntryView];
     
-    [self.view addSubview:self.entryView];
+   // [self.view addSubview:self.entryView];
+    entryViewFrameDown = CGRectMake(0, self.view.frame.size.height+60, self.view.frame.size.width, self.entryView.frame.size.height);
+    entryViewFrameUp = CGRectMake(0, -1, self.view.frame.size.width, self.entryView.frame.size.height);
+
+    imageFrameBig = self.courtImage.frame;
+    imageFrameSmall = CGRectMake(15, 60, 100, 140);
+    entryViewUp = false;
+    
+    self.entryView.frame = entryViewFrameDown;
+    
+    [self initEntryView];
+
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -73,5 +82,54 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark - Entry Shot Actions
+- (void)courtTapped:(UIGestureRecognizer *)sender {
+    if (entryViewUp == false) {
+        [sender.view setUserInteractionEnabled:NO];
+        if (sender.state == UIGestureRecognizerStateEnded) {
+            [UIView animateWithDuration:0.3 
+                             animations:^{
+                                 self.entryView.frame = entryViewFrameUp;
+                                 sender.view.frame = imageFrameSmall;
+                             }
+                             completion:^(BOOL finished){
+                                 NSLog(@"UP");
+                                 entryViewUp = true;
+                                 //[self.entryView addSubview:sender.view];
+                                // [sender.view removeFromSuperview];
+                             }];
+        }
+
+    }
+}
+
+- (void)doneButtonPressed {
+    entryViewUp = false;
+    
+        [UIView animateWithDuration:0.3 
+                         animations:^{
+                             self.entryView.frame = entryViewFrameDown;
+                         }
+                         completion:^(BOOL finished){
+                             [self.courtImage setUserInteractionEnabled:NO];
+                             entryViewUp = false;
+                         }];
+
+}
+
+
+
+
+-(IBAction)playerScoreChanged:(id)sender {
+    self.p1ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)p1Stepper.value];
+    self.p2ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)p2Stepper.value];
+
+}
+-(IBAction)gameNumberChanged:(id)sender {
+    self.gameNumberLabel.text = [NSString stringWithFormat:@"%u", (int)gameStepper.value];
+
+}
+
 
 @end

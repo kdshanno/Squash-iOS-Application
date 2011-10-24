@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "MainViewCell.h"
 #import "PlayersViewController.h"
-#import "ShotEntryController.h"
+#import "RallyEntryController.h"
 #import "MatchSetupViewController.h"
 
 @implementation MainViewController
@@ -60,6 +60,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillAppear:animated];
 }
 
@@ -227,9 +228,9 @@
             
             
         case 4: {
-            ShotEntryController *shotEntryController = [[ShotEntryController alloc] init];
-            shotEntryController.managedObjectContext = self.managedObjectContext;
-            [self.navigationController pushViewController:shotEntryController animated:YES];
+            RallyEntryController *rallyEntryController = [[RallyEntryController alloc] init];
+            //rallyEntryController.managedObjectContext = self.managedObjectContext;
+            [self.navigationController pushViewController:rallyEntryController animated:YES];
             break;
         }
 

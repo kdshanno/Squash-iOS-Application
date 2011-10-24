@@ -30,6 +30,8 @@
         self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, cellWidth/2-10, cellHeight)];
         [self.leftLabel setBackgroundColor:[UIColor clearColor]];
         [self.leftLabel setTextColor:[UIColor redColor]];
+        [self.leftLabel setShadowColor:[UIColor whiteColor]];
+        [self.leftLabel setShadowOffset:CGSizeMake(0, -1)];
         [self.contentView addSubview:self.leftLabel];
         
         self.rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(cellWidth/2, 0, cellWidth/2-22, cellHeight)];

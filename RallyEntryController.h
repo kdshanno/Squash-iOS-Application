@@ -1,8 +1,8 @@
 //
-//  ShotEntryController.h
+//  RallyEntryController.h
 //  Squash Court Report
 //
-//  Created by Maxwell Shaw on 10/14/11.
+//  Created by Max Shaw on 10/20/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,20 +10,23 @@
 #import "CoreDataModel.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface ShotEntryController : UIViewController {
+@interface RallyEntryController : UIViewController {
     CGRect entryViewFrameUp;
     CGRect entryViewFrameDown;
     CGRect imageFrameBig;
     CGRect imageFrameSmall;
     bool entryViewUp;
-
+    UIBarButtonItem *doneButton;
+    
 }
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) Match *match;
 @property (strong, nonatomic) IBOutlet UIImageView *courtImage;
-@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet UIToolbar *bottomToolbar;
+@property (strong, nonatomic) IBOutlet UIToolbar *topToolbar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *titleButton;
+@property (strong, nonatomic) IBOutlet UIView *opaqueView;
 @property (strong, nonatomic) IBOutlet UIView *entryView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *playerSegmentedControl;
 @property (strong, nonatomic) IBOutlet UIScrollView *entryScrollView;
@@ -37,13 +40,21 @@
 @property (strong, nonatomic) IBOutlet UIStepper *p1Stepper;
 @property (strong, nonatomic) IBOutlet UIStepper *p2Stepper;
 @property (strong, nonatomic) IBOutlet UIStepper *gameStepper;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *playerSegControl;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControl;
 
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch;
 
+
+-(void)finishButtonPressed;
 -(IBAction)animateImage:(id)sender;
+-(IBAction)playerSegChanged:(id)sender;
+-(IBAction)shotSegChanged:(id)sender;
 -(IBAction)playerScoreChanged:(id)sender;
 -(IBAction)gameNumberChanged:(id)sender;
 - (void)courtTapped:(UIGestureRecognizer *)sender;
-- (void)doneButtonPressed;
+- (IBAction)doneButtonPressed:(id)sender;
+
 
 @end
