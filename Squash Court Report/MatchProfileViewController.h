@@ -10,9 +10,10 @@
 #import "Match.h"
 #import "Player.h"
 
-@interface MatchProfileViewController : UIViewController
+@interface MatchProfileViewController : UIViewController <UITextFieldDelegate>
 
 
+@property(strong, nonatomic) IBOutlet UIScrollView *scroll;
 @property(strong, nonatomic) IBOutlet UILabel *player1Label;
 @property(strong, nonatomic) IBOutlet UILabel *player2Label;
 @property(strong, nonatomic) IBOutlet UISegmentedControl *tournamentMatchSwitch;

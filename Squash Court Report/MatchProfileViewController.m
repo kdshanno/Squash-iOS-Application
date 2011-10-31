@@ -10,7 +10,7 @@
 
 @implementation MatchProfileViewController
 
-@synthesize player1Label, player2Label, tournamentMatchSwitch, gameTypeSwitch, dateLabel, buildingField, cityField, stateField, countryField, conditionField, tournamentNameField, roundField, notesTextView, match, p1, p2;
+@synthesize scroll, player1Label, player2Label, tournamentMatchSwitch, gameTypeSwitch, dateLabel, buildingField, cityField, stateField, countryField, conditionField, tournamentNameField, roundField, notesTextView, match, p1, p2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil player1:(Player *)player1 player2:(Player *)player2
 {
@@ -37,6 +37,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [scroll setContentSize:CGSizeMake(self.view.frame.size.width, 655)];
     [self.player1Label setText:[NSString stringWithFormat:@"%@ %@", p1.firstName, p1.lastName]];
     [self.player2Label setText:[NSString stringWithFormat:@"%@ %@", p2.firstName, p2.lastName]];
     
@@ -60,6 +61,20 @@
 - (IBAction)dateButtonPressed
 {
     
+}
+
+#pragma mark - UITextFieldDelegate Methods
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [scroll scrollRectToVisible:CGRectMake(0, textField.frame.origin.y - 190, 320, 460) animated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
 }
 
 @end
