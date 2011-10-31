@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Root</key>
+	<array>
+		<array>
+			<dict>
+				<key>required</key>
+				<true/>
+				<key>property</key>
+				<string>firstName</string>
+				<key>labelID</key>
+				<string>First Name</string>
+			</dict>
+			<dict>
+				<key>required</key>
+				<true/>
+				<key>property</key>
+				<string>lastName</string>
+				<key>labelID</key>
+				<string>Last Name</string>
+			</dict>
+			<dict>
+				<key>required</key>
+				<false/>
+				<key>property</key>
+				<string>style</string>
+				<key>labelID</key>
+				<string>Style</string>
+			</dict>
+		</array>
+		<array>
+			<dict>
+				<key>custom</key>
+				<true/>
+			</dict>
+		</array>
+		<array>
+			<dict>
+				<key>custom</key>
+				<true/>
+			</dict>
+		</array>
+		<array>
+			<dict>
+				<key>required</key>
+				<false/>
+				<key>property</key>
+				<string>city</string>
+				<key>labelID</key>
+				<string>City</string>
+			</dict>
+			<dict>
+				<key>required</key>
+				<false/>
+				<key>property</key>
+				<string>stateProvince</string>
+				<key>labelID</key>
+				<string>State / Province</string>
+			</dict>
+			<dict>
+				<key>required</key>
+				<false/>
+				<key>property</key>
+				<string>country</string>
+				<key>labelID</key>
+				<string>Country</string>
+			</dict>
+			<dict>
+				<key>required</key>
+				<false/>
+				<key>property</key>
+				<string>homeClub</string>
+				<key>labelID</key>
+				<string>Home Club</string>
+			</dict>
+		</array>
+	</array>
+</dict>
+</plist>

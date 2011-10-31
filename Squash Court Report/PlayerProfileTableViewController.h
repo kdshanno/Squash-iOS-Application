@@ -10,9 +10,15 @@
 #import "CoreDataModel.h"
 #import <CoreData/CoreData.h>
 #import "PlayerProfileEditController.h"
+#import "PlayerEditController.h"
+
 
 @interface PlayerProfileTableViewController : UITableViewController <PlayerEditDelegate> {
     Player *player;
+    NSMutableArray *bioLeftLabels;
+    NSMutableArray *bioRightLabels;
+    NSMutableArray *statsLeftLabels;
+    NSMutableArray *statsRightLabels;
 }
 
 @property (strong, nonatomic) Player *player;
@@ -21,6 +27,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *sectionHeaderView;
 
+- (id)initWithStyle:(UITableViewStyle)style andPlayer:(Player *)newPlayer;
 
 
 @end

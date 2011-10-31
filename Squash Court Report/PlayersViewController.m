@@ -11,6 +11,7 @@
 #import "PlayerProfileController.h"
 #import "PlayerProfileEditController.h"
 #import "PlayerProfileTableViewController.h"
+#import "PlayerEditController.h"
 
 @interface PlayersViewController ()
 - (void)configureCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -52,6 +53,8 @@
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    imageCache = [[NSMutableDictionary alloc] init];
     
     self.title = NSLocalizedString(@"Players", @"Players");
 }
@@ -99,6 +102,10 @@
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
 
 // Customize the appearance of table view cells.
@@ -154,11 +161,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    PlayerProfileTableViewController *playerProfile = [[PlayerProfileTableViewController alloc] initWithStyle:UITableViewStylePlain];
+{    
     Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
-    playerProfile.player = player;
-    //playerProfile.title = [player getFullName];
+
+    PlayerProfileTableViewController *playerProfile = [[PlayerProfileTableViewController alloc] initWithStyle:UITableViewStylePlain andPlayer:player];
     [self.navigationController pushViewController:playerProfile animated:YES];
     
 }
@@ -268,17 +274,38 @@
  [self.tableView reloadData];
  }
  */
+
+- (void)addImageAtCell:(NSDictionary *)dic {
+    NSIndexPath *indexPath = (NSIndexPath *)[dic objectForKey:@"indexPath"];
+    PlayersViewCell *cell = (PlayersViewCell *)[dic objectForKey:@"cell"];
+    NSString *cellID = [NSString stringWithFormat:@"id_%d_%d", indexPath.section, indexPath.row];
+    UIImage *image = [imageCache objectForKey:cellID];
+    if (image) {
+        [cell.leftImageView setImage:image];
+    }
+    else {
+        Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+        image = [player getImage];
+        if (image) {
+            [cell.leftImageView setImage:image];
+            [imageCache setObject:image forKey:cellID];
+
+        }
+    }
+
+}
 - (void)configureCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.mainLabel.text = [player getFullName];
-    [cell.leftImageView setImage:[UIImage imageNamed:@"Person_Icon.png"]];
+    cell.mainLabel.text = [player getName:kFullName];
+    cell.detailLabel.text = [NSString stringWithFormat:@"%u - %u", [player getNumberOfWins], [player getNumberOfLosses]];
+    [self performSelectorOnMainThread:@selector(addImageAtCell:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:cell, @"cell", indexPath, @"indexPath", nil] waitUntilDone:NO];
+ //   [self performSelectorInBackground:@selector(addImageAtCell:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:cell, @"cell", indexPath, @"indexPath", nil]];
 }
 
 - (void)insertNewObject
 {
-    PlayerProfileEditController *editController = [[PlayerProfileEditController alloc] initWithStyle:UITableViewStyleGrouped];
-    editController.managedObjectContext = self.managedObjectContext;
+    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped andPlayer:NULL];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
     navController.navigationBar.tintColor = [UIColor redColor];
     [self.navigationController presentModalViewController:navController animated:YES];

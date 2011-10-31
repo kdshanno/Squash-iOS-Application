@@ -9,14 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataModel.h"
 #import <QuartzCore/QuartzCore.h>
+#import <CoreData/CoreData.h>
 
-@interface RallyEntryController : UIViewController {
+@interface RallyEntryController : UIViewController <UIScrollViewDelegate, UIPageViewControllerDelegate> {
+    int gameNumber;
+    int p1Score;
+    int p2Score;
     CGRect entryViewFrameUp;
     CGRect entryViewFrameDown;
     CGRect imageFrameBig;
     CGRect imageFrameSmall;
     bool entryViewUp;
     UIBarButtonItem *doneButton;
+    Rally *currentRally;
     
 }
 
@@ -41,7 +46,11 @@
 @property (strong, nonatomic) IBOutlet UIStepper *p2Stepper;
 @property (strong, nonatomic) IBOutlet UIStepper *gameStepper;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *playerSegControl;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControl;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControlTop;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControlBottom;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *scoreItemButton;
+
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch;
@@ -50,11 +59,16 @@
 -(void)finishButtonPressed;
 -(IBAction)animateImage:(id)sender;
 -(IBAction)playerSegChanged:(id)sender;
--(IBAction)shotSegChanged:(id)sender;
+-(IBAction)topShotSegChanged:(id)sender;
+-(IBAction)bottomShotSegChanged:(id)sender;
 -(IBAction)playerScoreChanged:(id)sender;
 -(IBAction)gameNumberChanged:(id)sender;
 - (void)courtTapped:(UIGestureRecognizer *)sender;
 - (IBAction)doneButtonPressed:(id)sender;
+- (IBAction)pageControlChanged:(id)sender;
+- (IBAction)rewindButtonPressed:(id)sender;
+- (IBAction)fastFowardButtonPressed:(id)sender;
+- (IBAction)scoreButtonPressed:(id)sender;
 
 
 @end

@@ -10,8 +10,10 @@
 
 @interface PlayersViewCell : UITableViewCell
 
-@property (strong, nonatomic) UIImageView *leftImageView;
-@property (strong, nonatomic) UILabel *mainLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *leftImageView;
+@property (strong, nonatomic) IBOutlet UILabel *mainLabel;
+@property (strong, nonatomic) IBOutlet UILabel *detailLabel;
+
 
 
 @end

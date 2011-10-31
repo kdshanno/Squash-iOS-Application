@@ -16,12 +16,86 @@
 
 @synthesize player, managedObjectContext, sectionHeaderView;
 
+- (void)initializeCellArrays 
+{
+    bioLeftLabels = [[NSMutableArray alloc] initWithCapacity:0];
+    bioRightLabels = [[NSMutableArray alloc] initWithCapacity:0];
+
+    if (self.player.style != @"" && self.player.style) {
+        [bioLeftLabels addObject:@"Style:"];
+        [bioRightLabels addObject:self.player.style];
+    }
+    
+    if (self.player.handedness) {
+        if ([self.player getHanded] == kLeftHanded) {
+            [bioLeftLabels addObject:@"Handedness:"];
+            [bioRightLabels addObject:@"Left Handed"];
+        }
+        else if ([self.player getHanded] == kRightHanded) {
+            [bioLeftLabels addObject:@"Handedness:"];
+            [bioRightLabels addObject:@"Right Handed"];
+        }
+            
+    }
+    if (self.player.city != @"" && self.player.city) {
+        [bioLeftLabels addObject:@"City:"];
+        [bioRightLabels addObject:self.player.city];
+    }
+    if (self.player.stateProvince != @"" && self.player.stateProvince) {
+        [bioLeftLabels addObject:@"State/Province:"];
+        [bioRightLabels addObject:self.player.stateProvince];
+    }
+    if (self.player.country != @"" && self.player.country) {
+        [bioLeftLabels addObject:@"Country:"];
+        [bioRightLabels addObject:self.player.country];
+    }
+    if (self.player.headCoach != @"" && self.player.headCoach) {
+        [bioLeftLabels addObject:@"Head Coach:"];
+        [bioRightLabels addObject:self.player.headCoach];
+    }
+    if (self.player.homeClub != @"" && self.player.homeClub) {
+        [bioLeftLabels addObject:@"Home Club:"];
+        [bioRightLabels addObject:self.player.homeClub];
+    }
+    
+    statsLeftLabels = [[NSMutableArray alloc] initWithCapacity:0];
+    statsRightLabels = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    if (true) {
+        [statsLeftLabels addObject:@"Wins:"];
+        [statsRightLabels addObject:@"16"];
+    }
+    if (true) {
+        [statsLeftLabels addObject:@"Number Of Matches:"];
+        [statsRightLabels addObject:@"28"];
+    }
+
+
+    
+    
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Wood_Background.png"]]];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        // Custom initialization
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style andPlayer:(Player *)newPlayer
+{
+    self = [super initWithStyle:UITableViewStylePlain];
+    if (self) {
+        [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Wood_Background.png"]]];
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        self.player = newPlayer;
+        [self initializeCellArrays];
+
+        self.title = [self.player getName:kFullName];
         // Custom initialization
     }
     return self;
@@ -37,10 +111,9 @@
 
 #pragma mark - View lifecycle
 
-- (void)editButtonPressed {
-    PlayerProfileEditController *editController = [[PlayerProfileEditController alloc] initWithStyle:UITableViewStyleGrouped];
-    editController.managedObjectContext = self.managedObjectContext;
-    editController.player = self.player;
+- (void)editButtonPressed 
+{
+    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped andPlayer:self.player];
     editController.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
     navController.navigationBar.tintColor = [UIColor redColor];
@@ -58,7 +131,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed)];}
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed)];
+}
 
 - (void)viewDidUnload
 {
@@ -110,26 +184,27 @@
             numberOfRows = 1;
             break;
         case 1:
-            numberOfRows = 3;
+            numberOfRows = [bioLeftLabels count];
 
             break;
 
         case 2:
-            numberOfRows = 7;
+            numberOfRows = [statsLeftLabels count];
 
             break;
-            
         case 3:
             numberOfRows = 1;
-            
-            break;
 
-            
+            break;
         default:
             break;
     }
     return numberOfRows;
     
+}
+
+- (void)addImageOnCell:(PlayerProfileTopCell *)cell {
+    cell.leftImage.image = [self.player getImage];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,6 +217,14 @@
         if (cell == nil) {
             cell = [[PlayerProfileTopCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        cell.topLabel.text = self.player.firstName;
+        cell.bottomLabel.text = self.player.lastName;
+        
+        if (player.imageData) {
+           // [self performSelectorOnMainThread:@selector(addImageOnCell:) withObject:cell waitUntilDone:NO];
+
+        }
+
         return cell;
         
 
@@ -163,8 +246,23 @@
         if (cell == nil) {
             cell = [[PlayerProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        cell.leftLabel.text = @"Left Label";
-        cell.rightLabel.text = @"Right Label";
+        
+        switch (indexPath.section) {
+            case 1: {
+                cell.leftLabel.text = [bioLeftLabels objectAtIndex:indexPath.row];
+                cell.rightLabel.text = [bioRightLabels objectAtIndex:indexPath.row];
+                break;
+            }
+                
+            case 2: {
+                cell.leftLabel.text = [statsLeftLabels objectAtIndex:indexPath.row];
+                cell.rightLabel.text = [statsRightLabels objectAtIndex:indexPath.row];                
+                break;
+            }
+            default:
+                break;
+        }
+        
         return cell;
 
     }
@@ -178,11 +276,19 @@
     if (section == 0 || section == self.tableView.numberOfSections-1) {
         return NULL;
     }
-    else {
+    else if (section == 1) {
         SectionHeaderView *header = [[SectionHeaderView alloc] init];
-        header.label.text = @"Section Header";
+        header.label.text = @"Bio";
+        return header;
+
+
+    }
+    else if (section == 2) {
+        SectionHeaderView *header = [[SectionHeaderView alloc] init];
+        header.label.text = @"Stats";
         return header;
     }
+    else return NULL;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {    
@@ -260,6 +366,7 @@
 #pragma mark - Edit Controller Degegate
 
 - (void)didChangeData {
+    [self initializeCellArrays];
     [self.tableView reloadData];    
 }
 

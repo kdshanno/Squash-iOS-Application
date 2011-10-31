@@ -29,8 +29,8 @@
     
         self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, cellWidth/2-10, cellHeight)];
         [self.leftLabel setBackgroundColor:[UIColor clearColor]];
-        [self.leftLabel setTextColor:[UIColor redColor]];
-        [self.leftLabel setShadowColor:[UIColor whiteColor]];
+        //[self.leftLabel setTextColor:[UIColor redColor]];
+        [self.leftLabel setFont:[UIFont boldSystemFontOfSize:15]];
         [self.leftLabel setShadowOffset:CGSizeMake(0, -1)];
         [self.contentView addSubview:self.leftLabel];
         
@@ -38,6 +38,8 @@
         [self.rightLabel setTextAlignment:UITextAlignmentRight];
         [self.rightLabel setTextColor:[UIColor redColor]];
 
+        [self.rightLabel setMinimumFontSize:12];
+        [self.rightLabel setAdjustsFontSizeToFitWidth:YES];
         [self.rightLabel setBackgroundColor:[UIColor clearColor]];
 
         [self.contentView addSubview:self.rightLabel];

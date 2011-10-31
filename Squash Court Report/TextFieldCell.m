@@ -11,7 +11,7 @@
 
 @implementation TextFieldCell
 
-@synthesize identifierLabel, textField;
+@synthesize identifierLabel, textField, cellInfo;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -24,6 +24,7 @@
         
         // Set Up Cell
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        //[self setBackgroundColor:[UIColor clearColor]];
         
         // Initialize Text Field and Label
         self.identifierLabel = [[UILabel alloc] init];
@@ -34,9 +35,10 @@
         [self.identifierLabel setBackgroundColor:[UIColor clearColor]];
         
         self.textField = [[UITextField alloc] init];
-        [self.textField setFrame:CGRectMake(labelWidth+15, 9, cellWidth-labelWidth-20, cellHeight-10)];
+        [self.textField setFrame:CGRectMake(labelWidth+15, 9, cellWidth-labelWidth-30, cellHeight-10)];
         [self.textField setMinimumFontSize:16];
         [self.textField setFont:[UIFont fontWithName:@"Helvetica" size:20]];
+        [self.textField setReturnKeyType:UIReturnKeyDone];
          
         // Add views to cell
         [self.contentView addSubview:self.identifierLabel];

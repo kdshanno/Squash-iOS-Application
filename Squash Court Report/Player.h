@@ -14,7 +14,16 @@ typedef enum {
     kRightHanded
 } handedness;
 
-@interface Player : NSManagedObject
+typedef enum {
+    kFirstInitialLastName,
+    kFirstInitialLastInitial,
+    kFullName
+} nameType;
+
+
+@interface Player : NSManagedObject {
+    UIImage *imageCache;
+}
 
 @property (nonatomic, retain) NSDate * dateBorn;
 @property (nonatomic, retain) NSNumber * handedness;
@@ -27,7 +36,7 @@ typedef enum {
 @property (nonatomic, retain) NSString * homeClub;
 @property (nonatomic, retain) NSString * stateProvince;
 @property (nonatomic, retain) NSString * style;
-
+@property (nonatomic, retain) NSData * imageData;
 
 @end
 
@@ -36,11 +45,20 @@ typedef enum {
 - (void)setHanded:(int)handedness;
 - (int)getHanded;
 
-- (NSString *)getFullName;
+- (NSString *)getName:(nameType) nameType;
+- (void)setImage:(UIImage *)image;
+- (UIImage *)getImage;
+
+-(int)getNumberOfWins;
+-(int)getNumberOfLosses;
+-(int)getNumberOfMatches;
 
 - (void)addMatchesObject:(NSManagedObject *)value;
 - (void)removeMatchesObject:(NSManagedObject *)value;
 - (void)addMatches:(NSSet *)values;
 - (void)removeMatches:(NSSet *)values;
+
+
+
 
 @end

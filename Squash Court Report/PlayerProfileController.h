@@ -10,7 +10,7 @@
 #import "CoreDataModel.h"
 #import <CoreData/CoreData.h>
 #import "PlayerProfileEditController.h"
-
+#import "PlayerEditController.h"
 
 @interface PlayerProfileController : UIViewController <PlayerEditDelegate> {
     Player *player;

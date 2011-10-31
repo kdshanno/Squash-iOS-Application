@@ -20,5 +20,6 @@
 @dynamic note;
 @dynamic player;
 @dynamic game;
+@dynamic pointNumber;
 
 @end

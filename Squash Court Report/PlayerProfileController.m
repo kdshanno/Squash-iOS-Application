@@ -39,7 +39,7 @@
 #pragma mark - View lifecycle
 
 - (void)updateData {
-    self.title = [self.player getFullName];
+    self.title = [self.player getName:kFullName];
     
     self.firstNameLabel.text = self.player.firstName;
     self.lastNameLabel.text = self.player.lastName;

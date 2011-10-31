@@ -10,30 +10,37 @@
 #import "CoreDataModel.h"
 #import "TextFieldCell.h"
 
-@protocol PlayerEditDelegate <NSObject>
+@protocol PlayerProfileEditDelegate <NSObject>
 
 - (void)didChangeData;
 
 @end
 
-@interface PlayerProfileEditController : UITableViewController
+@interface PlayerProfileEditController : UITableViewController <UITextFieldDelegate> {
+    UITextField *firstNameField;
+    UITextField *lastNameField;
+    UITextField *playerStyle;
+    UITextField *city;
+    UITextField *stateProvince;
+    UITextField *country;
+    UITextField *homeClub;
+    UITextField *headCoach;
+    
+    UISegmentedControl *handednessSegControl;
+    
+    NSMutableDictionary *cellDictionary;
+}
 
 @property (strong, nonatomic) Player *player;
 
-@property (strong, nonatomic) UITextField *firstNameField;
-@property (strong, nonatomic) UITextField *lastNameField;
-@property (strong, nonatomic) UITextField *playerStyle;
-@property (strong, nonatomic) UITextField *city;
-@property (strong, nonatomic) UITextField *stateProvince;
-@property (strong, nonatomic) UITextField *country;
-@property (strong, nonatomic) UITextField *homeClub;
-@property (strong, nonatomic) UITextField *headCoach;
 
 
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (retain) id delegate;
+
+- (id)initWithStyle:(UITableViewStyle)style andPlayer:(Player *)editingPlayer;
 
 
 @end

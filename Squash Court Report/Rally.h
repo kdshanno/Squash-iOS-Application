@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSNumber * finishingShot;
 @property (nonatomic, retain) NSNumber * p1Score;
 @property (nonatomic, retain) NSNumber * p2Score;
+@property (nonatomic, retain) NSNumber * pointNumber;
 @property (nonatomic, retain) NSNumber * xPosition;
 @property (nonatomic, retain) NSNumber * yPosition;
 @property (nonatomic, retain) NSString * note;

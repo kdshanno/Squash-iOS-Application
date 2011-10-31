@@ -8,10 +8,11 @@
 
 #import "RallyEntryController.h"
 #import "CourtView.h"
+#import "SCRAppDelegate.h"
 
 @implementation RallyEntryController
 
-@synthesize managedObjectContext, match, courtImage, bottomToolbar, titleButton, entryView, playerSegmentedControl, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel, topToolbar, opaqueView, playerSegControl, shotSegControl;
+@synthesize managedObjectContext, match, courtImage, bottomToolbar, titleButton, entryView, playerSegmentedControl, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel, topToolbar, opaqueView, playerSegControl, shotSegControlTop, shotSegControlBottom, pageControl, scoreItemButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +39,7 @@
     self = [super init];
     if (self) {
         self.title = @"Match";
+        
     }
     return self;
 }
@@ -76,20 +78,46 @@
     [newCourt addGestureRecognizer:tapRecognizer];
 
 }
+
+- (void)resetEntryView {
+    [self.entryScrollView setContentSize:CGSizeMake(320, 380)];
+    [self.entryScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [self.pageControl setAlpha:0.0];
+    
+    [self.playerSegControl setSelectedSegmentIndex:-1];
+    [self.shotSegControlBottom setSelectedSegmentIndex:-1];
+    [self.shotSegControlTop setSelectedSegmentIndex:-1];
+    
+    self.scoreItemButton.title = [NSString stringWithFormat:@"Shaw %u - %u Shannon", p1Score, p2Score];
+
+
+
+}
 - (void)initEntryView {
     
     [self addNewCourtImage];
     
     [self.entryView addSubview:self.entryScrollView];
-    [self.entryScrollView setContentSize:CGSizeMake(320, 602)];
+    [self.entryScrollView setPagingEnabled:YES];
+    [self.entryScrollView setScrollEnabled:YES];
+    [self.entryScrollView setDelegate:self];
+        
     [self.entryScrollView setBackgroundColor:[UIColor clearColor]];
     [self.entryScrollView setFrame:CGRectMake(0, 0, self.entryView.frame.size.width, self.entryView.frame.size.height)];
     
     [self.playerSegControl setTintColor:[UIColor redColor]];
     [self.playerSegControl setSegmentedControlStyle:UISegmentedControlStyleBar];
     
-    [self.shotSegControl setTintColor:[UIColor redColor]];
-    [self.shotSegControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    [self.shotSegControlBottom setTintColor:[UIColor redColor]];
+    [self.shotSegControlBottom setSegmentedControlStyle:UISegmentedControlStyleBar];
+    
+    [self.shotSegControlTop setTintColor:[UIColor redColor]];
+    [self.shotSegControlTop setSegmentedControlStyle:UISegmentedControlStyleBar];
+
+    
+    [self resetEntryView];
+    
+
     
 
 
@@ -101,6 +129,10 @@
     
     [self.bottomToolbar setTintColor:[UIColor redColor]];
     [self.topToolbar setTintColor:[UIColor redColor]];
+    
+    gameNumber = 0;
+    p1Score = 0;
+    p2Score = 0;
 
     
     [self.view setBackgroundColor:[UIColor colorWithRed:253.0/255.0 green:250.0/255.0 blue:212.0/255.0 alpha:1.0]];
@@ -110,7 +142,7 @@
     entryViewFrameUp = CGRectMake(0, 43, self.view.frame.size.width, self.entryView.frame.size.height);
     
     imageFrameBig = self.courtImage.frame;
-    imageFrameSmall = CGRectMake(90, 30, 139, 210);
+    imageFrameSmall = CGRectMake(90, 28, 140, 212);
     entryViewUp = false;
     
     self.entryView.frame = entryViewFrameDown;
@@ -122,6 +154,8 @@
                                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] , nil]];
     
     // Do any additional setup after loading the view from its nib.
+
+
 }
 
 - (void)viewDidUnload
@@ -143,6 +177,8 @@
 }
 
 #pragma mark - Entry Shot Actions
+
+
 - (void)courtTapped:(UIGestureRecognizer *)sender {
     if (entryViewUp == false) {
         
@@ -151,8 +187,22 @@
             [sender.view setUserInteractionEnabled:NO];
             CGPoint location = [(UITapGestureRecognizer *)sender locationInView:sender.view];
             CourtView *courtView = (CourtView *)sender.view;
-            [courtView setX:location.x/(sender.view.frame.size.width) andY:location.y/(sender.view.frame.size.height)];
+            double xPercent = location.x/(sender.view.frame.size.width);
+            double yPercent = location.y/(sender.view.frame.size.height);
+            [courtView setX:xPercent andY:yPercent];
  
+            SCRAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            currentRally = [NSEntityDescription insertNewObjectForEntityForName:@"Rally" inManagedObjectContext:delegate.managedObjectContext];
+            currentRally.xPosition = [NSNumber numberWithDouble:xPercent];
+            currentRally.yPosition = [NSNumber numberWithDouble:yPercent];
+            
+            self.p1Stepper.value = p1Score;
+            self.p2Stepper.value = p2Score;
+            self.gameStepper.value = gameNumber;
+            [self playerScoreChanged:nil];
+            [self gameNumberChanged:nil];
+
+            
             [UIView animateWithDuration:0.5 
                              animations:^{
                                  self.entryView.frame = entryViewFrameUp;
@@ -162,6 +212,7 @@
                                  sender.view.transform = rotate;
                                  //sender.view.transform = CGAffineTransformConcat(rotate, scale);
                                  self.opaqueView.alpha = 0.5;
+
                              }
                              completion:^(BOOL finished){
                                  //Set Bool
@@ -172,13 +223,15 @@
                                  [sender.view setFrame:CGRectMake(sender.view.frame.origin.x, sender.view.frame.origin.y-43, sender.view.frame.size.width, sender.view.frame.size.height)];
                                  sender.view.tag = 1024;
                                  
-                                 // Set Top Bar
-                                 NSArray *items = self.topToolbar.items;
-                                 [self.topToolbar setItems:[items arrayByAddingObject:[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneButtonPressed:)]] animated:YES];
+                                 
                              }];
         }
         
     }
+}
+
+- (void)saveShot {
+    
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
@@ -186,6 +239,13 @@
     NSMutableArray *items = [NSMutableArray arrayWithArray:self.topToolbar.items];
     [items removeLastObject];
     [self.topToolbar setItems:items animated:YES];
+    currentRally.p1Score = [NSNumber numberWithDouble:self.p1Stepper.value];
+    currentRally.p2Score = [NSNumber numberWithDouble:self.p2Stepper.value];
+
+    p1Score = self.p1Stepper.value;
+    p2Score = self.p2Stepper.value;
+    gameNumber = self.gameStepper.value;
+    
     [UIView animateWithDuration:0.5 
                      animations:^{
                          self.entryView.frame = entryViewFrameDown;
@@ -198,19 +258,55 @@
                          entryViewUp = false;
                          
                          //scroll view
-                         [self.entryScrollView setContentOffset:CGPointMake(0, 0)];
+                         [self resetEntryView];
+
                          
                      }];
     
+    [self saveShot];
+    
+}
+
+-(void)checkIfSegsPicked {
+    if (([self.shotSegControlTop selectedSegmentIndex] > -1 ||
+        [self.shotSegControlBottom selectedSegmentIndex] > -1) &&
+        [self.playerSegControl selectedSegmentIndex] > -1 &&
+        self.entryScrollView.contentSize.width == 320) {
+        [self.entryScrollView setContentSize:CGSizeMake(640, 380)];
+        [self.entryScrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+        [UIView animateWithDuration:0.5 animations:^ {
+            [self.pageControl setAlpha:1.0];
+            
+        }];
+        
+        // Set Top Bar
+        NSArray *items = self.topToolbar.items;
+        [self.topToolbar setItems:[items arrayByAddingObject:[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneButtonPressed:)]] animated:YES];
+    }
 }
 
 -(IBAction)playerSegChanged:(id)sender {
-    
+    [self checkIfSegsPicked];
 }
 
--(IBAction)shotSegChanged:(id)sender {
+-(IBAction)topShotSegChanged:(id)sender {
+    if ([self.shotSegControlBottom selectedSegmentIndex] > -1) {
+        [self.shotSegControlBottom setSelectedSegmentIndex:-1];
+    }
     
+    [self checkIfSegsPicked];
+
 }
+
+-(IBAction)bottomShotSegChanged:(id)sender {
+    if ([self.shotSegControlTop selectedSegmentIndex] > -1) {
+        [self.shotSegControlTop setSelectedSegmentIndex:-1];
+    }
+
+    [self checkIfSegsPicked];
+
+}
+
 
 
 -(void)finishButtonPressed {
@@ -227,6 +323,34 @@
     self.gameNumberLabel.text = [NSString stringWithFormat:@"%u", (int)gameStepper.value];
     
 }
+
+- (IBAction)rewindButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)fastFowardButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)scoreButtonPressed:(id)sender {
+    
+}
+
+
+#pragma mark - Paging Delegats
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView.contentOffset.x > 320/2) {
+        [self.pageControl setCurrentPage:1];
+    }
+    else [self.pageControl setCurrentPage:0];
+}
+
+- (IBAction)pageControlChanged:(id)sender {
+    int y = 0;
+    int x = self.pageControl.currentPage * 320;
+    [self.entryScrollView setContentOffset:CGPointMake(x, y) animated:YES];
+}
+
 
 
 @end

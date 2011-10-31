@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) UILabel *identifierLabel;
 @property (strong, nonatomic) UITextField *textField;
+@property (strong, nonatomic) NSMutableDictionary *cellInfo;
 
 @end

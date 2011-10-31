@@ -11,7 +11,7 @@
 
 @implementation PlayerProfileEditController
 
-@synthesize firstNameField, lastNameField, player, delegate, playerStyle, city, stateProvince, country, homeClub, headCoach;
+@synthesize player, delegate;
 @synthesize managedObjectContext = __managedObjectContext;
 
 
@@ -23,6 +23,18 @@
         //if (self.title == nil) self.title = [self.player getFullName];
         [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Wood_Background.png"]]];
 
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style andPlayer:(Player *)editingPlayer
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+        
+        
+               
     }
     return self;
 }
@@ -39,7 +51,7 @@
 
 - (void)saveNewPlayer {
     
-    if(self.firstNameField.text == NULL || self.lastNameField.text == NULL || [self.firstNameField.text compare:@""] == NSOrderedSame || [self.lastNameField.text compare:@""] == NSOrderedSame)
+    if(firstNameField.text == NULL || lastNameField.text == NULL || [firstNameField.text compare:@""] == NSOrderedSame || [lastNameField.text compare:@""] == NSOrderedSame)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter a first and last name." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Okay", nil];
         [alert show];
@@ -54,8 +66,17 @@
     else newPlayer = self.player;
         
 
-    newPlayer.firstName = self.firstNameField.text;
-    newPlayer.lastName = self.lastNameField.text;
+    newPlayer.firstName = firstNameField.text;
+    newPlayer.lastName = lastNameField.text;
+    newPlayer.style = playerStyle.text;
+    newPlayer.city = city.text;
+    newPlayer.stateProvince = stateProvince.text;
+    newPlayer.country = country.text;
+    newPlayer.headCoach = headCoach.text;
+    newPlayer.homeClub = homeClub.text;
+    
+    [newPlayer setHanded:[handednessSegControl selectedSegmentIndex]];
+
 
     [self.delegate didChangeData];
     [self.parentViewController dismissModalViewControllerAnimated:YES];
@@ -80,6 +101,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
     
        self.title = @"Edit Player";
+    
+    cellDictionary = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewDidUnload
@@ -143,40 +166,43 @@
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+- (TextFieldCell *)createCellatIndexPath:(NSIndexPath *)indexPath {
+    TextFieldCell *cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.textField.delegate = self;
     
     switch (indexPath.section) {
         case 0: {
             switch (indexPath.row) {
                 case 0: {
                     cell.identifierLabel.text = @"First Name";
-                    self.firstNameField = cell.textField;
+                    cell.textField.placeholder = @"Required";
                     if (self.player != nil) {
-                        self.firstNameField.text = self.player.firstName;
+                        cell.textField.text = self.player.firstName;
                     }
+                    firstNameField = cell.textField;
                     break;
                 }
+                    
                 case 1: {
                     cell.identifierLabel.text = @"Last Name";
-                    self.lastNameField = cell.textField;
+                    cell.textField.placeholder = @"Required";
+                    
                     if (self.player != nil) {
-                        self.lastNameField.text = self.player.lastName;
+                        cell.textField.text = self.player.lastName;
+                        
                     }
+                    lastNameField = cell.textField;
+                    
                     break;
                 }
+                    
                 case 2: {
                     cell.identifierLabel.text = @"Style";
-                    self.playerStyle = cell.textField;
                     if (self.player != nil) {
-                        self.playerStyle.text = self.player.firstName;
+                        cell.textField.text = self.player.style;
                     }
+                    playerStyle = cell.textField;
+                    
                     break;
                 }
                     
@@ -192,6 +218,13 @@
             segControl.frame = CGRectMake(0, 0, 300, cell.contentView.frame.size.height+5) ;
             [segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
             [segControl setTintColor:[UIColor redColor]];
+            
+            handednessSegControl = segControl;
+            if (self.player) {
+                [segControl setSelectedSegmentIndex:[self.player getHanded]];
+
+            }
+            
             [cell.contentView addSubview:segControl];
             
             break;
@@ -201,44 +234,49 @@
             switch (indexPath.row) {
                 case 0: {
                     cell.identifierLabel.text = @"City";
-                    self.city = cell.textField;
                     if (self.player != nil) {
-                        self.city.text = self.player.lastName;
+                        cell.textField.text = self.player.city;
                     }
+                    city = cell.textField;
+                    
                     break;
                 }
                 case 1: {
                     cell.identifierLabel.text = @"State / Province";
-                    self.stateProvince = cell.textField;
+                    
                     if (self.player != nil) {
-                        self.stateProvince.text = self.player.lastName;
+                        cell.textField.text = self.player.stateProvince;
                     }
+                    stateProvince = cell.textField;
                     break;
                 }
                     
                 case 2: {
                     cell.identifierLabel.text = @"Country";
-                    self.country = cell.textField;
                     if (self.player != nil) {
-                        self.country.text = self.player.lastName;
+                        cell.textField.text = self.player.country;
                     }
+                    country = cell.textField;
+                    
                     break;
                 }
                 case 3: {
                     cell.identifierLabel.text = @"Home Club";
-                    self.homeClub = cell.textField;
                     if (self.player != nil) {
-                        self.homeClub.text = self.player.lastName;
+                        cell.textField.text = self.player.homeClub;
                     }
+                    homeClub = cell.textField;
+                    
                     break;
                 }
                     
                 case 4: {
                     cell.identifierLabel.text = @"Head Coach";
-                    self.headCoach = cell.textField;
+                    
                     if (self.player != nil) {
-                        self.lastNameField.text = self.player.lastName;
+                        cell.textField.text = self.player.headCoach;
                     }
+                    headCoach = cell.textField;
                     break;
                 }
                     
@@ -252,8 +290,24 @@
         default:
             break;
     }
-            
-            return cell;
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellID = [NSString stringWithFormat:@"id_%d_%d", indexPath.section, indexPath.row];
+    
+    TextFieldCell *cell;
+    
+    if ([cellDictionary objectForKey:cellID]) {
+        cell = (TextFieldCell *)[cellDictionary objectForKey:cellID];
+    }
+    else {
+        cell = [self createCellatIndexPath:indexPath];
+        [cellDictionary setObject:cell forKey:cellID];
+    }
+    return cell;
 }
 
 /*
@@ -299,13 +353,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSString *cellID = [NSString stringWithFormat:@"id_%d_%d", indexPath.section, indexPath.row];
+
+    TextFieldCell *selectedCell = (TextFieldCell *)[cellDictionary objectForKey:cellID];
+    [selectedCell.textField becomeFirstResponder];
+}
+
+#pragma mark - Text Field Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
 }
 
 @end

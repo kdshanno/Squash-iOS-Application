@@ -35,6 +35,7 @@
         <attribute name="handedness" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="headCoach" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="homeClub" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stateProvince" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="style" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,6 +47,7 @@
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="p1Score" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="p2Score" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pointNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="xPosition" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="yPosition" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="game" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="rallies" inverseEntity="Game" syncable="YES"/>
@@ -55,7 +57,7 @@
         <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
         <element name="Game" positionX="-2738" positionY="-3339" width="128" height="120"/>
         <element name="Match" positionX="-2934" positionY="-3510" width="128" height="270"/>
-        <element name="Player" positionX="-3195" positionY="-3465" width="128" height="225"/>
-        <element name="Rally" positionX="-3008" positionY="-3249" width="128" height="165"/>
+        <element name="Player" positionX="-3195" positionY="-3465" width="128" height="240"/>
+        <element name="Rally" positionX="-3008" positionY="-3249" width="128" height="180"/>
     </elements>
 </model>

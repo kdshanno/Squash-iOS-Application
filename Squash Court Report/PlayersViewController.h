@@ -10,7 +10,9 @@
 #import <CoreData/CoreData.h>
 #import "CoreDataModel.h"
 
-@interface PlayersViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface PlayersViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+    NSMutableDictionary *imageCache;
+}
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
