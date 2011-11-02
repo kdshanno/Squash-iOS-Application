@@ -105,7 +105,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,13 +145,13 @@
             break;
         }
             
-        case 4: {
+       /* case 4: {
             cell.mainLabel.text = @"Shot Entry (temporary)";
             [cell.leftImageView setImage:[UIImage imageNamed:@"Person_Icon"]];
             
             
             break;
-        }
+        }*/
             
             
 
@@ -227,12 +227,12 @@
         }
             
             
+            /*
         case 4: {
             RallyEntryController *rallyEntryController = [[RallyEntryController alloc] init];
-            //rallyEntryController.managedObjectContext = self.managedObjectContext;
             [self.navigationController pushViewController:rallyEntryController animated:YES];
             break;
-        }
+        }*/
 
             
 

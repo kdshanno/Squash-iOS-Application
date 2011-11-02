@@ -22,8 +22,10 @@
 @dynamic city;
 @dynamic complex;
 @dynamic country;
+@dynamic courtCondition;
 @dynamic drawRound;
 @dynamic matchType;
+@dynamic notes;
 @dynamic provinceState;
 @dynamic recordingType;
 @dynamic tournamentName;

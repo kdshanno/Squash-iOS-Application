@@ -27,13 +27,15 @@ typedef enum {
 @property (nonatomic, retain) NSNumber * p1GameScore;
 @property (nonatomic, retain) NSNumber * p2GameScore;
 @property (nonatomic, retain) NSDate * datePlayed;
-@property (nonatomic, retain) Player *player1;
-@property (nonatomic, retain) Player *player2;
+@property (nonatomic, retain) Player * player1;
+@property (nonatomic, retain) Player * player2;
 @property (nonatomic, retain) NSSet *games;
 @property (nonatomic, retain) NSString * city;
 @property (nonatomic, retain) NSString * complex;
 @property (nonatomic, retain) NSString * country;
+@property (nonatomic, retain) NSString * courtCondition;
 @property (nonatomic, retain) NSString * drawRound;
+@property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * provinceState;
 @property (nonatomic, retain) NSString * tournamentName;
 @property (nonatomic, retain) NSNumber * matchType;

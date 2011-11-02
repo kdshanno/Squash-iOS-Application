@@ -58,13 +58,13 @@
     NSArray *array = [NSMutableArray arrayWithArray:[moc executeFetchRequest:request error:&error]];
     
     
-     for (int i=0; i<array.count; i++) 
-     {     
-     Player *player = [array objectAtIndex:i];
-     
-     [players addObject:player];
-     
-     }
+    for (int i=0; i<array.count; i++) 
+    {     
+        Player *player = [array objectAtIndex:i];
+        
+        [players addObject:player];
+        
+    }
     
     player1Index = -1;
     player2Index = -1;
@@ -174,7 +174,7 @@
         else  
             [picker enterSuperviewAnimatedWithRow:0];
         
-            [selectionButton setHidden:NO];
+        [selectionButton setHidden:NO];
     }
     else
     {
@@ -244,9 +244,6 @@
     [picker exitSuperviewAnimated];
     [selectionButton setHidden:YES];
     picker.tag = 0;
-    
-    if(player1Index > -1 && player2Index > -1) //both players have been selected
-        [matchProfileButton setHidden:NO];
 }
 
 - (IBAction)setupMatchProfile
@@ -297,6 +294,11 @@
         default:
             break;
     }
+    
+    if(player1Index == -1 || player2Index == -1 || player1Index == player2Index)
+        matchProfileButton.hidden = YES;
+    else
+        [matchProfileButton setHidden:NO];
 }
 
 

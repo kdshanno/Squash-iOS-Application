@@ -54,6 +54,7 @@
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch;
+-(id)initWithMatch: (Match *) currentMatch;
 
 
 -(void)finishButtonPressed;
