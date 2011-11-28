@@ -29,5 +29,6 @@
 @dynamic provinceState;
 @dynamic recordingType;
 @dynamic tournamentName;
+@dynamic pointsPerGame;
 
 @end

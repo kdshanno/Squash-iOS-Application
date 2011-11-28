@@ -73,6 +73,12 @@
    [self setNeedsDisplay];
 }
 
+-(void)removeDot {
+    self.drawDot = NO;
+    [self setNeedsDisplay];
+}
+
+
 
 
 @end

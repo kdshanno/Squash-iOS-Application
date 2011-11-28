@@ -24,6 +24,7 @@ typedef enum {
 @interface Match : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * numberOfGames;
+@property (nonatomic, retain) NSNumber * pointsPerGame;
 @property (nonatomic, retain) NSNumber * p1GameScore;
 @property (nonatomic, retain) NSNumber * p2GameScore;
 @property (nonatomic, retain) NSDate * datePlayed;

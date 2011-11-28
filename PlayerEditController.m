@@ -25,7 +25,7 @@
     }
     if ([cellID isEqualToString:@"id_2_0"]) {
         if (self.imageNew) {
-           // [self.player setImage:self.imageNew]; 
+            self.player.image = self.imageNew;
 
         }
     }
@@ -236,11 +236,9 @@
 - (void)custumSelectRowWithCellID:(NSString *)cellID {
     if ([cellID isEqualToString:@"id_2_0"]) {
             
-        UIImagePickerController *imgPicker = [[UIImagePickerController alloc] init];
-        imgPicker.delegate = self;
-        imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take a New Picture", @"Choose from Gallery", nil];
+        [actionSheet showInView:self.view];
         
-        [self.navigationController presentModalViewController:imgPicker animated:YES];
         
     }
 }
@@ -269,11 +267,53 @@
 #pragma mark - Image Picker Delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
-    NSLog(@"%f by %f", image.size.width, image.size.height);
-    self.imageNew = [UIImage imageWithCGImage:[image CGImage] scale:50.0 orientation:UIImageOrientationUp];
-    NSLog(@"%f by %f", self.imageNew.size.width, imageNew.size.height);
-
+    CGSize size = image.size;
+	CGFloat ratio = 0;
+	if (size.width > size.height) {
+		ratio = 400.0 / size.width;
+	}
+	else {
+		ratio = 400.0 / size.height;
+	}
+	CGRect rect = CGRectMake(0.0, 0.0, ratio * size.width, ratio * size.height);
+	
+	UIGraphicsBeginImageContext(rect.size);
+	[image drawInRect:rect];
+	self.imageNew = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+    
     [self.navigationController dismissModalViewControllerAnimated:YES];
+
+}
+
+#pragma mark - Action Sheet Delegate
+
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet {
+    [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0: {
+            UIImagePickerController *imgPicker = [[UIImagePickerController alloc] init];
+            imgPicker.delegate = self;
+            imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self.navigationController presentModalViewController:imgPicker animated:YES];
+            break;
+        }
+        case 1: {
+            UIImagePickerController *imgPicker = [[UIImagePickerController alloc] init];
+            imgPicker.delegate = self;
+            imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self.navigationController presentModalViewController:imgPicker animated:YES];
+            break;
+        }
+                    
+        default:
+            break;
+    }
 }
 
 

@@ -10,8 +10,10 @@
 #import "CoreDataModel.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
+#import "CourtView.h"
 
-@interface RallyEntryController : UIViewController <UIScrollViewDelegate, UIPageViewControllerDelegate> {
+
+@interface RallyEntryController : UIViewController <UIScrollViewDelegate, UIPageViewControllerDelegate, UIActionSheetDelegate> {
     int gameNumber;
     int p1Score;
     int p2Score;
@@ -22,18 +24,21 @@
     bool entryViewUp;
     UIBarButtonItem *doneButton;
     Rally *currentRally;
+    Game *currentGame;
+    double xVal;
+    double yVal;
     
 }
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) Match *match;
 @property (strong, nonatomic) IBOutlet UIImageView *courtImage;
+@property (strong, nonatomic) CourtView *courtView;
 @property (strong, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 @property (strong, nonatomic) IBOutlet UIToolbar *topToolbar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *titleButton;
 @property (strong, nonatomic) IBOutlet UIView *opaqueView;
 @property (strong, nonatomic) IBOutlet UIView *entryView;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *playerSegmentedControl;
 @property (strong, nonatomic) IBOutlet UIScrollView *entryScrollView;
 @property (strong, nonatomic) IBOutlet UILabel *p1NameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *p2NameLabel;
@@ -49,13 +54,24 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControlTop;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControlBottom;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *scoreItemButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *previousRallyButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *nextRallyButton;
+@property (strong, nonatomic) IBOutlet UIView *topOverlayView;
+@property (strong, nonatomic) IBOutlet UILabel *topOverlayTitle;
+@property (strong, nonatomic) IBOutlet UILabel *topOverlaySubtitle;
+@property (strong, nonatomic) IBOutlet UILabel *gameWonLabel;
+
+
+
 
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) NSMutableArray *gameArray;
+@property (strong, nonatomic) NSMutableDictionary *gameDic;
+@property (strong, nonatomic) NSMutableArray *rallyArray;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch;
--(id)initWithMatch: (Match *) currentMatch;
-
+- (id)initWithMatch:(Match *)currentMatch;
 
 -(void)finishButtonPressed;
 -(IBAction)animateImage:(id)sender;

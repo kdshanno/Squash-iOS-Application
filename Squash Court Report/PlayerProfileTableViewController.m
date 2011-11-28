@@ -62,12 +62,26 @@
     statsRightLabels = [[NSMutableArray alloc] initWithCapacity:0];
     
     if (true) {
-        [statsLeftLabels addObject:@"Wins:"];
-        [statsRightLabels addObject:@"16"];
+        [statsLeftLabels addObject:@"Number Of Matches:"];
+        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfMatches]]];
     }
     if (true) {
-        [statsLeftLabels addObject:@"Number Of Matches:"];
-        [statsRightLabels addObject:@"28"];
+        [statsLeftLabels addObject:@"Number of Wins:"];
+        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfWins]]];
+    }
+    if (true) {
+        [statsLeftLabels addObject:@"Number Of Losses:"];
+        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfLosses]]];
+    }
+    
+    if (true) {
+        [statsLeftLabels addObject:@"Winners per Match:"];
+        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberofWinnersPerMatch]]];
+    }
+    
+    if (true) {
+        [statsLeftLabels addObject:@"Errors per Match:"];
+        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberofErrorsPerMatch]]];
     }
 
 
@@ -204,7 +218,7 @@
 }
 
 - (void)addImageOnCell:(PlayerProfileTopCell *)cell {
-    cell.leftImage.image = [self.player getImage];
+  //  cell.leftImage.image = [self.player getImage];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -219,11 +233,12 @@
         }
         cell.topLabel.text = self.player.firstName;
         cell.bottomLabel.text = self.player.lastName;
+        cell.leftImage.image = self.player.image;
         
-        if (player.imageData) {
+       // if (player.imageData) {
            // [self performSelectorOnMainThread:@selector(addImageOnCell:) withObject:cell waitUntilDone:NO];
 
-        }
+      //  }
 
         return cell;
         

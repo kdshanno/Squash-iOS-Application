@@ -63,6 +63,8 @@
 		50A96B5F144A1A45003AC92D /* PlayerProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B5E144A1A44003AC92D /* PlayerProfileCell.m */; };
 		50A96B62144A1E0D003AC92D /* PlayerProfileTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B61144A1E0C003AC92D /* PlayerProfileTopCell.m */; };
 		50AB230A145F354B00E9F48D /* PlayerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50AB2309145F354A00E9F48D /* PlayerViewCell.xib */; };
+		50B280FD1475905A00725E16 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B280FC1475905A00725E16 /* UIImageToDataTransformer.m */; };
+		50B281001475994E00725E16 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B280FF1475994E00725E16 /* Icon@2x.png */; };
 		50D1A2191451EA9300CCE657 /* ShotEntryBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */; };
 		50D1A21C1451F7D900CCE657 /* ShotEntryBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
@@ -83,7 +85,7 @@
 		5004A6341456361400826773 /* MatchProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchProfileViewController.h; sourceTree = "<group>"; };
 		5004A6351456361400826773 /* MatchProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchProfileView.xib; sourceTree = "<group>"; };
 		50211E9E1450CC6200EF9AD4 /* RallyEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RallyEntryController.h; sourceTree = "<group>"; };
-		50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RallyEntryController.m; sourceTree = "<group>"; };
+		50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RallyEntryController.m; sourceTree = "<group>"; tabWidth = 4; };
 		50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RallyEntryController.xib; sourceTree = "<group>"; };
 		50343BCD14452F6900EDC043 /* Squash Court Report.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squash Court Report.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50343BD114452F6900EDC043 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -158,6 +160,9 @@
 		50A96B60144A1E0C003AC92D /* PlayerProfileTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileTopCell.h; sourceTree = "<group>"; };
 		50A96B61144A1E0C003AC92D /* PlayerProfileTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileTopCell.m; sourceTree = "<group>"; };
 		50AB2309145F354A00E9F48D /* PlayerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewCell.xib; sourceTree = "<group>"; };
+		50B280FB1475905A00725E16 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageToDataTransformer.h; sourceTree = "<group>"; };
+		50B280FC1475905A00725E16 /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageToDataTransformer.m; sourceTree = "<group>"; };
+		50B280FF1475994E00725E16 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShotEntryBackground@2x.png"; sourceTree = "<group>"; };
 		50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShotEntryBackground.png; sourceTree = "<group>"; };
 		5B7973E31460FD7500569407 /* AnimatedUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedUIDatePicker.h; sourceTree = "<group>"; };
@@ -213,6 +218,7 @@
 		50343BC214452F6900EDC043 = {
 			isa = PBXGroup;
 			children = (
+				50B280FF1475994E00725E16 /* Icon@2x.png */,
 				50A0EBDF1445427800A8B3CF /* Default@2x.png */,
 				50A0EBDD1445427400A8B3CF /* Default.png */,
 				50343BD914452F6900EDC043 /* Squash Court Report */,
@@ -259,7 +265,6 @@
 				50343C081445359600EDC043 /* MainViewController.xib */,
 				50343BEE14452F6A00EDC043 /* SCRMasterViewController.xib */,
 				50343BF114452F6A00EDC043 /* SCRDetailViewController.xib */,
-				50343BE514452F6900EDC043 /* Squash_Court_Report.xcdatamodeld */,
 				50A0EBDC1445425300A8B3CF /* Images */,
 				50343BDA14452F6900EDC043 /* Supporting Files */,
 			);
@@ -280,6 +285,8 @@
 		50343C051445355800EDC043 /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				50B280FB1475905A00725E16 /* UIImageToDataTransformer.h */,
+				50B280FC1475905A00725E16 /* UIImageToDataTransformer.m */,
 				50343C0B1445379600EDC043 /* CoreDataModel.h */,
 				50343C021445355200EDC043 /* Game.h */,
 				50343C031445355200EDC043 /* Game.m */,
@@ -289,6 +296,7 @@
 				50343BFD1445355200EDC043 /* Match.m */,
 				50343BF91445355100EDC043 /* Player.h */,
 				50343BFA1445355100EDC043 /* Player.m */,
+				50343BE514452F6900EDC043 /* Squash_Court_Report.xcdatamodeld */,
 			);
 			name = "Core Data Model";
 			sourceTree = "<group>";
@@ -498,6 +506,7 @@
 				5004A6371456361400826773 /* MatchProfileView.xib in Resources */,
 				5001626514572391001BBC78 /* Player-Edit.plist in Resources */,
 				50AB230A145F354B00E9F48D /* PlayerViewCell.xib in Resources */,
+				50B281001475994E00725E16 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +547,7 @@
 				5004A6361456361400826773 /* MatchProfileViewController.m in Sources */,
 				50593F611458C34D00C5F021 /* PlayerEditController.m in Sources */,
 				5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */,
+				50B280FD1475905A00725E16 /* UIImageToDataTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

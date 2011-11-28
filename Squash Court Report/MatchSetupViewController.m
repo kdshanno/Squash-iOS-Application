@@ -8,7 +8,7 @@
 
 #import "MatchSetupViewController.h"
 #import "SCRAppDelegate.h"
-#import "PlayerProfileEditController.h"
+#import "PlayerEditController.h"
 #import "MatchProfileViewController.h"
 
 @implementation MatchSetupViewController
@@ -221,8 +221,8 @@
 -(IBAction)newPlayer1
 {
     [self finishSelection];
-    PlayerProfileEditController *editController = [[PlayerProfileEditController alloc] initWithStyle:UITableViewStyleGrouped];
-    editController.managedObjectContext = [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped];
+    //editController.managedObjectContext = [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
     navController.navigationBar.tintColor = [UIColor redColor];
     playerBeingEdited = 1;
@@ -232,8 +232,8 @@
 -(IBAction)newPlayer2
 {
     [self finishSelection];
-    PlayerProfileEditController *editController = [[PlayerProfileEditController alloc] initWithStyle:UITableViewStyleGrouped];
-    editController.managedObjectContext = [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped];
+    //editController.managedObjectContext = [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
     navController.navigationBar.tintColor = [UIColor redColor];
     playerBeingEdited = 2;

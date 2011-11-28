@@ -18,7 +18,7 @@
 
 @end
 
-@interface PlayerEditController : UITableViewController <UIImagePickerControllerDelegate, UITextFieldDelegate, UINavigationControllerDelegate> {
+@interface PlayerEditController : UITableViewController <UIImagePickerControllerDelegate, UITextFieldDelegate, UINavigationControllerDelegate, UIActionSheetDelegate> {
     
     NSMutableDictionary *cellDictionary;
     UISegmentedControl *handednessSegControl;

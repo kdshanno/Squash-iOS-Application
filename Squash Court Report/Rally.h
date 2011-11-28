@@ -11,9 +11,20 @@
 
 @class Player;
 
+typedef enum {
+    kWinner = 0,
+    kUnforcedError = 1,
+    kError = 2,
+    kNoLet = 3,
+    kLet = 4,
+    kStroke = 5
+} ender;
+
 @interface Rally : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * finishingShot;
+@property (nonatomic, retain) NSNumber * p1Finished;
+
 @property (nonatomic, retain) NSNumber * p1Score;
 @property (nonatomic, retain) NSNumber * p2Score;
 @property (nonatomic, retain) NSNumber * pointNumber;
@@ -22,5 +33,8 @@
 @property (nonatomic, retain) NSString * note;
 @property (nonatomic, retain) Player *player;
 @property (nonatomic, retain) NSManagedObject *game;
+
+-(int)getPreviousp1Score;
+-(int)getPreviousp2Score;
 
 @end

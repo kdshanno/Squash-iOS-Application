@@ -15,6 +15,8 @@
 
 @interface PlayersViewController ()
 - (void)configureCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)addImageAtCell:(NSDictionary *)dic;
+
 @end
 
 @implementation PlayersViewController
@@ -92,6 +94,8 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+
+
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -123,6 +127,8 @@
     
     return cell;
 }
+
+//- (PlayersViewCell *)tableView:(UITableView *)tableView cellwii
 
 /*
  // Override to support conditional editing of the table view.
@@ -275,6 +281,7 @@
  }
  */
 
+/*
 - (void)addImageAtCell:(NSDictionary *)dic {
     NSIndexPath *indexPath = (NSIndexPath *)[dic objectForKey:@"indexPath"];
     PlayersViewCell *cell = (PlayersViewCell *)[dic objectForKey:@"cell"];
@@ -289,17 +296,19 @@
         if (image) {
             [cell.leftImageView setImage:image];
             [imageCache setObject:image forKey:cellID];
-
+            
         }
     }
+    
+}*/
 
-}
 - (void)configureCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.mainLabel.text = [player getName:kFullName];
     cell.detailLabel.text = [NSString stringWithFormat:@"%u - %u", [player getNumberOfWins], [player getNumberOfLosses]];
-    [self performSelectorOnMainThread:@selector(addImageAtCell:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:cell, @"cell", indexPath, @"indexPath", nil] waitUntilDone:NO];
+    cell.leftImageView.image = player.image;
+   // [self performSelectorOnMainThread:@selector(addImageAtCell:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:cell, @"cell", indexPath, @"indexPath", nil] waitUntilDone:NO];
  //   [self performSelectorInBackground:@selector(addImageAtCell:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:cell, @"cell", indexPath, @"indexPath", nil]];
 }
 

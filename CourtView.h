@@ -16,5 +16,7 @@
 @property BOOL drawDot;
 
 -(void)setX:(double)x andY:(double)y;
+-(void)removeDot;
+
 
 @end

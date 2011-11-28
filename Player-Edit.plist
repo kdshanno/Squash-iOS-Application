@@ -75,6 +75,14 @@
 				<key>labelID</key>
 				<string>Home Club</string>
 			</dict>
+			<dict>
+				<key>required</key>
+				<false/>
+				<key>property</key>
+				<string>headCoach</string>
+				<key>labelID</key>
+				<string>Head Coach</string>
+			</dict>
 		</array>
 	</array>
 </dict>

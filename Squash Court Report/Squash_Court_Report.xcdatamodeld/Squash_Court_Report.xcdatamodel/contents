@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="870" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event">
         <attribute name="timeStamp" optional="YES" attributeType="Date"/>
     </entity>
@@ -22,6 +22,7 @@
         <attribute name="numberOfGames" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="p1GameScore" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="p2GameScore" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pointsPerGame" optional="YES" attributeType="Integer 16" defaultValueString="11" syncable="YES"/>
         <attribute name="provinceState" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordingType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="tournamentName" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,7 +38,7 @@
         <attribute name="handedness" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="headCoach" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="homeClub" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stateProvince" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="style" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,6 +48,7 @@
     <entity name="Rally" representedClassName="Rally" syncable="YES">
         <attribute name="finishingShot" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="p1Finished" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="p1Score" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="p2Score" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="pointNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -58,8 +60,8 @@
     <elements>
         <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
         <element name="Game" positionX="-2738" positionY="-3339" width="128" height="120"/>
-        <element name="Match" positionX="-2934" positionY="-3510" width="128" height="300"/>
-        <element name="Player" positionX="-3195" positionY="-3465" width="128" height="240"/>
-        <element name="Rally" positionX="-3008" positionY="-3249" width="128" height="180"/>
+        <element name="Match" positionX="-2934" positionY="-3510" width="128" height="315"/>
+        <element name="Player" positionX="-3195" positionY="-3465" width="128" height="255"/>
+        <element name="Rally" positionX="-3008" positionY="-3249" width="128" height="195"/>
     </elements>
 </model>
