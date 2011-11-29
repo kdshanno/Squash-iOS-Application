@@ -221,8 +221,8 @@
 -(IBAction)newPlayer1
 {
     [self finishSelection];
-    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped];
-    //editController.managedObjectContext = [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    
+    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped andPlayer:NULL];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
     navController.navigationBar.tintColor = [UIColor redColor];
     playerBeingEdited = 1;
@@ -232,12 +232,13 @@
 -(IBAction)newPlayer2
 {
     [self finishSelection];
-    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped];
-    //editController.managedObjectContext = [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    
+    PlayerEditController *editController = [[PlayerEditController alloc] initWithStyle:UITableViewStyleGrouped andPlayer:NULL];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
     navController.navigationBar.tintColor = [UIColor redColor];
     playerBeingEdited = 2;
-    [self.navigationController presentModalViewController:navController animated:YES];}
+    [self.navigationController presentModalViewController:navController animated:YES];
+}
 
 -(IBAction)finishSelection
 {
