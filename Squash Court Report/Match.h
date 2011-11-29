@@ -42,6 +42,8 @@ typedef enum {
 @property (nonatomic, retain) NSNumber * matchType;
 @property (nonatomic, retain) NSNumber * recordingType;
 
+-(Player *)winner;
+-(Player *)loser;
 
 @end
 

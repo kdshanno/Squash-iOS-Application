@@ -31,4 +31,26 @@
 @dynamic tournamentName;
 @dynamic pointsPerGame;
 
+
+-(Player *)winner {
+    if (self.p1GameScore.intValue > self.p2GameScore.intValue) {
+        return self.player1;
+    }
+    if (self.p2GameScore.intValue > self.p1GameScore.intValue) {
+        return self.player2;
+    }
+    return NULL;
+}
+
+-(Player *)loser {
+    if (self.p1GameScore.intValue > self.p2GameScore.intValue) {
+        return self.player2;
+    }
+    if (self.p2GameScore.intValue > self.p1GameScore.intValue) {
+        return self.player1;
+    }
+    return NULL;
+}
+
+
 @end

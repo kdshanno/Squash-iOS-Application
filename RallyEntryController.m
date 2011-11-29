@@ -568,7 +568,8 @@
         // Remove match
         return;
     }
-        Game *oldGame = (Game *)[(Rally *)[self.rallyArray objectAtIndex:0] game];
+    
+    Game *oldGame = (Game *)[(Rally *)[self.rallyArray objectAtIndex:0] game];
     Game *newGame;
     int counter = 0;
     int p1GameScoreint = 0;

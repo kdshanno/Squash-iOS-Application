@@ -65,15 +65,8 @@
 -(int)getNumberOfWins {
     int wins = 0;
     for (Match *match in self.matches) {
-        if (match.player1 == self) {
-            if (match.p1GameScore > match.p2GameScore) {
-                wins++;
-            }
-        }
-        else {
-            if (match.p2GameScore > match.p1GameScore) {
-                wins++;
-            }
+        if (match.winner == self) {
+            wins++;
         }
     }
     return  wins;
@@ -83,16 +76,9 @@
 -(int)getNumberOfLosses {
     int losses = 0;
     for (Match *match in self.matches) {
-        if (match.player1 == self) {
-            if (match.p1GameScore < match.p2GameScore) {
-                losses++;
-            }
-        }
-        else {
-            if (match.p2GameScore < match.p1GameScore) {
-                losses++;
-            }
-        }
+        if (match.loser == self) {
+            losses++;
+        }    
     }
     return  losses;
 }
