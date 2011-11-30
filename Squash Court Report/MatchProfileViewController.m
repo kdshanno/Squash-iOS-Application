@@ -13,7 +13,7 @@
 
 @implementation MatchProfileViewController
 
-@synthesize scroll, player1Label, player2Label, tournamentMatchSwitch, gameTypeSwitch, dateLabel, buildingField, cityField, stateField, countryField, conditionField, tournamentNameField, roundField, notesTextView, datePicker, p1, p2, doneSelectingDateButton;
+@synthesize scroll, player1Label, player2Label, tournamentMatchSwitch, gameTypeSwitch, dateLabel, buildingField, cityField, stateField, countryField, conditionField, tournamentNameField, roundField, notesTextView, datePicker, p1, p2, doneSelectingDateButton, pointsPerGameSwitch;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil player1:(Player *)player1 player2:(Player *)player2
 {
@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [scroll setContentSize:CGSizeMake(self.view.frame.size.width, 655)];
+    [scroll setContentSize:CGSizeMake(self.view.frame.size.width, 490)];
     [self.player1Label setText:[NSString stringWithFormat:@"%@ %@", p1.firstName, p1.lastName]];
     [self.player2Label setText:[NSString stringWithFormat:@"%@ %@", p2.firstName, p2.lastName]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneCreatingProfile)];
@@ -140,6 +140,11 @@
     else
         [currentMatch setRecordingType:[NSNumber numberWithInt:kFilm]];
     
+    if(pointsPerGameSwitch.selectedSegmentIndex == 0)
+        [currentMatch setPointsPerGame:[NSNumber numberWithInt:11]];
+    else
+        [currentMatch setPointsPerGame:[NSNumber numberWithInt:15]];
+    
     RallyEntryController *vc = [[RallyEntryController alloc] initWithMatch:currentMatch];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -148,14 +153,42 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [scroll scrollRectToVisible:CGRectMake(0, textField.frame.origin.y - 190, 320, 460) animated:YES];
+    int keyboardHeight = 180;
+    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardHeight, 0.0);
+    scroll.contentInset = contentInsets;
+    scroll.scrollIndicatorInsets = contentInsets;
+    
+    // Step 3: Scroll the target text field into view.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= keyboardHeight;
+    if (!CGRectContainsPoint(aRect, textField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, textField.frame.origin.y - (keyboardHeight - 15));
+        [scroll setContentOffset:scrollPoint animated:YES];
+    }
+   // [scroll setContentSize:CGSizeMake(self.view.frame.size.width, 700)];
+    //[scroll scrollRectToVisible:CGRectMake(0, textField.frame.origin.y - 190, 320, 460) animated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scroll.contentInset = contentInsets;
+    scroll.scrollIndicatorInsets = contentInsets;
+    //[scroll setContentSize:CGSizeMake(self.view.frame.size.width, 490)];
     [textField resignFirstResponder];
     
     return YES;
 }
+
+/*
+#pragma mark - UITextViewDelegate Methods
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    //[scroll setContentSize:CGSizeMake(self.view.frame.size.width, 505)];
+    [scroll scrollRectToVisible:CGRectMake(0, textView.frame.origin.y, 320, textView.frame.origin.y + 200) animated:YES];
+}*/
+
 
 @end
