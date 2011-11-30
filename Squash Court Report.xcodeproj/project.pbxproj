@@ -67,6 +67,7 @@
 		50B281001475994E00725E16 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B280FF1475994E00725E16 /* Icon@2x.png */; };
 		50D1A2191451EA9300CCE657 /* ShotEntryBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */; };
 		50D1A21C1451F7D900CCE657 /* ShotEntryBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */; };
+		5B0712591485DB3E00BDEC1F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0712581485DB3E00BDEC1F /* Icon.png */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
 		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
 		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
@@ -165,6 +166,7 @@
 		50B280FF1475994E00725E16 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShotEntryBackground@2x.png"; sourceTree = "<group>"; };
 		50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShotEntryBackground.png; sourceTree = "<group>"; };
+		5B0712581485DB3E00BDEC1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5B7973E31460FD7500569407 /* AnimatedUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedUIDatePicker.h; sourceTree = "<group>"; };
 		5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedUIDatePicker.m; sourceTree = "<group>"; };
 		5BF1F740144CDBED000455BC /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		50343BC214452F6900EDC043 = {
 			isa = PBXGroup;
 			children = (
+				5B0712581485DB3E00BDEC1F /* Icon.png */,
 				50B280FF1475994E00725E16 /* Icon@2x.png */,
 				50A0EBDF1445427800A8B3CF /* Default@2x.png */,
 				50A0EBDD1445427400A8B3CF /* Default.png */,
@@ -507,6 +510,7 @@
 				5001626514572391001BBC78 /* Player-Edit.plist in Resources */,
 				50AB230A145F354B00E9F48D /* PlayerViewCell.xib in Resources */,
 				50B281001475994E00725E16 /* Icon@2x.png in Resources */,
+				5B0712591485DB3E00BDEC1F /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,11 +633,13 @@
 		50343BF714452F6A00EDC043 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kelly Shannon (H4W4T4C86C)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
 				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "583EF527-5F28-41F4-9132-D47907D0CEF2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -641,11 +647,17 @@
 		50343BF814452F6A00EDC043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=*]" = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kelly Shannon";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
 				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56CDDDAA-0F52-4AF6-ABC6-5ADC85205F9B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
