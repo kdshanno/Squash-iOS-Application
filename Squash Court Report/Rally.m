@@ -29,18 +29,18 @@
     }
     if (self.finishingShot) {
         if (self.p1Finished.boolValue) {
-            if (self.finishingShot.intValue == kWinner) {
+            if (self.finishingShot.intValue == kWinner || self.finishingShot.intValue == kStroke) {
                 return self.p1Score.intValue-1;
             }
-            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError) {
+            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError || self.finishingShot.intValue == kLet || self.finishingShot.intValue == kNoLet) {
                 return self.p1Score.intValue;
             }
         }
         else {
-            if (self.finishingShot.intValue == kWinner) {
+            if (self.finishingShot.intValue == kWinner || self.finishingShot.intValue == kStroke || self.finishingShot.intValue == kLet) {
                 return self.p1Score.intValue;
             }
-            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError) {
+            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError || self.finishingShot.intValue == kNoLet) {
                 return self.p1Score.intValue-1;
             }
         }
@@ -54,18 +54,18 @@
     }
     if (self.finishingShot) {
         if (!self.p1Finished.boolValue) {
-            if (self.finishingShot.intValue == kWinner) {
+            if (self.finishingShot.intValue == kWinner || self.finishingShot.intValue == kStroke) {
                 return self.p2Score.intValue-1;
             }
-            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError) {
+            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError || self.finishingShot.intValue == kLet || self.finishingShot.intValue == kNoLet) {
                 return self.p2Score.intValue;
             }
         }
         else {
-            if (self.finishingShot.intValue == kWinner) {
+            if (self.finishingShot.intValue == kWinner || self.finishingShot.intValue == kStroke || self.finishingShot.intValue == kLet) {
                 return self.p2Score.intValue;
             }
-            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError) {
+            else if (self.finishingShot.intValue == kUnforcedError || self.finishingShot.intValue == kError || self.finishingShot.intValue == kNoLet) {
                 return self.p2Score.intValue-1;
             }
         }

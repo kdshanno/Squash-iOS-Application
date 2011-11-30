@@ -516,10 +516,6 @@
                     break;
                 }
                 case kLet: {
-                    if (self.playerSegControl.selectedSegmentIndex == 0) {
-                        self.p2Stepper.value++;
-                    }
-                    else self.p1Stepper.value++;
                     break;
                 }
                 case kStroke: {
