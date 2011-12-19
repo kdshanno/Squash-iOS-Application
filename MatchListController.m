@@ -1,37 +1,40 @@
 //
-//  SCRMasterViewController.m
+//  MatchListController.m
 //  Squash Court Report
 //
-//  Created by Max Shaw on 10/11/11.
+//  Created by Max Shaw on 11/30/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SCRMasterViewController.h"
+#import "MatchListController.h"
+#import "CoreDataModel.h"
+#import "SCRAppDelegate.h"
 
-#import "SCRDetailViewController.h"
-
-@interface SCRMasterViewController ()
+@interface MatchListController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)addImageAtCell:(NSDictionary *)dic;
+
 @end
 
-@implementation SCRMasterViewController
+@implementation MatchListController
 
-@synthesize detailViewController = _detailViewController;
 @synthesize fetchedResultsController = __fetchedResultsController;
 @synthesize managedObjectContext = __managedObjectContext;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
+        // Custom initialization
     }
     return self;
 }
-							
+
 - (void)didReceiveMemoryWarning
 {
+    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
+    
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -42,10 +45,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     // Set up the edit and add buttons.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    //self.clearsSelectionOnViewWillAppear = NO;
+    
+    
+    self.title = NSLocalizedString(@"Matches", @"Matches");
 }
 
 - (void)viewDidUnload
@@ -81,6 +86,8 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+
+
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -93,6 +100,10 @@
     return [sectionInfo numberOfObjects];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -103,19 +114,22 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-
+    
     [self configureCell:cell atIndexPath:indexPath];
+    
     return cell;
 }
 
+//- (PlayersViewCell *)tableView:(UITableView *)tableView cellwii
+
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -145,13 +159,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (!self.detailViewController) {
-        self.detailViewController = [[SCRDetailViewController alloc] initWithNibName:@"SCRDetailViewController" bundle:nil];
-    }
-    NSManagedObject *selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    self.detailViewController.detailItem = selectedObject;    
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
+{    
+    /*
+    Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    PlayerProfileTableViewController *playerProfile = [[PlayerProfileTableViewController alloc] initWithStyle:UITableViewStylePlain andPlayer:player];
+    [self.navigationController pushViewController:playerProfile animated:YES];
+    */
 }
 
 #pragma mark - Fetched results controller
@@ -166,15 +180,16 @@
     // Create the fetch request for the entity.
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Match" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"datePlayed" ascending:YES];
+    
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sort1, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
@@ -188,7 +203,7 @@
 	if (![self.fetchedResultsController performFetch:&error]) {
 	    /*
 	     Replace this implementation with code to handle the error appropriately.
-
+         
 	     abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
 	     */
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -233,7 +248,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -249,43 +264,42 @@
 }
 
 /*
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
+ // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
  
  - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    // In the simplest, most efficient, case, reload the table view.
-    [self.tableView reloadData];
-}
+ {
+ // In the simplest, most efficient, case, reload the table view.
+ [self.tableView reloadData];
+ }
  */
+
+/*
+ - (void)addImageAtCell:(NSDictionary *)dic {
+ NSIndexPath *indexPath = (NSIndexPath *)[dic objectForKey:@"indexPath"];
+ PlayersViewCell *cell = (PlayersViewCell *)[dic objectForKey:@"cell"];
+ NSString *cellID = [NSString stringWithFormat:@"id_%d_%d", indexPath.section, indexPath.row];
+ UIImage *image = [imageCache objectForKey:cellID];
+ if (image) {
+ [cell.leftImageView setImage:image];
+ }
+ else {
+ Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+ image = [player getImage];
+ if (image) {
+ [cell.leftImageView setImage:image];
+ [imageCache setObject:image forKey:cellID];
+ 
+ }
+ }
+ 
+ }*/
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[managedObject valueForKey:@"timeStamp"] description];
-}
-
-- (void)insertNewObject
-{
-    // Create a new instance of the entity managed by the fetched results controller.
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    Match *match = (Match *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell.textLabel setText:[NSString stringWithFormat:@"%@ vs. %@", [match.player1 getName:kFirstInitialLastName], [match.player2 getName:kFirstInitialLastName]]];
     
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
     
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
 }
 
 @end

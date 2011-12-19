@@ -1,16 +1,15 @@
 //
-//  MainViewController.h
+//  MatchListController.h
 //  Squash Court Report
 //
-//  Created by Max Shaw on 10/11/11.
+//  Created by Max Shaw on 11/30/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreDataModel.h"
+#import <CoreData/CoreData.h>
 
-
-@interface MainViewController : UITableViewController
+@interface MatchListController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

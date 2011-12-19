@@ -8,18 +8,69 @@
 
 #import "RallyEntryController.h"
 #import "SCRAppDelegate.h"
+#import "SQRStepper.h"
 
 @implementation RallyEntryController
 
 @synthesize managedObjectContext, match, courtImage, bottomToolbar, titleButton, entryView, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel, topToolbar, opaqueView, playerSegControl, shotSegControlTop, shotSegControlBottom, pageControl, scoreItemButton, gameArray, gameDic, rallyArray, courtView, previousRallyButton, nextRallyButton, topOverlayView, topOverlayTitle, topOverlaySubtitle, gameWonLabel;
 
+- (void)addSteppers {
+    float version = [[UIDevice currentDevice].systemVersion floatValue];
+    if (version < 5.0) {
+        self.gameStepper = [[SQRStepper alloc] initWithFrame:CGRectMake(524, 61, 94, 27)];
+        [(SQRStepper *)self.gameStepper setMinimumValue:0];
+        [(SQRStepper *)self.gameStepper setMaximumValue:100];
+        [(SQRStepper *)self.gameStepper addTarget:self action:@selector(gameNumberChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.entryScrollView addSubview:self.gameStepper];
+        
+        self.p1Stepper = [[SQRStepper alloc] initWithFrame:CGRectMake(524, 133, 94, 27)];
+        [(SQRStepper *)self.p1Stepper setMinimumValue:0];
+        [(SQRStepper *)self.p1Stepper setMaximumValue:100];
+        [(SQRStepper *)self.p1Stepper addTarget:self action:@selector(playerScoreChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.entryScrollView addSubview:self.p1Stepper];
+
+
+        
+        self.p2Stepper = [[SQRStepper alloc] initWithFrame:CGRectMake(524, 171, 94, 27)];
+        [(SQRStepper *)self.p2Stepper setMinimumValue:0];
+        [(SQRStepper *)self.p2Stepper setMaximumValue:100];
+        [(SQRStepper *)self.p2Stepper addTarget:self action:@selector(playerScoreChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.entryScrollView addSubview:self.p2Stepper];
+
+    }
+    
+    else {
+        self.gameStepper = [[UIStepper alloc] initWithFrame:CGRectMake(524, 61, 94, 27)];
+        [(UIStepper *)self.gameStepper setMinimumValue:0];
+        [(UIStepper *)self.gameStepper setMaximumValue:100];
+        [(UIStepper *)self.gameStepper addTarget:self action:@selector(gameNumberChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.entryScrollView addSubview:self.gameStepper];
+
+        
+        self.p1Stepper = [[UIStepper alloc] initWithFrame:CGRectMake(524, 133, 94, 27)];
+        [(UIStepper *)self.p1Stepper setMinimumValue:0];
+        [(UIStepper *)self.p1Stepper setMaximumValue:100];
+        [(UIStepper *)self.p1Stepper addTarget:self action:@selector(playerScoreChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.entryScrollView addSubview:self.p1Stepper];
+
+        
+        
+        self.p2Stepper = [[UIStepper alloc] initWithFrame:CGRectMake(524, 171, 94, 27)];
+        [(UIStepper *)self.p2Stepper setMinimumValue:0];
+        [(UIStepper *)self.p2Stepper setMaximumValue:100];
+        [(UIStepper *)self.p2Stepper addTarget:self action:@selector(playerScoreChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.entryScrollView addSubview:self.p2Stepper];
+
+    }
+
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         self.title = @"Match";
-        
+                
     }
     return self;
 }
@@ -303,6 +354,8 @@
     [self.bottomToolbar setTintColor:[UIColor redColor]];
     [self.topToolbar setTintColor:[UIColor redColor]];
     
+    [self addSteppers];
+    
     gameNumber = 1;
     p1Score = 0;
     p2Score = 0;
@@ -373,9 +426,9 @@
             currentRally.xPosition = [NSNumber numberWithDouble:xPercent];
             currentRally.yPosition = [NSNumber numberWithDouble:yPercent];
             
-            self.p1Stepper.value = p1Score;
-            self.p2Stepper.value = p2Score;
-            self.gameStepper.value = gameNumber;
+            [(UIStepper *)self.p1Stepper setValue:p1Score];
+            [(UIStepper *)self.p2Stepper setValue:p2Score];
+            [(UIStepper *)self.gameStepper setValue:gameNumber];
             [self playerScoreChanged:nil];
             [self gameNumberChanged:nil];
             
@@ -420,13 +473,13 @@
    
 
     
-    currentRally.p1Score = [NSNumber numberWithDouble:self.p1Stepper.value];
-    currentRally.p2Score = [NSNumber numberWithDouble:self.p2Stepper.value];
+    currentRally.p1Score = [NSNumber numberWithDouble: [(UIStepper *)self.p1Stepper value]];
+    currentRally.p2Score = [NSNumber numberWithDouble: [(UIStepper *)self.p2Stepper value]];
     
         
-    p1Score = self.p1Stepper.value;
-    p2Score = self.p2Stepper.value;
-    gameNumber = self.gameStepper.value;
+    p1Score =  [(UIStepper *)self.p1Stepper value];
+    p2Score = [(UIStepper *)self.p2Stepper value];
+    gameNumber = [(UIStepper *)self.gameStepper value];
     
     Rally *rally = [self addRallyWithGameNumber:gameNumber andPointNumber:(p1Score + p2Score)];
     rally.p1Score = [NSNumber numberWithInt:p1Score];
@@ -452,10 +505,10 @@
                      }
                      completion:^(BOOL finished){
                          
-                         if (self.p1Stepper.value == self.match.pointsPerGame.intValue || self.p2Stepper.value == self.match.pointsPerGame.intValue) {
-                             self.p1Stepper.value = 0;
-                             self.p2Stepper.value = 0;
-                             self.gameStepper.value = self.gameStepper.value + 1;
+                         if ([(UIStepper *)self.p1Stepper value] == self.match.pointsPerGame.intValue || [(UIStepper *)self.p2Stepper value] == self.match.pointsPerGame.intValue) {
+                             [(UIStepper *)self.p1Stepper setValue:0];
+                             [(UIStepper *)self.p2Stepper setValue:0];
+                             [(UIStepper *)self.gameStepper setValue:([(UIStepper *)self.gameStepper value] + 1)];
                          }
                          
                          [self addNewCourtImage];
@@ -494,15 +547,15 @@
         if (self.shotSegControlTop.selectedSegmentIndex > -1) {
             if (self.shotSegControlTop.selectedSegmentIndex == kWinner) {
                 if (self.playerSegControl.selectedSegmentIndex == 0) {
-                    self.p1Stepper.value++;
+                    [(UIStepper *)self.p1Stepper setValue:[(UIStepper *)self.p1Stepper value]+1];
                 }
-                else self.p2Stepper.value++;
+                else [(UIStepper *)self.p2Stepper setValue:[(UIStepper *)self.p2Stepper value]+1];
             }
             else if (self.shotSegControlTop.selectedSegmentIndex == kUnforcedError || self.shotSegControlTop.selectedSegmentIndex == kError) {
                 if (self.playerSegControl.selectedSegmentIndex == 0) {
-                    self.p2Stepper.value++;
+                    [(UIStepper *)self.p2Stepper setValue:[(UIStepper *)self.p2Stepper value]+1];
                 }
-                else self.p1Stepper.value++;
+                else [(UIStepper *)self.p1Stepper setValue:[(UIStepper *)self.p1Stepper value]+1];
             }
 
         }
@@ -510,9 +563,9 @@
             switch (self.shotSegControlBottom.selectedSegmentIndex + 3) {
                 case kNoLet: {
                     if (self.playerSegControl.selectedSegmentIndex == 0) {
-                        self.p2Stepper.value++;
+                        [(UIStepper *)self.p2Stepper setValue:[(UIStepper *)self.p2Stepper value]+1];
                     }
-                    else self.p1Stepper.value++;
+                    else [(UIStepper *)self.p1Stepper setValue:[(UIStepper *)self.p1Stepper value]+1];
                     break;
                 }
                 case kLet: {
@@ -520,9 +573,9 @@
                 }
                 case kStroke: {
                     if (self.playerSegControl.selectedSegmentIndex == 0) {
-                        self.p1Stepper.value++;
+                        [(UIStepper *)self.p1Stepper setValue:[(UIStepper *)self.p1Stepper value]+1];
                     }
-                    else self.p2Stepper.value++;
+                    else [(UIStepper *)self.p2Stepper setValue:[(UIStepper *)self.p2Stepper value]+1];
                     break;
                 }
                     
@@ -614,24 +667,24 @@
 
 
 -(IBAction)playerScoreChanged:(id)sender {
-    self.p1ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)p1Stepper.value];
-    self.p2ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)p2Stepper.value];
+    self.p1ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)[(UIStepper *)p1Stepper value]];
+    self.p2ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)[(UIStepper *)p2Stepper value]];
     
     self.gameWonLabel.hidden = TRUE;
     
-    if ((int)p1Stepper.value == self.match.pointsPerGame.intValue) {
+    if ((int)[(UIStepper *)p1Stepper value] == self.match.pointsPerGame.intValue) {
         self.gameWonLabel.hidden = FALSE;
-        self.gameWonLabel.text = [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player1 getName:kFullName], (int)self.gameStepper.value];
+        self.gameWonLabel.text = [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player1 getName:kFullName], (int)[(UIStepper *)self.gameStepper value]];
     }
-    else if ((int)p2Stepper.value == self.match.pointsPerGame.intValue) {
+    else if ((int)[(UIStepper *)p2Stepper value] == self.match.pointsPerGame.intValue) {
         self.gameWonLabel.hidden = FALSE;
-        self.gameWonLabel.text = [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player2 getName:kFullName], (int)self.gameStepper.value];
+        self.gameWonLabel.text = [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player2 getName:kFullName], (int)[(UIStepper *)self.gameStepper value]];
         
     }
     
 }
 -(IBAction)gameNumberChanged:(id)sender {
-    self.gameNumberLabel.text = [NSString stringWithFormat:@"%u", (int)gameStepper.value];
+    self.gameNumberLabel.text = [NSString stringWithFormat:@"%u", (int)[(UIStepper *)self.gameStepper value]];
     
 }
 

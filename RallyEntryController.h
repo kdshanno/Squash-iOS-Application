@@ -47,9 +47,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *p1ScoreLabel;
 @property (strong, nonatomic) IBOutlet UILabel *p2ScoreLabel;
 @property (strong, nonatomic) IBOutlet UILabel *gameNumberLabel;
-@property (strong, nonatomic) IBOutlet UIStepper *p1Stepper;
-@property (strong, nonatomic) IBOutlet UIStepper *p2Stepper;
-@property (strong, nonatomic) IBOutlet UIStepper *gameStepper;
+@property (strong, nonatomic) UIControl *p1Stepper;
+@property (strong, nonatomic) UIControl *p2Stepper;
+@property (strong, nonatomic) UIControl *gameStepper;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *playerSegControl;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControlTop;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *shotSegControlBottom;

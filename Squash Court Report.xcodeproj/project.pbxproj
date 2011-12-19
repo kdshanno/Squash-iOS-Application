@@ -14,6 +14,7 @@
 		5004A631145622A700826773 /* AnimatedUIPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5004A630145622A700826773 /* AnimatedUIPickerView.m */; };
 		5004A6361456361400826773 /* MatchProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5004A6331456361400826773 /* MatchProfileViewController.m */; };
 		5004A6371456361400826773 /* MatchProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5004A6351456361400826773 /* MatchProfileView.xib */; };
+		501981531486CEE200C9FEA6 /* MatchListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501981511486CEE200C9FEA6 /* MatchListController.m */; };
 		50211EA11450CC6200EF9AD4 /* RallyEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */; };
 		50211EA21450CC6200EF9AD4 /* RallyEntryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */; };
 		50343BD214452F6900EDC043 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50343BD114452F6900EDC043 /* UIKit.framework */; };
@@ -65,6 +66,15 @@
 		50AB230A145F354B00E9F48D /* PlayerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50AB2309145F354A00E9F48D /* PlayerViewCell.xib */; };
 		50B280FD1475905A00725E16 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B280FC1475905A00725E16 /* UIImageToDataTransformer.m */; };
 		50B281001475994E00725E16 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B280FF1475994E00725E16 /* Icon@2x.png */; };
+		50C0D575149ECFEF004D5D50 /* StepperMinusButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D56D149ECFEF004D5D50 /* StepperMinusButton.png */; };
+		50C0D576149ECFEF004D5D50 /* StepperMinusButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D56E149ECFEF004D5D50 /* StepperMinusButton@2x.png */; };
+		50C0D577149ECFEF004D5D50 /* StepperMinusButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D56F149ECFEF004D5D50 /* StepperMinusButtonSelected.png */; };
+		50C0D578149ECFEF004D5D50 /* StepperMinusButtonSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D570149ECFEF004D5D50 /* StepperMinusButtonSelected@2x.png */; };
+		50C0D579149ECFEF004D5D50 /* StepperPlusButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D571149ECFEF004D5D50 /* StepperPlusButton.png */; };
+		50C0D57A149ECFEF004D5D50 /* StepperPlusButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D572149ECFEF004D5D50 /* StepperPlusButton@2x.png */; };
+		50C0D57B149ECFEF004D5D50 /* StepperPlusButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D573149ECFEF004D5D50 /* StepperPlusButtonSelected.png */; };
+		50C0D57C149ECFEF004D5D50 /* StepperPlusButtonSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C0D574149ECFEF004D5D50 /* StepperPlusButtonSelected@2x.png */; };
+		50C0D580149ED0CC004D5D50 /* SQRStepper.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C0D57F149ED0CB004D5D50 /* SQRStepper.m */; };
 		50D1A2191451EA9300CCE657 /* ShotEntryBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */; };
 		50D1A21C1451F7D900CCE657 /* ShotEntryBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
@@ -84,6 +94,8 @@
 		5004A6331456361400826773 /* MatchProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchProfileViewController.m; sourceTree = "<group>"; };
 		5004A6341456361400826773 /* MatchProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchProfileViewController.h; sourceTree = "<group>"; };
 		5004A6351456361400826773 /* MatchProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchProfileView.xib; sourceTree = "<group>"; };
+		501981501486CEE200C9FEA6 /* MatchListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListController.h; sourceTree = "<group>"; };
+		501981511486CEE200C9FEA6 /* MatchListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchListController.m; sourceTree = "<group>"; };
 		50211E9E1450CC6200EF9AD4 /* RallyEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RallyEntryController.h; sourceTree = "<group>"; };
 		50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RallyEntryController.m; sourceTree = "<group>"; tabWidth = 4; };
 		50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RallyEntryController.xib; sourceTree = "<group>"; };
@@ -163,6 +175,16 @@
 		50B280FB1475905A00725E16 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageToDataTransformer.h; sourceTree = "<group>"; };
 		50B280FC1475905A00725E16 /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageToDataTransformer.m; sourceTree = "<group>"; };
 		50B280FF1475994E00725E16 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		50C0D56D149ECFEF004D5D50 /* StepperMinusButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StepperMinusButton.png; sourceTree = "<group>"; };
+		50C0D56E149ECFEF004D5D50 /* StepperMinusButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StepperMinusButton@2x.png"; sourceTree = "<group>"; };
+		50C0D56F149ECFEF004D5D50 /* StepperMinusButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StepperMinusButtonSelected.png; sourceTree = "<group>"; };
+		50C0D570149ECFEF004D5D50 /* StepperMinusButtonSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StepperMinusButtonSelected@2x.png"; sourceTree = "<group>"; };
+		50C0D571149ECFEF004D5D50 /* StepperPlusButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StepperPlusButton.png; sourceTree = "<group>"; };
+		50C0D572149ECFEF004D5D50 /* StepperPlusButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StepperPlusButton@2x.png"; sourceTree = "<group>"; };
+		50C0D573149ECFEF004D5D50 /* StepperPlusButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StepperPlusButtonSelected.png; sourceTree = "<group>"; };
+		50C0D574149ECFEF004D5D50 /* StepperPlusButtonSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StepperPlusButtonSelected@2x.png"; sourceTree = "<group>"; };
+		50C0D57E149ED0CB004D5D50 /* SQRStepper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQRStepper.h; sourceTree = "<group>"; };
+		50C0D57F149ED0CB004D5D50 /* SQRStepper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQRStepper.m; sourceTree = "<group>"; };
 		50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShotEntryBackground@2x.png"; sourceTree = "<group>"; };
 		50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShotEntryBackground.png; sourceTree = "<group>"; };
 		5B7973E31460FD7500569407 /* AnimatedUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedUIDatePicker.h; sourceTree = "<group>"; };
@@ -201,12 +223,16 @@
 		50211EA41450CC8D00EF9AD4 /* Rally Entry */ = {
 			isa = PBXGroup;
 			children = (
+				50C0D57E149ED0CB004D5D50 /* SQRStepper.h */,
+				50C0D57F149ED0CB004D5D50 /* SQRStepper.m */,
 				504ECB1F145209BE00FE7B45 /* CourtView.h */,
 				504ECB20145209BE00FE7B45 /* CourtView.m */,
 				504ECB221455E8EC00FE7B45 /* CustomImageView.h */,
 				504ECB231455E8EC00FE7B45 /* CustomImageView.m */,
 				50211E9E1450CC6200EF9AD4 /* RallyEntryController.h */,
 				50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */,
+				501981501486CEE200C9FEA6 /* MatchListController.h */,
+				501981511486CEE200C9FEA6 /* MatchListController.m */,
 				50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */,
 				50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */,
 				50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */,
@@ -350,6 +376,14 @@
 		50A0EBDC1445425300A8B3CF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50C0D56D149ECFEF004D5D50 /* StepperMinusButton.png */,
+				50C0D56E149ECFEF004D5D50 /* StepperMinusButton@2x.png */,
+				50C0D56F149ECFEF004D5D50 /* StepperMinusButtonSelected.png */,
+				50C0D570149ECFEF004D5D50 /* StepperMinusButtonSelected@2x.png */,
+				50C0D571149ECFEF004D5D50 /* StepperPlusButton.png */,
+				50C0D572149ECFEF004D5D50 /* StepperPlusButton@2x.png */,
+				50C0D573149ECFEF004D5D50 /* StepperPlusButtonSelected.png */,
+				50C0D574149ECFEF004D5D50 /* StepperPlusButtonSelected@2x.png */,
 				5BF1F740144CDBED000455BC /* button_back.png */,
 				50A96B4B144A0565003AC92D /* ProfileBar.png */,
 				50A96B50144A14A6003AC92D /* PlayerProfileCell.png */,
@@ -507,6 +541,14 @@
 				5001626514572391001BBC78 /* Player-Edit.plist in Resources */,
 				50AB230A145F354B00E9F48D /* PlayerViewCell.xib in Resources */,
 				50B281001475994E00725E16 /* Icon@2x.png in Resources */,
+				50C0D575149ECFEF004D5D50 /* StepperMinusButton.png in Resources */,
+				50C0D576149ECFEF004D5D50 /* StepperMinusButton@2x.png in Resources */,
+				50C0D577149ECFEF004D5D50 /* StepperMinusButtonSelected.png in Resources */,
+				50C0D578149ECFEF004D5D50 /* StepperMinusButtonSelected@2x.png in Resources */,
+				50C0D579149ECFEF004D5D50 /* StepperPlusButton.png in Resources */,
+				50C0D57A149ECFEF004D5D50 /* StepperPlusButton@2x.png in Resources */,
+				50C0D57B149ECFEF004D5D50 /* StepperPlusButtonSelected.png in Resources */,
+				50C0D57C149ECFEF004D5D50 /* StepperPlusButtonSelected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +590,8 @@
 				50593F611458C34D00C5F021 /* PlayerEditController.m in Sources */,
 				5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */,
 				50B280FD1475905A00725E16 /* UIImageToDataTransformer.m in Sources */,
+				501981531486CEE200C9FEA6 /* MatchListController.m in Sources */,
+				50C0D580149ED0CC004D5D50 /* SQRStepper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
