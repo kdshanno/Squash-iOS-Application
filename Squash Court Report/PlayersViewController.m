@@ -1,4 +1,3 @@
-//
 //  PlayersViewController.m
 //  Squash Court Report
 //
@@ -12,17 +11,41 @@
 #import "PlayerProfileEditController.h"
 #import "PlayerProfileTableViewController.h"
 #import "PlayerEditController.h"
+#import "SCRAppDelegate.h"
 
 @interface PlayersViewController ()
 - (void)configureCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureFilteredCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 - (void)addImageAtCell:(NSDictionary *)dic;
 
+@end
+
+@interface NSManagedObject (FirstLetter)
+- (NSString *)uppercaseFirstLetterOfName;
+@end
+
+@implementation NSManagedObject (FirstLetter)
+- (NSString *)uppercaseFirstLetterOfName {
+    [self willAccessValueForKey:@"uppercaseFirstLetterOfName"];
+    NSString *aString = [[self valueForKey:@"firstName"] uppercaseString];
+    
+    // support UTF-16:
+    NSString *stringToReturn = [aString substringWithRange:[aString rangeOfComposedCharacterSequenceAtIndex:0]];
+    
+    // OR no UTF-16 support:
+    //NSString *stringToReturn = [aString substringToIndex:1];
+    
+    [self didAccessValueForKey:@"uppercaseFirstLetterOfName"];
+    return stringToReturn;
+}
 @end
 
 @implementation PlayersViewController
 
 @synthesize fetchedResultsController = __fetchedResultsController;
 @synthesize managedObjectContext = __managedObjectContext;
+
+@synthesize filteredPlayers;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -59,6 +82,9 @@
     imageCache = [[NSMutableDictionary alloc] init];
     
     self.title = NSLocalizedString(@"Players", @"Players");
+    
+    self.tableView.scrollEnabled = YES;
+
 }
 
 - (void)viewDidUnload
@@ -99,13 +125,46 @@
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return 1;
+    }
     return [[self.fetchedResultsController sections] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return NULL;
+    }
+
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo name]; // this is the index
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return NULL;
+    }
+
+    return [self.fetchedResultsController sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return NULL;
+    }
+
+    return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return self.filteredPlayers.count;
+    }
+    else {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,10 +179,13 @@
     PlayersViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[PlayersViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    [self configureCell:cell atIndexPath:indexPath];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        [self configureFilteredCell:cell atIndexPath:indexPath];
+    }
+    else [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
@@ -145,6 +207,7 @@
         // Delete the managed object for the given index path
         NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
         
         // Save the context.
         NSError *error = nil;
@@ -168,7 +231,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-    Player *player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    Player *player;
+
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        player = (Player *)[self.filteredPlayers objectAtIndex:indexPath.row];
+    }
+    else player = (Player *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+
 
     PlayerProfileTableViewController *playerProfile = [[PlayerProfileTableViewController alloc] initWithStyle:UITableViewStylePlain andPlayer:player];
     [self.navigationController pushViewController:playerProfile animated:YES];
@@ -203,7 +272,7 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"uppercaseFirstLetterOfName" cacheName:@"Master"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -301,6 +370,13 @@
     }
     
 }*/
+- (void)configureFilteredCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    Player *player = (Player *)[self.filteredPlayers objectAtIndex:indexPath.row];
+    cell.mainLabel.text = [player getName:kFullName];
+    cell.detailLabel.text = [NSString stringWithFormat:@"%u - %u", [player getNumberOfWins], [player getNumberOfLosses]];
+    cell.leftImageView.image = player.image;
+
+}
 
 - (void)configureCell:(PlayersViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
@@ -319,5 +395,37 @@
     navController.navigationBar.tintColor = [UIColor redColor];
     [self.navigationController presentModalViewController:navController animated:YES];
 }
+
+#pragma mark -
+#pragma mark Content Filtering
+
+- (void)filterContentForSearchText:(NSString*)searchText
+{
+    NSPredicate *namePred =[NSPredicate predicateWithFormat:@"(firstName BEGINSWITH[cd] %@) OR (lastName BEGINSWITH[cd] %@)", searchText, searchText];
+    NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor *sort2 = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+    
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sort1, sort2, nil];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Player"];
+    [request setSortDescriptors:sortDescriptors];
+    [request setPredicate:namePred];
+    filteredPlayers = [self.managedObjectContext executeFetchRequest:request error:nil];
+    
+}
+
+
+#pragma mark -
+#pragma mark UISearchDisplayController Delegate Methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    
+    [self filterContentForSearchText:searchString];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
 
 @end

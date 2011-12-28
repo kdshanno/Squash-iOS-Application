@@ -11,14 +11,19 @@
 #import <CoreData/CoreData.h>
 #import "PlayerProfileEditController.h"
 #import "PlayerEditController.h"
+#import "SectionHeaderView.h"
 
 
-@interface PlayerProfileTableViewController : UITableViewController <PlayerEditDelegate> {
+
+@interface PlayerProfileTableViewController : UITableViewController <PlayerEditDelegate, SectionHeaderDelegate> {
     Player *player;
     NSMutableArray *bioLeftLabels;
     NSMutableArray *bioRightLabels;
     NSMutableArray *statsLeftLabels;
     NSMutableArray *statsRightLabels;
+    NSMutableArray *recentMatchesLeftLabels;
+    NSMutableArray *recentMatchesRightLabels;
+    NSMutableArray *sectionCollapse;
 }
 
 @property (strong, nonatomic) Player *player;

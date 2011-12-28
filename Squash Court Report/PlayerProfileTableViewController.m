@@ -7,7 +7,6 @@
 //
 
 #import "PlayerProfileTableViewController.h"
-#import "SectionHeaderView.h"
 #import "PlayerProfileCell.h"
 #import "PlayerProfileTopCell.h"
 
@@ -16,11 +15,11 @@
 
 @synthesize player, managedObjectContext, sectionHeaderView;
 
-- (void)initializeCellArrays 
-{
+-(void)setUpBioLabels {
     bioLeftLabels = [[NSMutableArray alloc] initWithCapacity:0];
     bioRightLabels = [[NSMutableArray alloc] initWithCapacity:0];
-
+    
+    
     if (self.player.style != @"" && self.player.style) {
         [bioLeftLabels addObject:@"Style:"];
         [bioRightLabels addObject:self.player.style];
@@ -35,7 +34,7 @@
             [bioLeftLabels addObject:@"Handedness:"];
             [bioRightLabels addObject:@"Right Handed"];
         }
-            
+        
     }
     if (self.player.city != @"" && self.player.city) {
         [bioLeftLabels addObject:@"City:"];
@@ -57,22 +56,36 @@
         [bioLeftLabels addObject:@"Home Club:"];
         [bioRightLabels addObject:self.player.homeClub];
     }
-    
+
+    if (bioLeftLabels.count == 0) {
+        [bioLeftLabels addObject:@"No Information, Click Edit To Add"];
+        [bioRightLabels addObject:@""];
+    }
+}
+
+-(void)setUpStatLabels {
     statsLeftLabels = [[NSMutableArray alloc] initWithCapacity:0];
     statsRightLabels = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    if ([self.player getNumberOfMatches] == 0) {
+        [statsLeftLabels addObject:@"No Matches Played"];
+        [statsRightLabels addObject:@""];
+
+        return;
+    }
     
     if (true) {
         [statsLeftLabels addObject:@"Number Of Matches:"];
         [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfMatches]]];
     }
-    if (true) {
-        [statsLeftLabels addObject:@"Number of Wins:"];
-        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfWins]]];
-    }
-    if (true) {
-        [statsLeftLabels addObject:@"Number Of Losses:"];
-        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfLosses]]];
-    }
+//    if (true) {
+//        [statsLeftLabels addObject:@"Number of Wins:"];
+//        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfWins]]];
+//    }
+//    if (true) {
+//        [statsLeftLabels addObject:@"Number Of Losses:"];
+//        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfLosses]]];
+//    }
     
     if (true) {
         [statsLeftLabels addObject:@"Winners per Match:"];
@@ -83,10 +96,50 @@
         [statsLeftLabels addObject:@"Errors per Match:"];
         [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberofErrorsPerMatch]]];
     }
+    
+    [statsLeftLabels addObject:@"See All Stats"];
+    [statsRightLabels addObject:@""];
+
+}
+
+-(void)setUpMatchesLabels {
+    recentMatchesLeftLabels = [[NSMutableArray alloc] initWithCapacity:0];
+    recentMatchesRightLabels = [[NSMutableArray alloc] initWithCapacity:0];
+
+    if ([self.player getNumberOfMatches] == 0) {
+        [recentMatchesLeftLabels addObject:@"No Matches Played"];
+        return;
+    }
+
+    int i = 0;
+    for (Match *match in self.player.matches) {
+        if (i == 3) break;
+        if (match.player1 == self.player) {
+            if (match.winner == self.player) {
+                [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"W  %u, %u against %@", match.p1GameScore.intValue, match.p2GameScore.intValue, [match.player2 getName:kFirstInitialLastName]]];
+            }
+            else [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"L  %u, %u to %@", match.p1GameScore.intValue, match.p2GameScore.intValue, [match.player2 getName:kFirstInitialLastName]]];
+                  
+        }
+        else {
+            if (match.winner == self.player) {
+                [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"W  %u, %u against %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player1 getName:kFirstInitialLastName]]];
+            }
+            else [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"L  %u, %u to %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player1 getName:kFirstInitialLastName]]];
+        }
+        i++;
+    }
+    
+    [recentMatchesLeftLabels addObject:@"See All Matches"];
+}
+
+- (void)initializeCellArrays 
+{
+    [self setUpBioLabels];
+    [self setUpStatLabels];
+    [self setUpMatchesLabels];
 
 
-    
-    
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -108,6 +161,12 @@
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         self.player = newPlayer;
         [self initializeCellArrays];
+        
+        sectionCollapse = [[NSMutableArray alloc] initWithCapacity:5];
+        for (int i = 0; i < 5; i++) {
+            [sectionCollapse addObject:[NSNumber numberWithBool:NO]];
+        }
+
 
         self.title = [self.player getName:kFullName];
         // Custom initialization
@@ -186,13 +245,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     int numberOfRows = 0;
+    
+    // Return 0 if collapsed
+    if ([[sectionCollapse objectAtIndex:section] boolValue] == YES) {
+        return 0;
+    }
     switch (section) {
         case 0:
             numberOfRows = 1;
@@ -203,13 +267,14 @@
             break;
 
         case 2:
+            numberOfRows = [recentMatchesLeftLabels count];
+            break;
+        case 3:
             numberOfRows = [statsLeftLabels count];
 
             break;
-        case 3:
+        case 4:
             numberOfRows = 1;
-
-            break;
         default:
             break;
     }
@@ -233,6 +298,7 @@
         }
         cell.topLabel.text = self.player.firstName;
         cell.bottomLabel.text = self.player.lastName;
+        cell.detailLabel.text = [NSString stringWithFormat:@"%u - %u", [self.player getNumberOfWins], [self.player getNumberOfLosses]];
         cell.leftImage.image = self.player.image;
         
        // if (player.imageData) {
@@ -250,6 +316,7 @@
         UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PlayerProfileLastFooter.png"]];
         return cell;
@@ -257,10 +324,8 @@
     else {
         static NSString *CellIdentifier = @"Cell";
 
-        PlayerProfileCell *cell = (PlayerProfileCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[PlayerProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
+        PlayerProfileCell *cell = [[PlayerProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
         
         switch (indexPath.section) {
             case 1: {
@@ -270,8 +335,22 @@
             }
                 
             case 2: {
+
+                cell.leftLabel.text = [recentMatchesLeftLabels objectAtIndex:indexPath.row];
+                if (recentMatchesLeftLabels.count > 1) {
+                    cell.showDisclosure = TRUE;
+
+                }
+                break;
+            }
+
+                
+            case 3: {
                 cell.leftLabel.text = [statsLeftLabels objectAtIndex:indexPath.row];
-                cell.rightLabel.text = [statsRightLabels objectAtIndex:indexPath.row];                
+                cell.rightLabel.text = [statsRightLabels objectAtIndex:indexPath.row];
+                if (indexPath.row == statsLeftLabels.count-1 && statsLeftLabels.count > 1) {
+                    cell.showDisclosure = TRUE;
+                }
                 break;
             }
             default:
@@ -294,13 +373,31 @@
     else if (section == 1) {
         SectionHeaderView *header = [[SectionHeaderView alloc] init];
         header.label.text = @"Bio";
+        header.sectionNumber = section;
+        header.delegate = self;
+
+
         return header;
 
 
     }
     else if (section == 2) {
         SectionHeaderView *header = [[SectionHeaderView alloc] init];
+        header.label.text = @"Recent Matches";
+        header.sectionNumber = section;
+        header.delegate = self;
+
+        return header;
+        
+        
+    }
+
+    else if (section == 3) {
+        SectionHeaderView *header = [[SectionHeaderView alloc] init];
         header.label.text = @"Stats";
+        header.sectionNumber = section;
+        header.delegate = self;
+
         return header;
     }
     else return NULL;
@@ -369,13 +466,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 #pragma mark - Edit Controller Degegate
@@ -385,5 +475,40 @@
     [self.tableView reloadData];    
 }
 
+
+#pragma mark - Section Degegate
+- (void)sectionHeadedWasClicked:(SectionHeaderView *) sectionHeader{
+    
+    int number = sectionHeader.sectionNumber;
+    
+    BOOL previous = [[sectionCollapse objectAtIndex:number] boolValue];
+    BOOL new = !previous;
+    [sectionCollapse replaceObjectAtIndex:number withObject:[NSNumber numberWithBool:new]];
+    int count;
+    
+    switch (number) {
+        case 1:
+            count = bioLeftLabels.count;
+            break;
+        case 2 :
+            count = recentMatchesLeftLabels.count;
+            break;
+        case 3:
+            count = statsLeftLabels.count;
+            break;
+        default:
+            break;
+    }
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:0];
+    for (int i = 0; i < count; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:number]];
+    }
+    
+    if (new == TRUE) {
+        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    else [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+
+}
 
 @end

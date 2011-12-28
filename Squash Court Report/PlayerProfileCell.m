@@ -7,10 +7,13 @@
 //
 
 #import "PlayerProfileCell.h"
+#import "CustomDisclosureIndicator.h"
 
 @implementation PlayerProfileCell
 
+
 @synthesize leftLabel, rightLabel;
+@synthesize showDisclosure = _showDisclosure;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,10 +27,12 @@
 
         // Initialization code
         UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PlayerProfileCell.png"]];
-        [backgroundView setFrame:CGRectMake(0, 0, cellWidth, cellHeight)];
-        [self.contentView addSubview:backgroundView];
+//        [backgroundView setFrame:CGRectMake(0, 0, cellWidth, cellHeight)];
+//        [self.contentView addSubview:backgroundView];
+        
+        self.backgroundView =  backgroundView;
     
-        self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, cellWidth/2-10, cellHeight)];
+        self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, cellWidth, cellHeight)];
         [self.leftLabel setBackgroundColor:[UIColor clearColor]];
         //[self.leftLabel setTextColor:[UIColor redColor]];
         [self.leftLabel setFont:[UIFont boldSystemFontOfSize:15]];
@@ -43,8 +48,30 @@
         [self.rightLabel setBackgroundColor:[UIColor clearColor]];
 
         [self.contentView addSubview:self.rightLabel];
+        
     }
     return self;
+}
+
+#define kDISCOLSURE_INDICATOR_TAG 333
+
+- (void)setShowDisclosure:(BOOL)showDisclosure {
+    _showDisclosure = showDisclosure;
+    if (_showDisclosure && ![self.contentView viewWithTag:kDISCOLSURE_INDICATOR_TAG]) {
+        CustomDisclosureIndicator *ind = [[CustomDisclosureIndicator alloc] initWithFrame:CGRectMake(285, 8, 11, 18)];
+        self.selectionStyle = UITableViewCellSelectionStyleGray;
+        ind.tag = kDISCOLSURE_INDICATOR_TAG;
+        [self.contentView addSubview:ind];
+    }
+    else {
+        if ([self.contentView viewWithTag:kDISCOLSURE_INDICATOR_TAG]) {
+            self.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            [[self.contentView viewWithTag:kDISCOLSURE_INDICATOR_TAG] removeFromSuperview];
+
+        }
+    }
+         
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

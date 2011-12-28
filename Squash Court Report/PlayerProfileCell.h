@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) UILabel *leftLabel;
 @property (strong, nonatomic) UILabel *rightLabel;
+@property (nonatomic) BOOL showDisclosure;
+
 
 
 @end

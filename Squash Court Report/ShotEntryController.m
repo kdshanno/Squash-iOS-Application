@@ -94,7 +94,6 @@
                                  sender.view.frame = imageFrameSmall;
                              }
                              completion:^(BOOL finished){
-                                 NSLog(@"UP");
                                  entryViewUp = true;
                                  //[self.entryView addSubview:sender.view];
                                 // [sender.view removeFromSuperview];

@@ -10,12 +10,15 @@
 #import <CoreData/CoreData.h>
 #import "CoreDataModel.h"
 
-@interface PlayersViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+@interface PlayersViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate> {
     NSMutableDictionary *imageCache;
+    NSArray *filteredPlayers;
 }
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property (strong, nonatomic) NSArray *filteredPlayers;
 
 
 @end

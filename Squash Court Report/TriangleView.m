@@ -1,35 +1,24 @@
 //
-//  CustomImageView.m
+//  TriangleView.m
 //  Squash Court Report
 //
-//  Created by Max Shaw on 10/24/11.
+//  Created by Max Shaw on 12/27/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CustomImageView.h"
+#import "TriangleView.h"
 
-@implementation CustomImageView
+@implementation TriangleView
 
--(void)touchDown:(UIPanGestureRecognizer *)pan {
-    if (pan.state == UIGestureRecognizerStateBegan) {
-        drawGuides = TRUE;
-    }
-    if (pan.state == UIGestureRecognizerStateEnded) {
-        drawGuides = FALSE;
-    }
-}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        drawGuides = FALSE;
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(touchDown:)];
-        [self addGestureRecognizer:pan];
+        self.backgroundColor = [UIColor clearColor];
+        // Initialization code
     }
     return self;
 }
-
-
 
 
 // Only override drawRect: if you perform custom drawing.
@@ -42,21 +31,24 @@
     
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     
-    CGFloat components[] = {0.0, 0.0, 1.0, 1.0};
+    CGFloat components[] = {1.0, 1.0, 1.0, 1.0};
     
     CGColorRef color = CGColorCreate(colorspace, components);
     
     CGContextSetStrokeColorWithColor(context, color);
+    CGContextSetFillColorWithColor(context, color);
     
     CGContextMoveToPoint(context, 0, 0);
-    CGContextAddLineToPoint(context, 300, 400);
+    CGContextAddLineToPoint(context, 0, self.bounds.size.height);
+    CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height/2.0);
+    CGContextAddLineToPoint(context, 0, 0);
     
-    CGContextStrokePath(context);
-    
-    CGContextMoveToPoint(context, 0, self.bounds.size.width);
+    CGContextFillPath(context);
     
     CGColorSpaceRelease(colorspace);
     CGColorRelease(color);
+
+
 }
 
 

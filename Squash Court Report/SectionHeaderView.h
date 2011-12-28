@@ -7,8 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TriangleView.h"
 
-@interface SectionHeaderView : UIView
+@class SectionHeaderView;
+
+@protocol SectionHeaderDelegate <NSObject>
+
+- (void)sectionHeadedWasClicked:(SectionHeaderView *) sectionHeader;
+
+@end
+
+@interface SectionHeaderView : UIView {
+    id delegate;
+    BOOL collapsed;
+}
 
 @property (strong, nonatomic) UILabel *label;
+@property (nonatomic) int sectionNumber;
+@property (nonatomic, strong) id delegate;
+@property (strong, nonatomic) TriangleView *collapseIndicator;
+
+-(void)toggleCollapsed;
 @end

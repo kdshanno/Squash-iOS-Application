@@ -77,7 +77,13 @@
 		50C0D580149ED0CC004D5D50 /* SQRStepper.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C0D57F149ED0CB004D5D50 /* SQRStepper.m */; };
 		50D1A2191451EA9300CCE657 /* ShotEntryBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */; };
 		50D1A21C1451F7D900CCE657 /* ShotEntryBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */; };
-		5B0712591485DB3E00BDEC1F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0712581485DB3E00BDEC1F /* Icon.png */; };
+		50E9695314AA6823000AA1A5 /* HelpScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9695114AA6823000AA1A5 /* HelpScreen.m */; };
+		50E9695414AA6823000AA1A5 /* HelpScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9695214AA6823000AA1A5 /* HelpScreen.xib */; };
+		50E9695814AA892F000AA1A5 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9695714AA892E000AA1A5 /* TriangleView.m */; };
+		50E9695B14AADE08000AA1A5 /* SquashPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9695914AADE06000AA1A5 /* SquashPlayer.png */; };
+		50E9695C14AADE08000AA1A5 /* SquashPlayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9695A14AADE06000AA1A5 /* SquashPlayer@2x.png */; };
+		50E9695F14AAE2D7000AA1A5 /* CustomDisclosureIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */; };
+		50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
 		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
 		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
@@ -188,6 +194,16 @@
 		50C0D57F149ED0CB004D5D50 /* SQRStepper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQRStepper.m; sourceTree = "<group>"; };
 		50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShotEntryBackground@2x.png"; sourceTree = "<group>"; };
 		50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShotEntryBackground.png; sourceTree = "<group>"; };
+		50E9695014AA6822000AA1A5 /* HelpScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScreen.h; sourceTree = "<group>"; };
+		50E9695114AA6823000AA1A5 /* HelpScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpScreen.m; sourceTree = "<group>"; };
+		50E9695214AA6823000AA1A5 /* HelpScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpScreen.xib; sourceTree = "<group>"; };
+		50E9695614AA892D000AA1A5 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
+		50E9695714AA892E000AA1A5 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
+		50E9695914AADE06000AA1A5 /* SquashPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SquashPlayer.png; sourceTree = "<group>"; };
+		50E9695A14AADE06000AA1A5 /* SquashPlayer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SquashPlayer@2x.png"; sourceTree = "<group>"; };
+		50E9695D14AAE2D4000AA1A5 /* CustomDisclosureIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDisclosureIndicator.h; sourceTree = "<group>"; };
+		50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDisclosureIndicator.m; sourceTree = "<group>"; };
+		50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayersViewController.xib; sourceTree = "<group>"; };
 		5B0712581485DB3E00BDEC1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5B7973E31460FD7500569407 /* AnimatedUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedUIDatePicker.h; sourceTree = "<group>"; };
 		5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedUIDatePicker.m; sourceTree = "<group>"; };
@@ -225,6 +241,9 @@
 		50211EA41450CC8D00EF9AD4 /* Rally Entry */ = {
 			isa = PBXGroup;
 			children = (
+				50E9695014AA6822000AA1A5 /* HelpScreen.h */,
+				50E9695114AA6823000AA1A5 /* HelpScreen.m */,
+				50E9695214AA6823000AA1A5 /* HelpScreen.xib */,
 				50C0D57E149ED0CB004D5D50 /* SQRStepper.h */,
 				50C0D57F149ED0CB004D5D50 /* SQRStepper.m */,
 				504ECB1F145209BE00FE7B45 /* CourtView.h */,
@@ -233,11 +252,11 @@
 				504ECB231455E8EC00FE7B45 /* CustomImageView.m */,
 				50211E9E1450CC6200EF9AD4 /* RallyEntryController.h */,
 				50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */,
+				50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */,
 				501981501486CEE200C9FEA6 /* MatchListController.h */,
 				501981511486CEE200C9FEA6 /* MatchListController.m */,
 				50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */,
 				50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */,
-				50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */,
 			);
 			name = "Rally Entry";
 			path = ..;
@@ -338,6 +357,7 @@
 				50AB2309145F354A00E9F48D /* PlayerViewCell.xib */,
 				50A0EC3014455D3B00A8B3CF /* PlayersViewController.h */,
 				50A0EC3114455D3B00A8B3CF /* PlayersViewController.m */,
+				50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */,
 				5034ED5814460C0600895D86 /* Player Profile Edit */,
 				5034ED5714460BF100895D86 /* Player Profile */,
 			);
@@ -349,8 +369,12 @@
 			children = (
 				50A96B4D144A13D9003AC92D /* PlayerProfileTableViewController.h */,
 				50A96B4E144A13D9003AC92D /* PlayerProfileTableViewController.m */,
+				50E9695614AA892D000AA1A5 /* TriangleView.h */,
+				50E9695714AA892E000AA1A5 /* TriangleView.m */,
 				50A96B58144A16EB003AC92D /* SectionHeaderView.h */,
 				50A96B59144A16EB003AC92D /* SectionHeaderView.m */,
+				50E9695D14AAE2D4000AA1A5 /* CustomDisclosureIndicator.h */,
+				50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */,
 				50A96B5D144A1A44003AC92D /* PlayerProfileCell.h */,
 				50A96B5E144A1A44003AC92D /* PlayerProfileCell.m */,
 				50A96B60144A1E0C003AC92D /* PlayerProfileTopCell.h */,
@@ -379,6 +403,8 @@
 		50A0EBDC1445425300A8B3CF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50E9695914AADE06000AA1A5 /* SquashPlayer.png */,
+				50E9695A14AADE06000AA1A5 /* SquashPlayer@2x.png */,
 				50C0D56D149ECFEF004D5D50 /* StepperMinusButton.png */,
 				50C0D56E149ECFEF004D5D50 /* StepperMinusButton@2x.png */,
 				50C0D56F149ECFEF004D5D50 /* StepperMinusButtonSelected.png */,
@@ -552,6 +578,10 @@
 				50C0D57A149ECFEF004D5D50 /* StepperPlusButton@2x.png in Resources */,
 				50C0D57B149ECFEF004D5D50 /* StepperPlusButtonSelected.png in Resources */,
 				50C0D57C149ECFEF004D5D50 /* StepperPlusButtonSelected@2x.png in Resources */,
+				50E9695414AA6823000AA1A5 /* HelpScreen.xib in Resources */,
+				50E9695B14AADE08000AA1A5 /* SquashPlayer.png in Resources */,
+				50E9695C14AADE08000AA1A5 /* SquashPlayer@2x.png in Resources */,
+				50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +625,9 @@
 				50B280FD1475905A00725E16 /* UIImageToDataTransformer.m in Sources */,
 				501981531486CEE200C9FEA6 /* MatchListController.m in Sources */,
 				50C0D580149ED0CC004D5D50 /* SQRStepper.m in Sources */,
+				50E9695314AA6823000AA1A5 /* HelpScreen.m in Sources */,
+				50E9695814AA892F000AA1A5 /* TriangleView.m in Sources */,
+				50E9695F14AAE2D7000AA1A5 /* CustomDisclosureIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,13 +709,13 @@
 		50343BF714452F6A00EDC043 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kelly Shannon (H4W4T4C86C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Max Shaw (3FH82D22YB)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
 				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "583EF527-5F28-41F4-9132-D47907D0CEF2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56AD1EC7-6355-457A-B4EA-6C981E93CA90";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -694,13 +727,13 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kelly Shannon";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Max Shaw (3FH82D22YB)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
 				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56CDDDAA-0F52-4AF6-ABC6-5ADC85205F9B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56AD1EC7-6355-457A-B4EA-6C981E93CA90";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

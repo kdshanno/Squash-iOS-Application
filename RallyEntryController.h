@@ -23,6 +23,9 @@
     CGRect imageFrameSmall;
     bool entryViewUp;
     UIBarButtonItem *doneButton;
+    UIBarButtonItem *leftTopButton;
+    UIBarButtonItem *rightTopButton;
+    UIBarButtonItem *topTitle;
     Rally *currentRally;
     Game *currentGame;
     double xVal;
@@ -86,6 +89,8 @@
 - (IBAction)rewindButtonPressed:(id)sender;
 - (IBAction)fastFowardButtonPressed:(id)sender;
 - (IBAction)scoreButtonPressed:(id)sender;
+- (IBAction)infoButtonPressed:(id)sender;
+
 
 
 @end

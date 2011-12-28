@@ -57,6 +57,7 @@
         SCRAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         NSManagedObjectContext *moc = [appDelegate managedObjectContext];
         self.player = [NSEntityDescription insertNewObjectForEntityForName:@"Player" inManagedObjectContext:moc];
+        self.imageNew = [UIImage imageNamed:@"SquashPlayer"];
     }
     
     
@@ -78,6 +79,8 @@
     }
 
     [self.delegate didChangeData];
+    SCRAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate saveContext];
     [self.parentViewController dismissModalViewControllerAnimated:YES];
     
 }

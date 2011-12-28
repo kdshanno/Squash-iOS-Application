@@ -11,6 +11,8 @@
 @implementation CourtView
 
 @synthesize drawDot;
+@synthesize drawGuides = _drawGuides;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -22,6 +24,9 @@
         y = 0;
         self.drawDot = NO;
         self.backgroundColor = [UIColor blackColor];
+        
+        self.drawGuides = FALSE;
+
     }
     return self;
 }
@@ -39,7 +44,11 @@
     [tempImage drawInRect:CGRectMake(0, 0, self.bounds.size.width,self.bounds.size.height)];
     // Drawing code
     
+
     if (self.drawDot) {
+//        float width = self.bounds.size.width;
+//        float height = self.bounds.size.height;
+        
         CGContextRef context = UIGraphicsGetCurrentContext();
         
         CGContextSetLineWidth(context, 2.0);
@@ -57,6 +66,18 @@
         double height = 10;
         CGRect square = CGRectMake(self.bounds.size.width*x-width/2.0, self.bounds.size.height*y-height/2.0, 10, 10);
         CGContextFillEllipseInRect(context, square);
+        
+        if (self.drawGuides) {
+            CGContextMoveToPoint(context, 0, y*self.bounds.size.height);
+            CGContextAddLineToPoint(context, self.bounds.size.width, y*self.bounds.size.height);
+            CGContextStrokePath(context);
+            
+            CGContextMoveToPoint(context, x*self.bounds.size.width, 0);
+            CGContextAddLineToPoint(context, x*self.bounds.size.width, self.bounds.size.height);
+            CGContextStrokePath(context);
+        }
+        
+
         
         CGColorSpaceRelease(colorspace);
         CGColorRelease(color);

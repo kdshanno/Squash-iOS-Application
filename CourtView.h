@@ -13,7 +13,8 @@
     double y;
 }
 
-@property BOOL drawDot;
+@property (nonatomic) BOOL drawDot;
+@property (nonatomic) BOOL drawGuides;
 
 -(void)setX:(double)x andY:(double)y;
 -(void)removeDot;

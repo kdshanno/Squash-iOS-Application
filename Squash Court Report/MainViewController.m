@@ -220,7 +220,7 @@
         }
             
         case 1: {
-            PlayersViewController *playersViewController = [[PlayersViewController alloc] initWithStyle:UITableViewStylePlain];
+            PlayersViewController *playersViewController = [[PlayersViewController alloc] initWithNibName:@"PlayersViewController" bundle:nil];
             playersViewController.managedObjectContext = self.managedObjectContext;
             [self.navigationController pushViewController:playersViewController animated:YES];
     

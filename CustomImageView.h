@@ -12,6 +12,7 @@
 @interface CustomImageView : UIImageView {
     double xBallLocation;
     double yBallLocation;
+    BOOL drawGuides;
 }
 
 @end

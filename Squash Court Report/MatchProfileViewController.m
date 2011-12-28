@@ -109,6 +109,7 @@
     NSManagedObjectContext *moc = [appDelegate managedObjectContext];
     Match *currentMatch = [NSEntityDescription insertNewObjectForEntityForName:@"Match" inManagedObjectContext:moc];
 
+    
     [currentMatch setNumberOfGames:[NSNumber numberWithInt:0]];
     [currentMatch setP1GameScore:[NSNumber numberWithInt:0]];
     [currentMatch setP2GameScore:[NSNumber numberWithInt:0]];
@@ -120,6 +121,7 @@
     
     [currentMatch setPlayer1:p1];
     [currentMatch setPlayer2:p2];
+    
     [currentMatch setGames:[NSSet set]];
     [currentMatch setCity:cityField.text];
     [currentMatch setComplex:buildingField.text];
@@ -145,8 +147,12 @@
     else
         [currentMatch setPointsPerGame:[NSNumber numberWithInt:15]];
     
+    [appDelegate saveContext];
+
+    
     RallyEntryController *vc = [[RallyEntryController alloc] initWithMatch:currentMatch];
     [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 #pragma mark - UITextFieldDelegate Methods

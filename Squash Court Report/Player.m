@@ -21,7 +21,6 @@
 @dynamic handedness;
 @dynamic firstName;
 @dynamic lastName;
-@dynamic matches;
 @dynamic city;
 @dynamic country;
 @dynamic headCoach;
@@ -29,12 +28,19 @@
 @dynamic stateProvince;
 @dynamic style;
 @dynamic image;
+@dynamic matchesIAmPlayer2;
+@dynamic matchesIAmPlayer1;
 
 + (void)initialize {
 	if (self == [Player class]) {
 		UIImageToDataTransformer *transformer = [[UIImageToDataTransformer alloc] init];
 		[NSValueTransformer setValueTransformer:transformer forName:@"UIImageToDataTransformer"];
 	}
+}
+
+- (NSSet *)matches {
+    return [self.matchesIAmPlayer1 setByAddingObjectsFromSet:self.matchesIAmPlayer2];
+    
 }
 
 - (void)setHanded:(int)handedness {
