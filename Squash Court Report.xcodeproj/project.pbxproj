@@ -84,6 +84,7 @@
 		50E9695C14AADE08000AA1A5 /* SquashPlayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9695A14AADE06000AA1A5 /* SquashPlayer@2x.png */; };
 		50E9695F14AAE2D7000AA1A5 /* CustomDisclosureIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */; };
 		50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */; };
+		5B69524314AE74690084C38C /* ShotFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B69524214AE74690084C38C /* ShotFilter.m */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
 		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
 		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
@@ -205,6 +206,8 @@
 		50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDisclosureIndicator.m; sourceTree = "<group>"; };
 		50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayersViewController.xib; sourceTree = "<group>"; };
 		5B0712581485DB3E00BDEC1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		5B69524114AE74690084C38C /* ShotFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotFilter.h; sourceTree = "<group>"; };
+		5B69524214AE74690084C38C /* ShotFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotFilter.m; sourceTree = "<group>"; };
 		5B7973E31460FD7500569407 /* AnimatedUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedUIDatePicker.h; sourceTree = "<group>"; };
 		5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedUIDatePicker.m; sourceTree = "<group>"; };
 		5BF1F740144CDBED000455BC /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
@@ -298,6 +301,7 @@
 		50343BD914452F6900EDC043 /* Squash Court Report */ = {
 			isa = PBXGroup;
 			children = (
+				5B69523F14AE73A20084C38C /* Analysis */,
 				50343C051445355800EDC043 /* Core Data Model */,
 				50343BE214452F6900EDC043 /* SCRAppDelegate.h */,
 				50343BE314452F6900EDC043 /* SCRAppDelegate.m */,
@@ -458,6 +462,15 @@
 				5004A630145622A700826773 /* AnimatedUIPickerView.m */,
 			);
 			name = "Animated UIPickerView";
+			sourceTree = "<group>";
+		};
+		5B69523F14AE73A20084C38C /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				5B69524114AE74690084C38C /* ShotFilter.h */,
+				5B69524214AE74690084C38C /* ShotFilter.m */,
+			);
+			name = Analysis;
 			sourceTree = "<group>";
 		};
 		5B7973E11460FD5700569407 /* Match Players Setup */ = {
@@ -628,6 +641,7 @@
 				50E9695314AA6823000AA1A5 /* HelpScreen.m in Sources */,
 				50E9695814AA892F000AA1A5 /* TriangleView.m in Sources */,
 				50E9695F14AAE2D7000AA1A5 /* CustomDisclosureIndicator.m in Sources */,
+				5B69524314AE74690084C38C /* ShotFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
