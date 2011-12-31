@@ -11,7 +11,7 @@
 #import "PlayersViewController.h"
 #import "RallyEntryController.h"
 #import "MatchSetupViewController.h"
-#import "MatchListController.h"
+#import "MatchListViewController.h"
 
 @implementation MainViewController
 
@@ -228,7 +228,7 @@
         }
             
         case 2: {
-            MatchListController *mlc = [[MatchListController alloc] initWithStyle:UITableViewStylePlain];
+            MatchListViewController *mlc = [[MatchListViewController alloc] initForAllMatches];
             [self.navigationController pushViewController:mlc animated:YES];
         }
             /*
