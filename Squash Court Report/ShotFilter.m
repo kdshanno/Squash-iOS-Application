@@ -12,6 +12,9 @@
 
 @synthesize errors, winners, lets, noLets, strokes, unforcedErrors;
 
+/**
+ * Overrides superclass (NSObject) init method.
+ */
 -(ShotFilter *)init
 {
     winners = NO;
