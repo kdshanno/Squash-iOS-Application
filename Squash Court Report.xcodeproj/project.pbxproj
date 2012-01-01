@@ -14,7 +14,6 @@
 		5004A631145622A700826773 /* AnimatedUIPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5004A630145622A700826773 /* AnimatedUIPickerView.m */; };
 		5004A6361456361400826773 /* MatchProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5004A6331456361400826773 /* MatchProfileViewController.m */; };
 		5004A6371456361400826773 /* MatchProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5004A6351456361400826773 /* MatchProfileView.xib */; };
-		501981531486CEE200C9FEA6 /* MatchListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501981511486CEE200C9FEA6 /* MatchListController.m */; };
 		50211EA11450CC6200EF9AD4 /* RallyEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */; };
 		50211EA21450CC6200EF9AD4 /* RallyEntryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */; };
 		50343BD214452F6900EDC043 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50343BD114452F6900EDC043 /* UIKit.framework */; };
@@ -84,9 +83,10 @@
 		50E9695C14AADE08000AA1A5 /* SquashPlayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9695A14AADE06000AA1A5 /* SquashPlayer@2x.png */; };
 		50E9695F14AAE2D7000AA1A5 /* CustomDisclosureIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */; };
 		50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */; };
+		5B66FB9614AFC6B300EA999E /* MatchListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B66FB9514AFC6B300EA999E /* MatchListCell.m */; };
 		5B69524314AE74690084C38C /* ShotFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B69524214AE74690084C38C /* ShotFilter.m */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
-		5B804D2914AE9ACC00F8D948 /* MatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B804D2714AE9ACC00F8D948 /* MatchListViewController.m */; };
+		5B804D2914AE9ACC00F8D948 /* MatchListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B804D2714AE9ACC00F8D948 /* MatchListController.m */; };
 		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
 		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
 		5BF1F746144CDBED000455BC /* MatchSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1F743144CDBED000455BC /* MatchSetupViewController.m */; };
@@ -103,8 +103,6 @@
 		5004A6331456361400826773 /* MatchProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchProfileViewController.m; sourceTree = "<group>"; };
 		5004A6341456361400826773 /* MatchProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchProfileViewController.h; sourceTree = "<group>"; };
 		5004A6351456361400826773 /* MatchProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchProfileView.xib; sourceTree = "<group>"; };
-		501981501486CEE200C9FEA6 /* MatchListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListController.h; sourceTree = "<group>"; };
-		501981511486CEE200C9FEA6 /* MatchListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchListController.m; sourceTree = "<group>"; };
 		50211E9E1450CC6200EF9AD4 /* RallyEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RallyEntryController.h; sourceTree = "<group>"; };
 		50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RallyEntryController.m; sourceTree = "<group>"; tabWidth = 4; };
 		50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RallyEntryController.xib; sourceTree = "<group>"; };
@@ -207,12 +205,14 @@
 		50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDisclosureIndicator.m; sourceTree = "<group>"; };
 		50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayersViewController.xib; sourceTree = "<group>"; };
 		5B0712581485DB3E00BDEC1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		5B66FB9414AFC6B300EA999E /* MatchListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListCell.h; sourceTree = "<group>"; };
+		5B66FB9514AFC6B300EA999E /* MatchListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchListCell.m; sourceTree = "<group>"; };
 		5B69524114AE74690084C38C /* ShotFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotFilter.h; sourceTree = "<group>"; };
 		5B69524214AE74690084C38C /* ShotFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotFilter.m; sourceTree = "<group>"; };
 		5B7973E31460FD7500569407 /* AnimatedUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedUIDatePicker.h; sourceTree = "<group>"; };
 		5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedUIDatePicker.m; sourceTree = "<group>"; };
-		5B804D2614AE9ACC00F8D948 /* MatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListViewController.h; sourceTree = "<group>"; };
-		5B804D2714AE9ACC00F8D948 /* MatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchListViewController.m; sourceTree = "<group>"; };
+		5B804D2614AE9ACC00F8D948 /* MatchListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListController.h; sourceTree = "<group>"; };
+		5B804D2714AE9ACC00F8D948 /* MatchListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchListController.m; sourceTree = "<group>"; };
 		5BF1F740144CDBED000455BC /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
 		5BF1F741144CDBED000455BC /* MatchSetupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchSetupView.xib; sourceTree = "<group>"; };
 		5BF1F742144CDBED000455BC /* MatchSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchSetupViewController.h; sourceTree = "<group>"; };
@@ -259,8 +259,6 @@
 				50211E9E1450CC6200EF9AD4 /* RallyEntryController.h */,
 				50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */,
 				50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */,
-				501981501486CEE200C9FEA6 /* MatchListController.h */,
-				501981511486CEE200C9FEA6 /* MatchListController.m */,
 				50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */,
 				50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */,
 			);
@@ -490,8 +488,10 @@
 		5B804D1F14AE9A6500F8D948 /* Matches */ = {
 			isa = PBXGroup;
 			children = (
-				5B804D2614AE9ACC00F8D948 /* MatchListViewController.h */,
-				5B804D2714AE9ACC00F8D948 /* MatchListViewController.m */,
+				5B804D2614AE9ACC00F8D948 /* MatchListController.h */,
+				5B804D2714AE9ACC00F8D948 /* MatchListController.m */,
+				5B66FB9414AFC6B300EA999E /* MatchListCell.h */,
+				5B66FB9514AFC6B300EA999E /* MatchListCell.m */,
 			);
 			name = Matches;
 			sourceTree = "<group>";
@@ -649,13 +649,13 @@
 				50593F611458C34D00C5F021 /* PlayerEditController.m in Sources */,
 				5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */,
 				50B280FD1475905A00725E16 /* UIImageToDataTransformer.m in Sources */,
-				501981531486CEE200C9FEA6 /* MatchListController.m in Sources */,
 				50C0D580149ED0CC004D5D50 /* SQRStepper.m in Sources */,
 				50E9695314AA6823000AA1A5 /* HelpScreen.m in Sources */,
 				50E9695814AA892F000AA1A5 /* TriangleView.m in Sources */,
 				50E9695F14AAE2D7000AA1A5 /* CustomDisclosureIndicator.m in Sources */,
 				5B69524314AE74690084C38C /* ShotFilter.m in Sources */,
-				5B804D2914AE9ACC00F8D948 /* MatchListViewController.m in Sources */,
+				5B804D2914AE9ACC00F8D948 /* MatchListController.m in Sources */,
+				5B66FB9614AFC6B300EA999E /* MatchListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
