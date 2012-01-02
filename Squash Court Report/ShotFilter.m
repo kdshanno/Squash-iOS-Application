@@ -27,4 +27,50 @@
     return self;
 }
 
+-(ShotFilter *)initShowAll
+{
+    winners = YES;
+    errors = YES;
+    unforcedErrors = YES;
+    strokes = YES;
+    lets = YES;
+    noLets = YES;
+    
+    return self;
+}
+
+-(UIColor *)winnersColor
+{
+    return [UIColor greenColor];
+}
+
+-(UIColor *)errorsColor
+{
+    return [UIColor redColor];
+}
+
+-(UIColor *)unforcedErrorsColor
+{
+    return [UIColor orangeColor];
+}
+
+-(UIColor *)letsColor
+{
+    return [UIColor grayColor];
+}
+
+-(UIColor *)noLetsColor
+{
+    return [UIColor blackColor];
+}
+
+-(UIColor *)strokesColor
+{
+    return [UIColor blueColor];
+}
+
 @end
+
+
+
+

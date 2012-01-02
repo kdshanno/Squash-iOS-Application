@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface ShotFilter : NSObject {    
     BOOL winners;
     BOOL errors;
@@ -24,7 +25,14 @@
 @property(nonatomic, assign) BOOL noLets;
 @property(nonatomic, assign) BOOL strokes;
 
+-(UIColor *)winnersColor;
+-(UIColor *)errorsColor;
+-(UIColor *)unforcedErrorsColor;
+-(UIColor *)letsColor;
+-(UIColor *)noLetsColor;
+-(UIColor *)strokesColor;
 
 -(ShotFilter *)init;
+-(ShotFilter *)initShowAll;
 
 @end
