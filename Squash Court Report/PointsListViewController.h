@@ -16,10 +16,11 @@
     Match *match;
     ShotFilter *filter;
     NSMutableArray *games;
+    NSMutableArray *pointArrays;
     BOOL expandedGames[5];
 }
 
 /* If match == nil, error(); filter == nil, then show all shots */
--(PointsListViewController *)initWithMatch:(Match *)match andFilter:(ShotFilter *)filter;
+- (PointsListViewController *)initWithMatch:(Match *)match andFilter:(ShotFilter *)filter;
 
 @end

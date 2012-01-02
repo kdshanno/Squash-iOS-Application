@@ -7,6 +7,9 @@
 //
 
 #import "PointsListViewController.h"
+#import "PointsListCell.h"
+#import "Rally.h"
+#import "Player.h"
 
 @implementation PointsListViewController
 
@@ -37,7 +40,7 @@
         self.title = NSLocalizedString(@"List View", "List View");
         
         for (int i = 0; i < 5; i++)
-            expandedGames[i] = NO;
+            expandedGames[i] = YES;
         
         games = [NSMutableArray arrayWithCapacity:[[match games] count]];
         Game *arrayOfGames[5];
@@ -48,8 +51,17 @@
             numGames++;
         }
         
+        pointArrays = [NSMutableArray arrayWithCapacity:numGames];
         for(int i = 0; i < numGames; i++)
-            [games insertObject:arrayOfGames[i] atIndex:i];
+        {
+            Game *g = arrayOfGames[i];
+            [games insertObject:g atIndex:i];
+            
+            NSSortDescriptor *sd =[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES];
+            NSArray *sdArray = [NSArray arrayWithObjects:sd, nil];
+            NSArray *points = [[g rallies] sortedArrayUsingDescriptors:sdArray];
+            [pointArrays insertObject:points atIndex:i];
+        }
     }
     
     return self;
@@ -130,34 +142,51 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *PointCell = @"PointCell";
+    static NSString *TextCell = @"TextCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    UITableViewCell *cell;
     
-    // Configure the cell...
-    if(expandedGames[indexPath.section])
+    if(expandedGames[indexPath.section] && (indexPath.row + 1 != [self tableView:self.tableView numberOfRowsInSection:indexPath.section]))
     {
-        if(indexPath.row + 1 == [self tableView:self.tableView numberOfRowsInSection:indexPath.section])
-            [cell.textLabel setText:@"Collapse"];
-    }
-    else if (!expandedGames[indexPath.section])
-    {
-        [cell.textLabel setText:@"Expand"];
-    }
+        PointsListCell *customCell = [tableView dequeueReusableCellWithIdentifier:PointCell];
+        if (customCell == nil) {
+            customCell = [[PointsListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PointCell];
+            [customCell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        }
         
-    
+        NSArray *points = [pointArrays objectAtIndex:indexPath.section];
+        Rally *r = [points objectAtIndex:indexPath.row];
+        [customCell setContentWithRally:r];
+        
+        cell = customCell;
+    }
+    else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:TextCell];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TextCell];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        }
+        
+        if(expandedGames[indexPath.section])
+        {
+            [cell.textLabel setText:@"Collapse"];
+        }
+        else
+        {
+            [cell.textLabel setText:@"Expand"];
+        }
+    }
     
     return cell;
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 */
@@ -197,17 +226,60 @@
     return [NSString stringWithFormat:@"Game %d", section + 1];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    Game *game = [games objectAtIndex:section];
+    
+    NSString *gameString = @"";
+    
+    switch (section + 1) {
+        case 1:
+            gameString = @"one";
+            break;
+        case 2:
+            gameString = @"two";
+            break;
+        case 3:
+            gameString = @"three";
+            break;
+        case 4:
+            gameString = @"four";
+            break;
+        case 5:
+            gameString = @"five";
+            break;
+        default:
+            abort();
+            break;
+    }
+    
+    if(game.p1Score > game.p2Score)
+        return [NSString stringWithFormat:@"%@ won game %@ (%d - %d)", [match.player1 getName:kFirstInitialLastInitial], gameString, [game.p1Score intValue], [game.p2Score intValue]];
+    else
+        return [NSString stringWithFormat:@"%@ won game %@ (%d - %d)", [match.player2 getName:kFirstInitialLastInitial], gameString, [game.p2Score intValue], [game.p1Score intValue]];
+
+    
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if(expandedGames[indexPath.section] && (indexPath.row + 1 == [self tableView:self.tableView numberOfRowsInSection:indexPath.section]))
+    {
+        //Collapse the section
+        expandedGames[indexPath.section] = !expandedGames[indexPath.section];
+        
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else if (!expandedGames[indexPath.section])
+    {
+        //Expand the section
+        expandedGames[indexPath.section] = !expandedGames[indexPath.section];
+        
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
+
 
 @end

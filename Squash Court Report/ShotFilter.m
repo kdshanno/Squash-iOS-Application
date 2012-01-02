@@ -39,34 +39,88 @@
     return self;
 }
 
--(UIColor *)winnersColor
++(UIColor *)winnersColor
 {
-    return [UIColor greenColor];
+    return [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1];
 }
 
--(UIColor *)errorsColor
-{
-    return [UIColor redColor];
-}
-
--(UIColor *)unforcedErrorsColor
++(UIColor *)errorsColor
 {
     return [UIColor orangeColor];
 }
 
--(UIColor *)letsColor
++(UIColor *)unforcedErrorsColor
 {
-    return [UIColor grayColor];
+    return [UIColor redColor];
 }
 
--(UIColor *)noLetsColor
++(UIColor *)letsColor
 {
     return [UIColor blackColor];
 }
 
--(UIColor *)strokesColor
++(UIColor *)noLetsColor
+{
+    return [UIColor brownColor];
+}
+
++(UIColor *)strokesColor
 {
     return [UIColor blueColor];
+}
+
++ (NSString *)stringForShotType:(ender)type
+{
+    switch (type) {
+        case kError:
+            return @"Error";
+            break;
+        case kLet:
+            return @"Let";
+            break; 
+        case kNoLet:
+            return @"No Let";
+            break; 
+        case kStroke:
+            return @"Stroke";
+            break; 
+        case kWinner:
+            return @"Winner";
+            break; 
+        case kUnforcedError:
+            return @"Unforced";
+            break;
+        default:
+            abort();
+            break;
+    }
+}
+
++ (UIColor *)colorForShotType:(ender)type
+{
+    switch (type) {
+        case kError:
+            return [ShotFilter errorsColor];
+            break;
+        case kLet:
+            return [ShotFilter letsColor];
+            break; 
+        case kNoLet:
+            return [ShotFilter noLetsColor];
+            break; 
+        case kStroke:
+            return [ShotFilter strokesColor];
+            break; 
+        case kWinner:
+            return [ShotFilter winnersColor];
+            break; 
+        case kUnforcedError:
+            return [ShotFilter unforcedErrorsColor];
+            break;
+        default:
+            abort();
+            break;
+    }
 }
 
 @end

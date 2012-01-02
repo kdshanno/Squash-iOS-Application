@@ -83,6 +83,7 @@
 		50E9695C14AADE08000AA1A5 /* SquashPlayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9695A14AADE06000AA1A5 /* SquashPlayer@2x.png */; };
 		50E9695F14AAE2D7000AA1A5 /* CustomDisclosureIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */; };
 		50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */; };
+		5B13DF4314B2361B00A0EFAD /* PointsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B13DF4214B2361B00A0EFAD /* PointsListCell.m */; };
 		5B5D965814B150770086E9E4 /* PointsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D965614B150770086E9E4 /* PointsListViewController.m */; };
 		5B66FB9614AFC6B300EA999E /* MatchListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B66FB9514AFC6B300EA999E /* MatchListCell.m */; };
 		5B69524314AE74690084C38C /* ShotFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B69524214AE74690084C38C /* ShotFilter.m */; };
@@ -206,6 +207,8 @@
 		50E9695E14AAE2D5000AA1A5 /* CustomDisclosureIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDisclosureIndicator.m; sourceTree = "<group>"; };
 		50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayersViewController.xib; sourceTree = "<group>"; };
 		5B0712581485DB3E00BDEC1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		5B13DF4114B2361B00A0EFAD /* PointsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointsListCell.h; sourceTree = "<group>"; };
+		5B13DF4214B2361B00A0EFAD /* PointsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointsListCell.m; sourceTree = "<group>"; };
 		5B5D965514B150770086E9E4 /* PointsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointsListViewController.h; sourceTree = "<group>"; };
 		5B5D965614B150770086E9E4 /* PointsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointsListViewController.m; sourceTree = "<group>"; };
 		5B66FB9414AFC6B300EA999E /* MatchListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListCell.h; sourceTree = "<group>"; };
@@ -474,6 +477,8 @@
 			children = (
 				5B5D965514B150770086E9E4 /* PointsListViewController.h */,
 				5B5D965614B150770086E9E4 /* PointsListViewController.m */,
+				5B13DF4114B2361B00A0EFAD /* PointsListCell.h */,
+				5B13DF4214B2361B00A0EFAD /* PointsListCell.m */,
 			);
 			name = "List View";
 			sourceTree = "<group>";
@@ -670,6 +675,7 @@
 				5B804D2914AE9ACC00F8D948 /* MatchListController.m in Sources */,
 				5B66FB9614AFC6B300EA999E /* MatchListCell.m in Sources */,
 				5B5D965814B150770086E9E4 /* PointsListViewController.m in Sources */,
+				5B13DF4314B2361B00A0EFAD /* PointsListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

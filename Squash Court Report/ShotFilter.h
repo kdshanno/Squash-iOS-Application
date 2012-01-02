@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Rally.h"
 
 @interface ShotFilter : NSObject {    
     BOOL winners;
@@ -25,12 +25,15 @@
 @property(nonatomic, assign) BOOL noLets;
 @property(nonatomic, assign) BOOL strokes;
 
--(UIColor *)winnersColor;
--(UIColor *)errorsColor;
--(UIColor *)unforcedErrorsColor;
--(UIColor *)letsColor;
--(UIColor *)noLetsColor;
--(UIColor *)strokesColor;
++(UIColor *)winnersColor;
++(UIColor *)errorsColor;
++(UIColor *)unforcedErrorsColor;
++(UIColor *)letsColor;
++(UIColor *)noLetsColor;
++(UIColor *)strokesColor;
+
++ (NSString *)stringForShotType:(ender)type;
++ (UIColor *)colorForShotType:(ender)type;
 
 -(ShotFilter *)init;
 -(ShotFilter *)initShowAll;
