@@ -9,6 +9,8 @@
 #import "PlayerProfileTableViewController.h"
 #import "PlayerProfileCell.h"
 #import "PlayerProfileTopCell.h"
+#import "MatchOverviewController.h"
+#import "MatchListController.h"
 
 
 @implementation PlayerProfileTableViewController
@@ -110,6 +112,9 @@
         [recentMatchesLeftLabels addObject:@"No Matches Played"];
         return;
     }
+
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"datePlayed" ascending:NO];
+    recentMatches = [self.player.matches sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
 
     int i = 0;
     for (Match *match in self.player.matches) {
@@ -466,6 +471,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 2) {
+        if (indexPath.row == 3 || indexPath.row == recentMatches.count) {
+            MatchListController *controller = [[MatchListController alloc] initWithPlayer:self.player];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else {
+            MatchOverviewController *controller = [[MatchOverviewController alloc] initWithNibName:@"MatchOverviewController" bundle:nil match:[recentMatches objectAtIndex:indexPath.row]];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
 }
 
 #pragma mark - Edit Controller Degegate

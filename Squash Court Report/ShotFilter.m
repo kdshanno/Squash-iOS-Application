@@ -91,7 +91,6 @@
             return @"Unforced";
             break;
         default:
-            abort();
             break;
     }
 }
@@ -118,7 +117,6 @@
             return [ShotFilter unforcedErrorsColor];
             break;
         default:
-            abort();
             break;
     }
 }

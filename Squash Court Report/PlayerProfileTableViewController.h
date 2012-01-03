@@ -24,6 +24,8 @@
     NSMutableArray *recentMatchesLeftLabels;
     NSMutableArray *recentMatchesRightLabels;
     NSMutableArray *sectionCollapse;
+    
+    NSArray *recentMatches;
 }
 
 @property (strong, nonatomic) Player *player;
