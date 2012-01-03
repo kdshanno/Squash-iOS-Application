@@ -167,6 +167,7 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TextCell];
             [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+            [cell.textLabel setTextColor:[UIColor darkGrayColor]];
         }
         
         if(expandedGames[indexPath.section])
@@ -224,6 +225,56 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [NSString stringWithFormat:@"Game %d", section + 1];
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
+    [header setBackgroundColor:[UIColor clearColor]];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(14, -2, 100, 50)];
+    [title setBackgroundColor:[UIColor clearColor]];
+    [title setText:[NSString stringWithFormat:@"Game %d", section + 1]];
+    [title setFont:[UIFont boldSystemFontOfSize:17]];
+    [title setTextColor:[UIColor darkGrayColor]];
+    [header addSubview:title];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.tag = section;
+    
+    UIImage *image;
+    if(expandedGames[section])
+        image = [UIImage imageNamed:@"expanded.png"];
+    else
+        image = [UIImage imageNamed:@"collapsed.png"];
+
+    
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(expandCollapse:) forControlEvents:UIControlEventTouchUpInside];
+    [header addSubview:button];
+    [button setFrame:CGRectMake(280, 20, 14, 15)];
+    
+    return header;
+}
+
+- (void)expandCollapse:(id)b
+{
+    UIButton *button = b;
+    if(expandedGames[button.tag])
+    {
+        //Code to collapse
+        [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:([self tableView:self.tableView numberOfRowsInSection:button.tag]-1) inSection:button.tag]];
+       
+        CGAffineTransform transform = CGAffineTransformMakeRotation(-3.14/2.0);
+        [UIView animateWithDuration:0.17 animations:^{button.transform = transform;}];
+                                   
+    }
+    else
+    {
+        //Code to expand
+        [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:button.tag]];
+        
+        CGAffineTransform transform = CGAffineTransformMakeRotation(3.14/2.0);
+        [UIView animateWithDuration:0.17 animations:^{button.transform = transform;}];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section

@@ -11,6 +11,15 @@
 #import "Match.h"
 #import "Game.h"
 
+/**
+ 
+ 
+ 
+ Add animation for expanding and collapsing.
+ 
+ 
+ 
+ */
 @interface PointsListViewController : UITableViewController
 {
     Match *match;
@@ -22,5 +31,6 @@
 
 /* If match == nil, error(); filter == nil, then show all shots */
 - (PointsListViewController *)initWithMatch:(Match *)match andFilter:(ShotFilter *)filter;
+- (void)expandCollapse:(id)b;
 
 @end

@@ -59,7 +59,7 @@
 - (void)setContentWithRally:(Rally *)r
 {
     [pointNumberLabel setText:[NSString stringWithFormat:@"%d)", [r.pointNumber intValue]]];
-    [playerLabel setText:@"W.W."];
+    [playerLabel setText:@"R.N."];
     //[playerLabel setText:[r.player getName:kFirstInitialLastInitial]];
     [outcomeLabel setText:[ShotFilter stringForShotType:[r.finishingShot intValue]]];
     [locationLabel setText:[self locationForX:[r.xPosition doubleValue] andY:[r.yPosition doubleValue]]];
