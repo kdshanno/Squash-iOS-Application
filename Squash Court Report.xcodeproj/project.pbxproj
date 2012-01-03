@@ -660,6 +660,7 @@
 				50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */,
 				5BAD10FA14B2DA9A0090462D /* collapsed.png in Resources */,
 				5BAD10FB14B2DA9A0090462D /* expanded.png in Resources */,
+				5005644E14B14C5300E431C3 /* MatchOverviewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

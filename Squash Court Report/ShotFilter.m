@@ -91,6 +91,7 @@
             return @"Unforced";
             break;
         default:
+            abort();
             break;
     }
 }
