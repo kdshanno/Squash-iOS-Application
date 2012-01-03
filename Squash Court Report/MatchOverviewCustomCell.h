@@ -32,6 +32,9 @@
 - (IBAction)centerButtonPressed:(id)sender;
 - (IBAction)rightButtonPressed:(id)sender;
 
+- (void)setCenterButtonSelected:(BOOL)selected;
+- (void)setRightButtonSelected:(BOOL)selected;
+
 
 
 @end

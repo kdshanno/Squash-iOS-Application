@@ -12,7 +12,7 @@
 
 @implementation MatchOverviewController
 
-@synthesize gameSegControl, courtAreaPicker, match, statsTableView, tempCell;
+@synthesize gameSegControl, courtAreaPicker, match, statsTableView, tempCell, filterView;
 - (void)initStatHeaders {
     statHeaders = [[NSMutableArray alloc] initWithObjects:@"Winners", @"Errors", @"Unforced", @"Total", @"No-Let", @"Let", @"Stroke", @"Total", @"W:E Ratio", @"Rally Control Margin", nil];
 }
@@ -101,12 +101,45 @@
 
 #pragma mark - View lifecycle
 
+- (void)toggleFilterView {
+    if (self.filterView.frame.origin.y != 0) {
+        [UIView animateWithDuration:.3 animations:^(void){
+            CGRect frame = self.filterView.frame;
+            CGFloat height = frame.size.height;
+            frame = CGRectOffset(frame, 0, frame.size.height);
+            self.filterView.frame = frame;
+            
+            CGRect tableFrame = self.statsTableView.frame;
+            tableFrame = CGRectMake(0, frame.origin.y + height, 320, tableFrame.size.height-height);
+            self.statsTableView.frame = tableFrame;
+        }];
+    }
+    else {
+        [UIView animateWithDuration:.3 animations:^(void){
+            CGRect frame = self.filterView.frame;
+            CGFloat height = frame.size.height;
+
+            frame = CGRectOffset(frame, 0, -frame.size.height);
+            self.filterView.frame = frame;
+            
+            CGRect tableFrame = self.statsTableView.frame;
+            tableFrame = CGRectMake(0, frame.origin.y + height, 320, tableFrame.size.height+height);
+            self.statsTableView.frame = tableFrame;
+
+        }];
+
+    }
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self.statsTableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Wood_Background.png"]]];
     self.title = @"Match Overview";
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleFilterView)];
+    self.navigationItem.rightBarButtonItem = item;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -132,7 +165,13 @@
     
 }
 - (IBAction)filterButtonPressed:(id)sender {
-    [UIView animateWithDuration:0.5 animations:^(void){self.courtAreaPicker.frame = pickerUp;}];
+    if (self.courtAreaPicker.frame.origin.y == pickerDown.origin.y) {
+        [UIView animateWithDuration:0.3 animations:^(void){self.courtAreaPicker.frame = pickerUp;}];
+    }
+    else {
+        [UIView animateWithDuration:0.3 animations:^(void){self.courtAreaPicker.frame = pickerDown;}];
+
+    }
     
 }
 
@@ -152,20 +191,36 @@
     
     switch (indexPath.row) {
         case ROW_WINNERS:
-            cell.highlightColor = [UIColor greenColor];
+            cell.highlightColor = [ShotFilter winnersColor];
             break;
         case ROW_ERRORS:
-            cell.highlightColor = [UIColor redColor];
+            cell.highlightColor = [ShotFilter errorsColor];
             break;
         case ROW_UNFORCED_ERRORS:
-            cell.highlightColor = [UIColor orangeColor];
+            cell.highlightColor = [ShotFilter unforcedErrorsColor];
             break;
         case ROW_TOTAL_ERRORS:
-            cell.highlightColor = [UIColor orangeColor];
+            cell.highlightColor = [UIColor redColor];
             break;
         case ROW_NO_LET:
-            cell.highlightColor = [UIColor orangeColor];
+            cell.highlightColor = [ShotFilter noLetsColor];
             break;
+        case ROW_LET:
+            cell.highlightColor = [ShotFilter letsColor];
+            break;
+        case ROW_STROKE:
+            cell.highlightColor = [ShotFilter strokesColor];
+            break;
+        case ROW_TOTAL_STOKE_LET_NO_LET:
+            cell.highlightColor = [UIColor redColor];
+            break;
+        case ROW_WE_RATIO:
+            cell.highlightColor = [UIColor redColor];
+            break;
+        case ROW_RALLY_CONTROL_MARGIN:
+            cell.highlightColor = [UIColor redColor];
+            break;
+
 
         default:
             break;
@@ -182,6 +237,7 @@
         [cells setObject:cell forKey:cellid];
     }
     cell.indexPath = indexPath;
+    cell.delegate = self;
     [self configureCell:cell];
 
     return cell;
@@ -220,7 +276,140 @@
 }
 #pragma mark - Cell Delegate
 
+- (void)leftButtonWasSelectedAtIndexPath:(NSIndexPath *)indexpath {
+    NSString *path = [NSString stringWithFormat:@"%u_%u", indexpath.row, indexpath.section];
+    MatchOverviewCustomCell *cell = (MatchOverviewCustomCell *)[cells objectForKey:path];
+    BOOL t = cell.centerButton.filterOn;
 
+    switch (indexpath.row) 
+    {
+        case (ROW_WINNERS):
+        case (ROW_ERRORS):
+        case (ROW_UNFORCED_ERRORS):
+        case (ROW_STROKE):
+        case (ROW_LET):
+        case (ROW_NO_LET):
+            [cell setCenterButtonSelected:!t];
+            [cell setRightButtonSelected:!t];
+            break;
+        case (ROW_TOTAL_ERRORS): {
+            MatchOverviewCustomCell *errorsCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_ERRORS, 0]];
+            MatchOverviewCustomCell *unforcedCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_UNFORCED_ERRORS, 0]];
+            t = errorsCell.rightButton.filterOn;
+            [errorsCell setRightButtonSelected:!t];
+            [unforcedCell setRightButtonSelected:!t];
+            [errorsCell setCenterButtonSelected:!t];
+            [unforcedCell setCenterButtonSelected:!t];
+            break;
+        }
+        case (ROW_TOTAL_STOKE_LET_NO_LET): {
+            MatchOverviewCustomCell *strokeCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_STROKE, 0]];
+            MatchOverviewCustomCell *letCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_LET, 0]];
+            MatchOverviewCustomCell *noLetCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_NO_LET, 0]];
+            
+            t = strokeCell.rightButton.filterOn;
+            [strokeCell setRightButtonSelected:!t];
+            [letCell setRightButtonSelected:!t];
+            [noLetCell setRightButtonSelected:!t];
+            [strokeCell setCenterButtonSelected:!t];
+            [letCell setCenterButtonSelected:!t];
+            [noLetCell setCenterButtonSelected:!t];
+
+            
+            break;
+        }
+
+        default:
+            break;
+    }
+}
+
+- (void)centerButtonWasSelectedAtIndexPath:(NSIndexPath *)indexpath {
+    NSString *path = [NSString stringWithFormat:@"%u_%u", indexpath.row, indexpath.section];
+    MatchOverviewCustomCell *cell = (MatchOverviewCustomCell *)[cells objectForKey:path];
+    BOOL t = cell.centerButton.filterOn;
+    
+    switch (indexpath.row) 
+    {
+        case (ROW_WINNERS):
+        case (ROW_ERRORS):
+        case (ROW_UNFORCED_ERRORS):
+        case (ROW_STROKE):
+        case (ROW_LET):
+        case (ROW_NO_LET):
+            [cell setCenterButtonSelected:!t];
+            break;
+        case (ROW_TOTAL_ERRORS): {
+            MatchOverviewCustomCell *errorsCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_ERRORS, 0]];
+            MatchOverviewCustomCell *unforcedCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_UNFORCED_ERRORS, 0]];
+            t = errorsCell.centerButton.filterOn;
+            [errorsCell setCenterButtonSelected:!t];
+            [unforcedCell setCenterButtonSelected:!t];
+            break;
+        }
+        case (ROW_TOTAL_STOKE_LET_NO_LET): {
+            MatchOverviewCustomCell *strokeCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_STROKE, 0]];
+            MatchOverviewCustomCell *letCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_LET, 0]];
+            MatchOverviewCustomCell *noLetCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_NO_LET, 0]];
+            
+            t = strokeCell.centerButton.filterOn;
+            [strokeCell setCenterButtonSelected:!t];
+            [letCell setCenterButtonSelected:!t];
+            [noLetCell setCenterButtonSelected:!t];
+            
+            break;
+        }
+
+            
+        default:
+            break;
+    }
+    
+}
+
+- (void)rightButtonWasSelectedAtIndexPath:(NSIndexPath *)indexpath {
+    NSString *path = [NSString stringWithFormat:@"%u_%u", indexpath.row, indexpath.section];
+    MatchOverviewCustomCell *cell = (MatchOverviewCustomCell *)[cells objectForKey:path];
+    BOOL t = cell.rightButton.filterOn;
+    
+    switch (indexpath.row) 
+    {
+        case (ROW_WINNERS):
+        case (ROW_ERRORS):
+        case (ROW_UNFORCED_ERRORS):
+        case (ROW_STROKE):
+        case (ROW_LET):
+        case (ROW_NO_LET):
+            [cell setRightButtonSelected:!t];
+            break;
+        case (ROW_TOTAL_ERRORS): {
+            MatchOverviewCustomCell *errorsCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_ERRORS, 0]];
+            MatchOverviewCustomCell *unforcedCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_UNFORCED_ERRORS, 0]];
+            t = errorsCell.rightButton.filterOn;
+            [errorsCell setRightButtonSelected:!t];
+            [unforcedCell setRightButtonSelected:!t];
+            break;
+        }
+        case (ROW_TOTAL_STOKE_LET_NO_LET): {
+            MatchOverviewCustomCell *strokeCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_STROKE, 0]];
+            MatchOverviewCustomCell *letCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_LET, 0]];
+            MatchOverviewCustomCell *noLetCell = (MatchOverviewCustomCell *)[cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_NO_LET, 0]];
+
+            t = strokeCell.rightButton.filterOn;
+            [strokeCell setRightButtonSelected:!t];
+            [letCell setRightButtonSelected:!t];
+            [noLetCell setRightButtonSelected:!t];
+
+            break;
+        }
+
+
+            
+        default:
+            break;
+    }
+    
+}
 
 
 #pragma mark - Picker Delegate
@@ -229,7 +418,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [UIView animateWithDuration:0.5 animations:^(void){pickerView.frame = pickerDown;}];
+    [UIView animateWithDuration:0.3 animations:^(void){pickerView.frame = pickerDown;}];
     
 }
 

@@ -11,6 +11,7 @@
 @interface SquareButton : UIButton
 
 @property (nonatomic, strong) UIColor *highLightColor;
+@property (nonatomic) BOOL filterOn;
 
 
 @end

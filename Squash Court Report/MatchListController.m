@@ -11,6 +11,7 @@
 #import "Match.h"
 #import "MatchListCell.h"
 #import "PointsListViewController.h"
+#import "MatchOverviewController.h"
 
 
 @implementation MatchListController
@@ -246,7 +247,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Match *m = [fetchedResults objectAtIndexPath:indexPath];
-    PointsListViewController *vc = [[PointsListViewController alloc] initWithMatch:m andFilter:nil];
+    
+    MatchOverviewController *vc = [[MatchOverviewController alloc] initWithNibName:@"MatchOverviewController" bundle:nil match:m];
      
     [self.navigationController pushViewController:vc animated:YES];
 }

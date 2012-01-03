@@ -53,6 +53,26 @@
     // Configure the view for the selected state
 }
 
+- (void)setCenterButtonSelectedDelaySelected:(NSNumber *)selected {
+    [self.centerButton setHighlighted:selected.boolValue];
+//    [self.centerButton setSelected:selected.boolValue];
+}
+
+- (void)setRightButtonSelectedDelaySelected:(NSNumber *)selected {
+    [self.rightButton setHighlighted:selected.boolValue];
+//    [self.rightButton setSelected:selected.boolValue];
+}
+
+
+- (void)setCenterButtonSelected:(BOOL)selected {
+    self.centerButton.filterOn = selected;
+}
+
+- (void)setRightButtonSelected:(BOOL)selected {
+    self.rightButton.filterOn = selected;
+
+}
+
 - (void)highlightRow:(MatchOverviewCustomCell *)cell {
     BOOL t = cell.centerButton.selected;
     [cell.centerButton setHighlighted:!t];
@@ -62,23 +82,23 @@
     [cell.rightButton setSelected:!t];
 
 }
-- (void)toggleButton:(UIButton *)button {
-    BOOL t = button.selected;
-    [button setHighlighted:!t];
-    [button setSelected:!t];
-}
 
-- (IBAction)leftButtonPressed:(id)sender {
-//    [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
+
+- (IBAction)leftButtonPressed:(UIButton *)sender {
+    [sender setSelected:NO];
+    [delegate leftButtonWasSelectedAtIndexPath:self.indexPath];
 
 }
 - (IBAction)centerButtonPressed:(id)sender {
-    [self performSelector:@selector(toggleButton:) withObject:sender afterDelay:0.0];
+    [sender setSelected:NO];
+
+    [delegate centerButtonWasSelectedAtIndexPath:self.indexPath];
 
 }
 - (IBAction)rightButtonPressed:(UIButton *)sender {
-    [self performSelector:@selector(toggleButton:) withObject:sender afterDelay:0.0];
-//    [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
+    [sender setSelected:NO];
+
+    [delegate rightButtonWasSelectedAtIndexPath:self.indexPath];
 
 }
 

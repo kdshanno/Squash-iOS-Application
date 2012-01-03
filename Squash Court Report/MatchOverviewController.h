@@ -23,7 +23,7 @@
 #define ROW_RALLY_CONTROL_MARGIN 9
 
 
-@interface MatchOverviewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource> {
+@interface MatchOverviewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, MatchOverviewCustomCellDelegate> {
     NSMutableArray *statHeaders;
     NSMutableArray *p1Stats;
     NSMutableArray *p2Stats;
@@ -43,6 +43,7 @@
 @property (nonatomic, strong) Match *match;
 @property (nonatomic, strong) IBOutlet UITableView *statsTableView;
 @property (nonatomic, strong) IBOutlet MatchOverviewCustomCell *tempCell;
+@property (nonatomic, strong) IBOutlet UIView *filterView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch;

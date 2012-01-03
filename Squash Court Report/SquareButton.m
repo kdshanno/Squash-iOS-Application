@@ -11,18 +11,21 @@
 @implementation SquareButton
 
 @synthesize highLightColor = _highLightColor;
+@synthesize filterOn = _filterOn;
 
 - (void)setUp {
     self.titleLabel.textColor = [UIColor redColor];
     self.highLightColor = [UIColor redColor];
     [self setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected|UIControlStateHighlighted)];
+    [self setTitleColor:[UIColor redColor] forState:(UIControlStateSelected|UIControlStateHighlighted)];
 
     self.titleLabel.textAlignment = UITextAlignmentCenter;
     self.titleLabel.font = [UIFont boldSystemFontOfSize:20];
     [self.titleLabel setMinimumFontSize:14];
     [self.titleLabel setAdjustsFontSizeToFitWidth:YES];
     self.backgroundColor = [UIColor clearColor];
+    
+    self.filterOn = false;
 
 }
 
@@ -40,7 +43,15 @@
 
 - (void)setHighLightColor:(UIColor *)highLightColor {
     _highLightColor = highLightColor;
-    [self setTitleColor:highLightColor forState:(UIControlStateNormal)];
+    if (self.filterOn) [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    else [self setTitleColor:highLightColor forState:(UIControlStateNormal)];
+}
+
+- (void)setFilterOn:(BOOL)filterOn {
+    _filterOn = filterOn;
+    if (filterOn) [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    else [self setTitleColor:self.highLightColor forState:(UIControlStateNormal)];
+    [self setNeedsDisplay];
 }
 
 #define PSIZE 4
@@ -81,7 +92,7 @@ void MyStencilPatternPainting (CGContextRef myContext,
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    if (self.highlighted || self.selected) {
+    if (self.filterOn) {
         CGContextSetFillColorWithColor(context, self.highLightColor.CGColor);
         CGContextSetStrokeColorWithColor(context, self.highLightColor.CGColor);
         MyStencilPatternPainting(context, rect, self.highLightColor);

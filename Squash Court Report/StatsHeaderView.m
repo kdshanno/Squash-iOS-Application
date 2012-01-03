@@ -31,7 +31,7 @@
         buttonCenter.titleLabel.font = [UIFont boldSystemFontOfSize:20];
         [buttonCenter.titleLabel setMinimumFontSize:15];
         [buttonCenter.titleLabel setAdjustsFontSizeToFitWidth:YES];
-        buttonCenter.titleLabel.textColor = [UIColor redColor];
+        [buttonCenter setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         buttonCenter.backgroundColor = [UIColor clearColor];
         
         UIButton *buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -39,7 +39,7 @@
         [buttonRight setTitle:[match.player2 getName:kFirstInitialLastName] forState:UIControlStateNormal];
         buttonRight.titleLabel.font = [UIFont boldSystemFontOfSize:20];
         [buttonRight.titleLabel setMinimumFontSize:15];
-        buttonRight.titleLabel.textColor = [UIColor redColor];
+        [buttonRight setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [buttonRight.titleLabel setAdjustsFontSizeToFitWidth:YES];
         buttonRight.backgroundColor = [UIColor clearColor];
 
