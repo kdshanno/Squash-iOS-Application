@@ -41,9 +41,18 @@ typedef enum {
 @property (nonatomic, retain) NSString * tournamentName;
 @property (nonatomic, retain) NSNumber * matchType;
 @property (nonatomic, retain) NSNumber * recordingType;
+@property (readonly) NSSet *rallies;
+
+@property (readonly) int p1WERatio;
+@property (readonly) int p1RallyControlMargin;
+
+@property (readonly) int p2WERatio;
+@property (readonly) int p2RallyControlMargin;
 
 -(Player *)winner;
 -(Player *)loser;
+
+
 
 @end
 

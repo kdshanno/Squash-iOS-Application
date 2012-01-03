@@ -8,6 +8,7 @@
 
 #import "Match.h"
 #import "Player.h"
+#import "Game.h"
 
 
 @implementation Match
@@ -30,6 +31,32 @@
 @dynamic recordingType;
 @dynamic tournamentName;
 @dynamic pointsPerGame;
+
+-(NSSet *)rallies {
+    NSSet *_rallies = [[NSSet alloc] init];
+    for (Game *game in self.games) {
+        _rallies = [_rallies setByAddingObjectsFromSet:game.rallies];
+    }
+    return _rallies;
+    
+}
+
+-(int)p1WERatio {
+    return 1;
+}
+-(int)p2WERatio {
+    return 1;
+}
+
+-(int)p1RallyControlMargin {
+    return 30;
+}
+
+-(int)p2RallyControlMargin {
+    return 5;
+}
+
+
 
 
 -(Player *)winner {
