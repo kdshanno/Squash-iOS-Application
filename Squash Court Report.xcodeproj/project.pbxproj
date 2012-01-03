@@ -327,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				5B804D1F14AE9A6500F8D948 /* Matches */,
-				5B69523F14AE73A20084C38C /* Analysis */,
 				50343C051445355800EDC043 /* Core Data Model */,
 				50343BE214452F6900EDC043 /* SCRAppDelegate.h */,
 				50343BE314452F6900EDC043 /* SCRAppDelegate.m */,
@@ -490,26 +489,13 @@
 			name = "Animated UIPickerView";
 			sourceTree = "<group>";
 		};
-		5B5D965414B1501F0086E9E4 /* List View */ = {
-			isa = PBXGroup;
-			children = (
-				5BAD10F814B2DA9A0090462D /* collapsed.png */,
-				5BAD10F914B2DA9A0090462D /* expanded.png */,
-				5B5D965514B150770086E9E4 /* PointsListViewController.h */,
-				5B5D965614B150770086E9E4 /* PointsListViewController.m */,
-				5B13DF4114B2361B00A0EFAD /* PointsListCell.h */,
-				5B13DF4214B2361B00A0EFAD /* PointsListCell.m */,
-			);
-			name = "List View";
-			sourceTree = "<group>";
-		};
 		5B69523F14AE73A20084C38C /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
-				50F6D96F14B28CFC0046F0F5 /* PointsListCell.h */,
-				50F6D97014B28CFC0046F0F5 /* PointsListCell.m */,
 				50F6D97114B28CFC0046F0F5 /* PointsListViewController.h */,
 				50F6D97214B28CFC0046F0F5 /* PointsListViewController.m */,
+				50F6D96F14B28CFC0046F0F5 /* PointsListCell.h */,
+				50F6D97014B28CFC0046F0F5 /* PointsListCell.m */,
 				5B69524114AE74690084C38C /* ShotFilter.h */,
 				5B69524214AE74690084C38C /* ShotFilter.m */,
 			);
@@ -542,6 +528,7 @@
 				5005644914B14C5200E431C3 /* MatchOverviewController.xib */,
 				5005644A14B14C5300E431C3 /* MatchOverviewCustomCell.h */,
 				5005644B14B14C5300E431C3 /* MatchOverviewCustomCell.m */,
+				5B69523F14AE73A20084C38C /* Analysis */,
 			);
 			name = Matches;
 			sourceTree = "<group>";

@@ -11,26 +11,25 @@
 #import "Match.h"
 #import "Game.h"
 
-/**
- 
- 
- 
- Add animation for expanding and collapsing.
- 
- 
- 
- */
 @interface PointsListViewController : UITableViewController
 {
     Match *match;
-    ShotFilter *filter;
+    ShotFilter *filters[2];
     NSMutableArray *games;
     NSMutableArray *pointArrays;
     BOOL expandedGames[5];
 }
 
-/* If match == nil, error(); filter == nil, then show all shots */
-- (PointsListViewController *)initWithMatch:(Match *)match andFilter:(ShotFilter *)filter;
+/* If match == nil, error(); if filters[i] == nil, then show all shots for that player */
+- (PointsListViewController *)initWithMatch:(Match *)match andPlayerOneFilter:(ShotFilter *)filterOne andPlayerTwoFilter:(ShotFilter *)filterTwo;
+
+/* Switch between expanded and collapsed for a given section */
 - (void)expandCollapse:(id)b;
+
+/* Given an array of points, return an array of those points that are not filtered out by the filters. */
+- (NSMutableArray *)filterOutPoints:(NSMutableArray *)points;
+
+/* Is this point a valid point among the filters? */
+- (BOOL)keepPoint:(Rally *)rally;
 
 @end

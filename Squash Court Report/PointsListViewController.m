@@ -13,14 +13,18 @@
 
 @implementation PointsListViewController
 
-/* If match == nil, error(); filter == nil, then show all shots */
--(PointsListViewController *)initWithMatch:(Match *)m andFilter:(ShotFilter *)shotFilter
+- (PointsListViewController *)initWithMatch:(Match *)m andPlayerOneFilter:(ShotFilter *)filterOne andPlayerTwoFilter:(ShotFilter *)filterTwo
 {
-    filter = shotFilter;
+    filters[0] = filterOne;
     
-    if(filter == nil)
-        filter = [[ShotFilter alloc] initShowAll];
+    if(filters[0] == nil)
+        filters[0] = [[ShotFilter alloc] initShowAll];
     
+    filters[1] = filterTwo;
+    
+    if(filters[1] == nil)
+        filters[1] = [[ShotFilter alloc] initShowAll];
+
     if(m == nil)
         abort();
     
@@ -59,12 +63,67 @@
             
             NSSortDescriptor *sd =[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES];
             NSArray *sdArray = [NSArray arrayWithObjects:sd, nil];
-            NSArray *points = [[g rallies] sortedArrayUsingDescriptors:sdArray];
+            NSMutableArray *points = [NSMutableArray arrayWithArray:[[g rallies] 
+                                                                     sortedArrayUsingDescriptors:sdArray]];
+            points = [self filterOutPoints:points];
             [pointArrays insertObject:points atIndex:i];
         }
     }
     
     return self;
+}
+
+- (NSMutableArray *)filterOutPoints:(NSMutableArray *)points
+{
+    int size = [points count];
+    int index = 0;
+    for (int iteration = 0; iteration < size; iteration++) 
+    {
+        if ([self keepPoint:[points objectAtIndex:index]]) 
+            index++;
+        else
+            [points removeObjectAtIndex:index];
+    }
+    
+    return points;
+}
+
+- (BOOL)keepPoint:(Rally *)rally
+{
+    int index;
+    if(match.player1 == rally.player)
+        index = 0;
+    else if(match.player2 == rally.player)
+        index = 1;
+    else
+        return true;
+    
+    switch ([rally.finishingShot intValue]) {
+        case kError:
+            return [filters[index] errors];
+            break;
+        case kLet:
+            return [filters[index] lets];
+            break; 
+        case kNoLet:
+            return [filters[index] noLets];
+            break; 
+        case kStroke:
+            return [filters[index] strokes];
+            break; 
+        case kWinner:
+            return [filters[index] winners];
+            break; 
+        case kUnforcedError:
+            return [filters[index] unforcedErrors];
+            break;
+        default:
+            abort();
+            break;
+;
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
