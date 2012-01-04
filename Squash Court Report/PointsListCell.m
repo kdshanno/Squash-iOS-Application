@@ -59,10 +59,10 @@
 - (void)setContentWithRally:(Rally *)r
 {
     [pointNumberLabel setText:[NSString stringWithFormat:@"%d)", [r.pointNumber intValue]]];
-    [playerLabel setText:@"W.W."];
-    //[playerLabel setText:[r.player getName:kFirstInitialLastInitial]];
+    //[playerLabel setText:@"R.N."];
+    [playerLabel setText:[r.player getName:kFirstInitialLastInitial]];
     [outcomeLabel setText:[ShotFilter stringForShotType:[r.finishingShot intValue]]];
-    [locationLabel setText:[self locationForX:[r.xPosition doubleValue] andY:[r.yPosition doubleValue]]];
+    [locationLabel setText:[self relativeLocationForX:[r.xPosition doubleValue] andY:[r.yPosition doubleValue]]];
     
     UIColor *color = [ShotFilter colorForShotType:[r.finishingShot intValue]];
     [pointNumberLabel setTextColor:color];
@@ -73,7 +73,7 @@
     
 }
 
-- (NSString *)locationForX:(double)x andY:(double)y
+- (NSString *)relativeLocationForX:(double)x andY:(double)y
 {
     NSString *xPos;
     if(x < 0.5)
@@ -82,9 +82,9 @@
         xPos = @"Right";
     
     NSString *yPos;
-    if(y < 1.0/3.0)
+    if(y < 0.46)
         yPos = @"Front";
-    else if (y > 2.0/3.0)
+    else if (y > 0.75)
         yPos = @"Back";
     else
         yPos = @"Mid";

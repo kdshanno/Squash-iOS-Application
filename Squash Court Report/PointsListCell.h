@@ -18,6 +18,6 @@
 }
 
 - (void)setContentWithRally:(Rally *)r;
-- (NSString *)locationForX:(double)x andY:(double)y;
+- (NSString *)relativeLocationForX:(double)x andY:(double)y;
 
 @end
