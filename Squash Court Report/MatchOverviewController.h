@@ -32,8 +32,8 @@
     NSMutableArray *courtAreaPickerOptions;
     NSString *selectedCourtArea;
     NSMutableDictionary *cells;
-    ShotFilter *p1Filter;
-    ShotFilter *p2Filter;
+//    ShotFilter *p1Filter;
+//    ShotFilter *p2Filter;
  
     
 }

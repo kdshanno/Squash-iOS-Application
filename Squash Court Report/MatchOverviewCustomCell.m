@@ -17,9 +17,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.leftButton = [[SquareButton alloc] initWithFrame:CGRectMake(0+1, 0+1, 120-2, self.frame.size.height-2)];
-        self.centerButton = [[SquareButton alloc] initWithFrame:CGRectMake(121, 1, 100-2, self.frame.size.height-2)];
-        self.rightButton = [[SquareButton alloc] initWithFrame:CGRectMake(220+1, 1, 100-2, self.frame.size.height-2)];
+        self.leftButton = [[SquareButton alloc] initWithFrame:CGRectMake(0+1, 0+1, 120-2, OVERVIEW_CELL_HEIGHT-2)];
+        self.centerButton = [[SquareButton alloc] initWithFrame:CGRectMake(121, 1, 100-2, OVERVIEW_CELL_HEIGHT-2)];
+        self.rightButton = [[SquareButton alloc] initWithFrame:CGRectMake(220+1, 1, 100-2, OVERVIEW_CELL_HEIGHT-2)];
         
         [self.leftButton addTarget:self action:@selector(leftButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.centerButton addTarget:self action:@selector(centerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -107,12 +107,12 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     UIColor *tan = [UIColor colorWithRed:254.0/255.0 green:241.0/255.0 blue:183.0/255.0 alpha:1.0];
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] colorWithAlphaComponent:0.5].CGColor);
     CGContextFillRect(context, self.bounds);
     
     CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
-    CGContextStrokeRect(context, self.bounds);
+//    CGContextStrokeRect(context, self.bounds);
 
     CGContextMoveToPoint(context, 120, 0);
     CGContextAddLineToPoint(context, 120, self.bounds.size.height);

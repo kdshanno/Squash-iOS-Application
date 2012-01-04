@@ -20,8 +20,10 @@
     [self setTitleColor:[UIColor redColor] forState:(UIControlStateSelected|UIControlStateHighlighted)];
 
     self.titleLabel.textAlignment = UITextAlignmentCenter;
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:20];
-    [self.titleLabel setMinimumFontSize:14];
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    [self.titleLabel setLineBreakMode:UILineBreakModeWordWrap];
+    [self.titleLabel setNumberOfLines:2.0];
+    [self.titleLabel setMinimumFontSize:10];
     [self.titleLabel setAdjustsFontSizeToFitWidth:YES];
     self.backgroundColor = [UIColor clearColor];
     
@@ -44,13 +46,13 @@
 - (void)setHighLightColor:(UIColor *)highLightColor {
     _highLightColor = highLightColor;
     if (self.filterOn) [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    else [self setTitleColor:highLightColor forState:(UIControlStateNormal)];
+    else [self setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
 }
 
 - (void)setFilterOn:(BOOL)filterOn {
     _filterOn = filterOn;
     if (filterOn) [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    else [self setTitleColor:self.highLightColor forState:(UIControlStateNormal)];
+    else [self setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
     [self setNeedsDisplay];
 }
 

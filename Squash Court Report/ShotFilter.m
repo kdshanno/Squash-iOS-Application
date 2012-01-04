@@ -10,7 +10,7 @@
 
 @implementation ShotFilter
 
-@synthesize errors, winners, lets, noLets, strokes, unforcedErrors;
+@synthesize errors, winners, lets, noLets, strokes, unforcedErrors, courtArea, gameNumber;
 
 /**
  * Overrides superclass (NSObject) init method.
@@ -23,6 +23,8 @@
     strokes = NO;
     lets = NO;
     noLets = NO;
+    gameNumber = -1;
+    courtArea = CourtAreaFullCourt;
     
     return self;
 }
@@ -35,6 +37,8 @@
     strokes = YES;
     lets = YES;
     noLets = YES;
+    gameNumber = -1;
+    courtArea = CourtAreaFullCourt;
     
     return self;
 }

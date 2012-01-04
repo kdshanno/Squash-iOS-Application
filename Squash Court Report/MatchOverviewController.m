@@ -9,12 +9,13 @@
 #import "MatchOverviewController.h"
 #import "Rally.h"
 #import "StatsHeaderView.h"
+#import "PointsCourtViewController.h"
 
 @implementation MatchOverviewController
 
 @synthesize gameSegControl, courtAreaPicker, match, statsTableView, tempCell, filterView;
 - (void)initStatHeaders {
-    statHeaders = [[NSMutableArray alloc] initWithObjects:@"Winners", @"Errors", @"Unforced", @"Total", @"No-Let", @"Let", @"Stroke", @"Total", @"W:E Ratio", @"Rally Control Margin", nil];
+    statHeaders = [[NSMutableArray alloc] initWithObjects:@"WINNERS", @"ERRORS", @"UNFORCED", @"TOTAL", @"NO-LET", @"LET", @"STROKE", @"TOTAL", @"W:E RATIO", @"RALLY CONTROL MARGIN", nil];
 }
 
 - (void)initP1Stats {
@@ -82,8 +83,6 @@
         pickerUp = CGRectMake(0, 200, 320, 216);
         courtAreaPickerOptions = [[NSMutableArray alloc] initWithObjects:@"Front Left", @"Front Middle", @"Front Right", @"Middle Left", @"Middle Middle", @"Middle Right", @"Back Left", @"Back Middle", @"Back Right", nil];
 
-        p1Filter = [[ShotFilter alloc] init];
-        p2Filter = [[ShotFilter alloc] init];
 
 
         // Custom initialization
@@ -158,11 +157,52 @@
 
 #pragma mark - Buttons
 
-- (IBAction)listViewPicked:(id)sender {
+-(void)fillFiltersP1:(ShotFilter *)p1Filter andP2:(ShotFilter *)p2Filter {
+
+    MatchOverviewCustomCell *winnerCell = [cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_WINNERS, 0]];
+    p1Filter.winners = winnerCell.centerButton.filterOn;
+    p2Filter.winners = winnerCell.rightButton.filterOn;
+    
+    MatchOverviewCustomCell *errorsCell = [cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_ERRORS, 0]];
+    p1Filter.errors = errorsCell.centerButton.filterOn;
+    p2Filter.errors = errorsCell.rightButton.filterOn;
+
+    MatchOverviewCustomCell *unforcedCell = [cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_UNFORCED_ERRORS, 0]];
+    p1Filter.unforcedErrors = unforcedCell.centerButton.filterOn;
+    p2Filter.unforcedErrors = unforcedCell.rightButton.filterOn;
+
+    MatchOverviewCustomCell *letCell = [cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_LET, 0]];
+    p1Filter.lets = letCell.centerButton.filterOn;
+    p2Filter.lets = letCell.rightButton.filterOn;
+
+    MatchOverviewCustomCell *noLetCell = [cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_NO_LET, 0]];
+    p1Filter.noLets = noLetCell.centerButton.filterOn;
+    p2Filter.noLets = noLetCell.rightButton.filterOn;
+
+    MatchOverviewCustomCell *strokeCell = [cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_STROKE, 0]];
+    p1Filter.strokes = strokeCell.centerButton.filterOn;
+    p2Filter.strokes = strokeCell.rightButton.filterOn;
+
+    
+    
+    
     
 }
+- (IBAction)listViewPicked:(id)sender {
+    ShotFilter *p1Filter = [[ShotFilter alloc] init];
+    ShotFilter *p2Filter = [[ShotFilter alloc] init];
+
+    [self fillFiltersP1:p1Filter andP2:p2Filter];
+}
 - (IBAction)courtViewPicked:(id)sender {
+    ShotFilter *p1Filter = [[ShotFilter alloc] init];
+    ShotFilter *p2Filter = [[ShotFilter alloc] init];
     
+    [self fillFiltersP1:p1Filter andP2:p2Filter];
+    
+    PointsCourtViewController *vc = [[PointsCourtViewController alloc] initWithNibName:@"PointsCourtViewController" bundle:nil andp1Filter:p1Filter andp2Filter:p2Filter andMatch:self.match];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 - (IBAction)filterButtonPressed:(id)sender {
     if (self.courtAreaPicker.frame.origin.y == pickerDown.origin.y) {
@@ -263,15 +303,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return OVERVIEW_CELL_HEIGHT;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44;
+    return 50;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    StatsHeaderView *header = [[StatsHeaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 44) andMatch:self.match];
+    StatsHeaderView *header = [[StatsHeaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    header.leftHeaderView.text = @"GAME 1";
+    header.centerTopView.text = self.match.player1.firstName;
+    header.centerBottomView.text = self.match.player1.lastName;
+    header.rightTopView.text = self.match.player2.firstName;
+    header.rightBottomView.text = self.match.player2.lastName;
+    
     return header;
 }
 #pragma mark - Cell Delegate

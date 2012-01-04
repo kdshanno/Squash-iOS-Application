@@ -56,6 +56,37 @@
     return 5;
 }
 
+-(NSArray *)getShotsWithFilter:(ShotFilter *)filter withPlayer1:(BOOL)player1 {
+    NSSet *rallies = self.rallies;
+    
+    NSMutableArray *predicates = [[NSMutableArray alloc] init];
+    if (filter.winners) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kWinner]];
+    }
+    if (filter.errors) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kError]];
+    }
+    if (filter.unforcedErrors) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kUnforcedError]];
+    }
+    if (filter.strokes) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kStroke]];
+    }
+    if (filter.lets) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kLet]];
+    }
+    if (filter.noLets) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kNoLet]];
+    }
+    
+    NSCompoundPredicate *compoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSOrPredicateType subpredicates:predicates];
+    
+    NSPredicate *playerPredicate = player1 ? [NSPredicate predicateWithFormat:@"p1Finished == YES"] : [NSPredicate predicateWithFormat:@"p1Finished == NO"];
+    
+    NSCompoundPredicate *p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, nil]];
+    
+    return [[rallies filteredSetUsingPredicate:p1CompoundPredicate] sortedArrayUsingDescriptors:NULL];
+}
 
 
 

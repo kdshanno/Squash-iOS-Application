@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ShotFilter.h"
 
 @class Player;
 
@@ -52,7 +53,7 @@ typedef enum {
 -(Player *)winner;
 -(Player *)loser;
 
-
+-(NSArray *)getShotsWithFilter:(ShotFilter *)filter withPlayer1:(BOOL)player1;
 
 @end
 

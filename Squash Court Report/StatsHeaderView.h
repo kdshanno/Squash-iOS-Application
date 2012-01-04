@@ -11,6 +11,12 @@
 
 @interface StatsHeaderView : UIView
 
-- (id)initWithFrame:(CGRect)frame andMatch:(Match *)match;
+@property (nonatomic, retain) UILabel *leftHeaderView;
+@property (nonatomic, retain) UILabel *centerTopView;
+@property (nonatomic, retain) UILabel *centerBottomView;
+@property (nonatomic, retain) UILabel *rightTopView;
+@property (nonatomic, retain) UILabel *rightBottomView;
+
+
 
 @end

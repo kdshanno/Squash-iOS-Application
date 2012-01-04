@@ -90,6 +90,11 @@
 		50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9696614ABB3A4000AA1A5 /* PlayersViewController.xib */; };
 		50F6D97314B28CFC0046F0F5 /* PointsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6D97014B28CFC0046F0F5 /* PointsListCell.m */; };
 		50F6D97414B28CFC0046F0F5 /* PointsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6D97214B28CFC0046F0F5 /* PointsListViewController.m */; };
+		50F6D97914B2CDD70046F0F5 /* PointsCourtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6D97714B2CDD60046F0F5 /* PointsCourtViewController.m */; };
+		50F6D97A14B2CDD70046F0F5 /* PointsCourtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F6D97814B2CDD60046F0F5 /* PointsCourtViewController.xib */; };
+		50F6D97D14B2D0C70046F0F5 /* PointsCourtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6D97C14B2D0C60046F0F5 /* PointsCourtView.m */; };
+		50F6D98014B386FA0046F0F5 /* LegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6D97F14B386FA0046F0F5 /* LegendView.m */; };
+		50F6D98314B38A120046F0F5 /* LegendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6D98214B38A110046F0F5 /* LegendsCell.m */; };
 		5B66FB9614AFC6B300EA999E /* MatchListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B66FB9514AFC6B300EA999E /* MatchListCell.m */; };
 		5B69524314AE74690084C38C /* ShotFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B69524214AE74690084C38C /* ShotFilter.m */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
@@ -224,6 +229,15 @@
 		50F6D97014B28CFC0046F0F5 /* PointsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointsListCell.m; sourceTree = "<group>"; };
 		50F6D97114B28CFC0046F0F5 /* PointsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointsListViewController.h; sourceTree = "<group>"; };
 		50F6D97214B28CFC0046F0F5 /* PointsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointsListViewController.m; sourceTree = "<group>"; };
+		50F6D97614B2CDD60046F0F5 /* PointsCourtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointsCourtViewController.h; sourceTree = "<group>"; };
+		50F6D97714B2CDD60046F0F5 /* PointsCourtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointsCourtViewController.m; sourceTree = "<group>"; };
+		50F6D97814B2CDD60046F0F5 /* PointsCourtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PointsCourtViewController.xib; sourceTree = "<group>"; };
+		50F6D97B14B2D0C60046F0F5 /* PointsCourtView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointsCourtView.h; sourceTree = "<group>"; };
+		50F6D97C14B2D0C60046F0F5 /* PointsCourtView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointsCourtView.m; sourceTree = "<group>"; };
+		50F6D97E14B386F90046F0F5 /* LegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegendView.h; sourceTree = "<group>"; };
+		50F6D97F14B386FA0046F0F5 /* LegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendView.m; sourceTree = "<group>"; };
+		50F6D98114B38A100046F0F5 /* LegendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegendsCell.h; sourceTree = "<group>"; };
+		50F6D98214B38A110046F0F5 /* LegendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendsCell.m; sourceTree = "<group>"; };
 		5B0712581485DB3E00BDEC1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5B66FB9414AFC6B300EA999E /* MatchListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListCell.h; sourceTree = "<group>"; };
 		5B66FB9514AFC6B300EA999E /* MatchListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchListCell.m; sourceTree = "<group>"; };
@@ -477,6 +491,49 @@
 			name = Players;
 			sourceTree = "<group>";
 		};
+		50F6D98414B3CF900046F0F5 /* Points Court View */ = {
+			isa = PBXGroup;
+			children = (
+				50F6D97614B2CDD60046F0F5 /* PointsCourtViewController.h */,
+				50F6D97714B2CDD60046F0F5 /* PointsCourtViewController.m */,
+				50F6D97814B2CDD60046F0F5 /* PointsCourtViewController.xib */,
+				50F6D98114B38A100046F0F5 /* LegendsCell.h */,
+				50F6D98214B38A110046F0F5 /* LegendsCell.m */,
+				50F6D97E14B386F90046F0F5 /* LegendView.h */,
+				50F6D97F14B386FA0046F0F5 /* LegendView.m */,
+				50F6D97B14B2D0C60046F0F5 /* PointsCourtView.h */,
+				50F6D97C14B2D0C60046F0F5 /* PointsCourtView.m */,
+			);
+			name = "Points Court View";
+			sourceTree = "<group>";
+		};
+		50F6D98514B3CFA70046F0F5 /* Points List View */ = {
+			isa = PBXGroup;
+			children = (
+				50F6D96F14B28CFC0046F0F5 /* PointsListCell.h */,
+				50F6D97014B28CFC0046F0F5 /* PointsListCell.m */,
+				50F6D97114B28CFC0046F0F5 /* PointsListViewController.h */,
+				50F6D97214B28CFC0046F0F5 /* PointsListViewController.m */,
+			);
+			name = "Points List View";
+			sourceTree = "<group>";
+		};
+		50F6D98614B3CFBB0046F0F5 /* Match Overview */ = {
+			isa = PBXGroup;
+			children = (
+				5005645614B14DAD00E431C3 /* SquareButton.h */,
+				5005645714B14DAD00E431C3 /* SquareButton.m */,
+				5005645914B23CC800E431C3 /* StatsHeaderView.h */,
+				5005645A14B23CC800E431C3 /* StatsHeaderView.m */,
+				5005644714B14C5200E431C3 /* MatchOverviewController.h */,
+				5005644814B14C5200E431C3 /* MatchOverviewController.m */,
+				5005644914B14C5200E431C3 /* MatchOverviewController.xib */,
+				5005644A14B14C5300E431C3 /* MatchOverviewCustomCell.h */,
+				5005644B14B14C5300E431C3 /* MatchOverviewCustomCell.m */,
+			);
+			name = "Match Overview";
+			sourceTree = "<group>";
+		};
 		5B5A59AC144F875100AD90A3 /* Animated UIPickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,10 +546,8 @@
 		5B69523F14AE73A20084C38C /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
-				50F6D96F14B28CFC0046F0F5 /* PointsListCell.h */,
-				50F6D97014B28CFC0046F0F5 /* PointsListCell.m */,
-				50F6D97114B28CFC0046F0F5 /* PointsListViewController.h */,
-				50F6D97214B28CFC0046F0F5 /* PointsListViewController.m */,
+				50F6D98414B3CF900046F0F5 /* Points Court View */,
+				50F6D98514B3CFA70046F0F5 /* Points List View */,
 				5B69524114AE74690084C38C /* ShotFilter.h */,
 				5B69524214AE74690084C38C /* ShotFilter.m */,
 			);
@@ -516,15 +571,7 @@
 				5B804D2714AE9ACC00F8D948 /* MatchListController.m */,
 				5B66FB9414AFC6B300EA999E /* MatchListCell.h */,
 				5B66FB9514AFC6B300EA999E /* MatchListCell.m */,
-				5005645614B14DAD00E431C3 /* SquareButton.h */,
-				5005645714B14DAD00E431C3 /* SquareButton.m */,
-				5005645914B23CC800E431C3 /* StatsHeaderView.h */,
-				5005645A14B23CC800E431C3 /* StatsHeaderView.m */,
-				5005644714B14C5200E431C3 /* MatchOverviewController.h */,
-				5005644814B14C5200E431C3 /* MatchOverviewController.m */,
-				5005644914B14C5200E431C3 /* MatchOverviewController.xib */,
-				5005644A14B14C5300E431C3 /* MatchOverviewCustomCell.h */,
-				5005644B14B14C5300E431C3 /* MatchOverviewCustomCell.m */,
+				50F6D98614B3CFBB0046F0F5 /* Match Overview */,
 			);
 			name = Matches;
 			sourceTree = "<group>";
@@ -642,6 +689,7 @@
 				50E9695C14AADE08000AA1A5 /* SquashPlayer@2x.png in Resources */,
 				50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */,
 				5005644E14B14C5300E431C3 /* MatchOverviewController.xib in Resources */,
+				50F6D97A14B2CDD70046F0F5 /* PointsCourtViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +744,10 @@
 				5005645B14B23CC800E431C3 /* StatsHeaderView.m in Sources */,
 				50F6D97314B28CFC0046F0F5 /* PointsListCell.m in Sources */,
 				50F6D97414B28CFC0046F0F5 /* PointsListViewController.m in Sources */,
+				50F6D97914B2CDD70046F0F5 /* PointsCourtViewController.m in Sources */,
+				50F6D97D14B2D0C70046F0F5 /* PointsCourtView.m in Sources */,
+				50F6D98014B386FA0046F0F5 /* LegendView.m in Sources */,
+				50F6D98314B38A120046F0F5 /* LegendsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

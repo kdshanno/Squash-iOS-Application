@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SquareButton.h"
 
+#define OVERVIEW_CELL_HEIGHT 36
+
 @protocol MatchOverviewCustomCellDelegate <NSObject>
 
 -(void)leftButtonWasSelectedAtIndexPath:(NSIndexPath *)row;

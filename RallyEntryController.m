@@ -669,6 +669,7 @@
     rally.xPosition = [NSNumber numberWithDouble:xVal];
     rally.yPosition = [NSNumber numberWithDouble:yVal];
     rally.p1Finished = [NSNumber numberWithBool:(self.playerSegControl.selectedSegmentIndex == 0)];
+    rally.player = (rally.p1Finished.boolValue) ? self.match.player1 : self.match.player2;
     
     if (self.shotSegControlTop.selectedSegmentIndex > -1) {
         rally.finishingShot = [NSNumber numberWithInt:self.shotSegControlTop.selectedSegmentIndex];
