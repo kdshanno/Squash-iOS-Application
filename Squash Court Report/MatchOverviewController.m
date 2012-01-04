@@ -10,6 +10,7 @@
 #import "Rally.h"
 #import "StatsHeaderView.h"
 #import "PointsCourtViewController.h"
+#import "PointsListViewController.h"
 
 @implementation MatchOverviewController
 
@@ -193,6 +194,9 @@
     ShotFilter *p2Filter = [[ShotFilter alloc] init];
 
     [self fillFiltersP1:p1Filter andP2:p2Filter];
+    
+    PointsListViewController *vc = [[PointsListViewController alloc] initWithMatch:self.match andPlayerOneFilter:p1Filter andPlayerTwoFilter:p2Filter];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)courtViewPicked:(id)sender {
     ShotFilter *p1Filter = [[ShotFilter alloc] init];
