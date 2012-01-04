@@ -91,12 +91,10 @@
 - (BOOL)keepPoint:(Rally *)rally
 {
     int index;
-    if(match.player1 == rally.player)
+    if([rally.p1Finished boolValue])
         index = 0;
-    else if(match.player2 == rally.player)
-        index = 1;
     else
-        return true;
+        index = 1;
     
     switch ([rally.finishingShot intValue]) {
         case kError:
@@ -195,7 +193,7 @@
         return 1;
     else
     {
-        return [[[games objectAtIndex:section] rallies] count] + 1;
+        return [[pointArrays objectAtIndex:section] count] + 1;
     }
 }
 
@@ -216,7 +214,7 @@
         
         NSArray *points = [pointArrays objectAtIndex:indexPath.section];
         Rally *r = [points objectAtIndex:indexPath.row];
-        [customCell setContentWithRally:r];
+        [customCell setContentWithRally:r inMatch:match];
         
         cell = customCell;
     }
@@ -363,7 +361,7 @@
             break;
     }
     
-    if(game.p1Score > game.p2Score)
+    if([game.p1Score intValue] > [game.p2Score intValue])
         return [NSString stringWithFormat:@"%@ won game %@ (%d - %d)", [match.player1 getName:kFirstInitialLastInitial], gameString, [game.p1Score intValue], [game.p2Score intValue]];
     else
         return [NSString stringWithFormat:@"%@ won game %@ (%d - %d)", [match.player2 getName:kFirstInitialLastInitial], gameString, [game.p2Score intValue], [game.p1Score intValue]];

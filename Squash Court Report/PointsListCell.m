@@ -20,7 +20,8 @@
         //int width = self.frame.size.width;
         
         // Initialization code
-        pointNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 25, height)];
+        pointNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 25, height)];
+        [pointNumberLabel setTextAlignment:UITextAlignmentRight];
         [pointNumberLabel setBackgroundColor:[UIColor clearColor]];
         
         playerLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 55, height)];
@@ -56,11 +57,18 @@
 }*/
 
 
-- (void)setContentWithRally:(Rally *)r
+- (void)setContentWithRally:(Rally *)r inMatch:(Match *)m
 {
     [pointNumberLabel setText:[NSString stringWithFormat:@"%d)", [r.pointNumber intValue]]];
-    //[playerLabel setText:@"R.N."];
-    [playerLabel setText:[r.player getName:kFirstInitialLastInitial]];
+    Player *finishingPlayer;
+    if([r.p1Finished boolValue])
+        finishingPlayer = m.player1;
+    else
+        finishingPlayer = m.player2;
+    
+    NSString *name = [finishingPlayer getName:kFirstInitialLastInitial];
+
+    [playerLabel setText:name];
     [outcomeLabel setText:[ShotFilter stringForShotType:[r.finishingShot intValue]]];
     [locationLabel setText:[self relativeLocationForX:[r.xPosition doubleValue] andY:[r.yPosition doubleValue]]];
     
