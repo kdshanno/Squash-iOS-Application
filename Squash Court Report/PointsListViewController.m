@@ -44,7 +44,7 @@
         self.title = NSLocalizedString(@"List View", "List View");
         
         for (int i = 0; i < 5; i++)
-            expandedGames[i] = YES;
+            expandedGames[i] = NO;
         
         games = [NSMutableArray arrayWithCapacity:[[match games] count]];
         Game *arrayOfGames[5];
@@ -297,17 +297,21 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.tag = section;
     
-    UIImage *image;
+    UIImage *image = [UIImage imageNamed:@"expanded.png"];
     if(expandedGames[section])
-        image = [UIImage imageNamed:@"expanded.png"];
+    {
+        button.transform = CGAffineTransformMakeRotation(0);    
+    }
     else
-        image = [UIImage imageNamed:@"collapsed.png"];
+    {
+        button.transform = CGAffineTransformMakeRotation(-3.14/2.0);    
+    }
 
     
     [button setImage:image forState:UIControlStateNormal];
     [button addTarget:self action:@selector(expandCollapse:) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:button];
-    [button setFrame:CGRectMake(280, 20, 14, 15)];
+    [button setFrame:CGRectMake(270, 5, 43, 43)];
     
     return header;
 }
@@ -321,7 +325,7 @@
         [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:([self tableView:self.tableView numberOfRowsInSection:button.tag]-1) inSection:button.tag]];
        
         CGAffineTransform transform = CGAffineTransformMakeRotation(-3.14/2.0);
-        [UIView animateWithDuration:0.17 animations:^{button.transform = transform;}];
+        [UIView animateWithDuration:0.25 animations:^{button.transform = transform;}];
                                    
     }
     else
@@ -329,8 +333,8 @@
         //Code to expand
         [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:button.tag]];
         
-        CGAffineTransform transform = CGAffineTransformMakeRotation(3.14/2.0);
-        [UIView animateWithDuration:0.17 animations:^{button.transform = transform;}];
+        CGAffineTransform transform = CGAffineTransformMakeRotation(0);
+        [UIView animateWithDuration:0.25 animations:^{button.transform = transform;}];
     }
 }
 
@@ -376,16 +380,38 @@
     if(expandedGames[indexPath.section] && (indexPath.row + 1 == [self tableView:self.tableView numberOfRowsInSection:indexPath.section]))
     {
         //Collapse the section
+        int numRows = [self tableView:self.tableView numberOfRowsInSection:indexPath.section];
         expandedGames[indexPath.section] = !expandedGames[indexPath.section];
+      
+        NSMutableArray *paths = [[NSMutableArray alloc] initWithCapacity:numRows];
+        for(int i = 1; i < numRows; i++)
+        {
+            [paths insertObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section] atIndex:(i-1)];
+        }
         
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+        //[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationLeft];
     }
     else if (!expandedGames[indexPath.section])
     {
         //Expand the section
         expandedGames[indexPath.section] = !expandedGames[indexPath.section];
+        int numRows = [self tableView:self.tableView numberOfRowsInSection:indexPath.section];
+
+        NSMutableArray *paths = [[NSMutableArray alloc] initWithCapacity:numRows];
+        for(int i = 0; i < numRows - 1; i++)
+        {
+            [paths insertObject:[NSIndexPath indexPathForRow:i inSection:indexPath.section] atIndex:i];
+        }
         
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+        //[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:(numRows-1) inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+
+        [tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:(numRows-1) inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationRight];
+
+        
+       // [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
