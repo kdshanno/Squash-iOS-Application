@@ -12,7 +12,7 @@
 
 @implementation RallyEntryController
 
-@synthesize managedObjectContext, match, courtImage, bottomToolbar, titleButton, entryView, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel, topToolbar, opaqueView, playerSegControl, shotSegControlTop, shotSegControlBottom, pageControl, scoreItemButton, gameArray, gameDic, rallyArray, courtView, previousRallyButton, nextRallyButton, topOverlayView, topOverlayTitle, topOverlaySubtitle, gameWonLabel;
+@synthesize managedObjectContext, match, courtImage, bottomToolbar, titleButton, entryView, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel, topToolbar, opaqueView, playerSegControl, shotSegControlTop, shotSegControlBottom, pageControl, scoreItemButton, gameArray, gameDic, rallyArray, courtView, previousRallyButton, nextRallyButton, topOverlayView, topOverlayTitle, topOverlaySubtitle, gameWonLabel, rallyDoneButton, rallyWithGameDoneButton;
 
 - (void)addSteppers {
     float version = [[UIDevice currentDevice].systemVersion floatValue];
@@ -136,37 +136,6 @@
     //Check to see if rally exists
     //Add Rally to Rally Array
     [self.rallyArray addObject:currentRally];
-//    
-//    if (self.rallyArray.count == 0) {
-//        [self.rallyArray addObject:currentRally];
-//    }
-//    else {
-//        for (int i = 0; i < self.rallyArray.count+1; i++) {
-//            if (i == self.rallyArray.count) {
-//                [self.rallyArray addObject:currentRally];
-//                break;
-//                
-//            }
-//            
-//            Rally *tempRally = [self.rallyArray objectAtIndex:i]; 
-//            Game *game = (Game *)tempRally.game;
-//            if (game.number.intValue == gmNumber && (tempRally.p1Score.intValue + tempRally.p2Score.intValue) < pntNumber) {
-//                i++;
-//                while ((tempRally.p1Score.intValue + tempRally.p2Score.intValue) < pntNumber && i < self.rallyArray.count) {
-//                    tempRally = [self.rallyArray objectAtIndex:i];
-//                    i++;
-//                }
-//                [self.rallyArray insertObject:currentRally atIndex:i];
-//                break;
-//            }
-//            if (game.number.intValue < gmNumber && (tempRally.p1Score.intValue + tempRally.p2Score.intValue) < pntNumber) {
-//                [self.rallyArray insertObject:currentRally atIndex:i];
-//                break;
-//            }
-//
-//        }
-//    }
-    
     return currentRally;
     
 }
@@ -184,8 +153,8 @@
         currentRallyNumber--;
         
     }  
-    currentRally = [self.rallyArray objectAtIndex:currentRallyNumber];
-    return NULL;
+    currentRally = [self.rallyArray objectAtIndex:currentRallyNumber];    
+    return currentRally;
 }
 
 //Find Next Rally
@@ -224,10 +193,6 @@
 }
 
 - (void)editButtonPressed {
-    
-    NSMutableArray *items = [NSMutableArray arrayWithArray:self.topToolbar.items];
-    [items removeLastObject];
-    [self.topToolbar setItems:[items arrayByAddingObject:[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneButtonPressed:)]] animated:YES];    
     
     if (entryViewUp == false) {
         
@@ -290,47 +255,62 @@
 
 
 - (void)setCourtView {
+    int p1GameScore = 0;
+    int p2GameScore = 0;
+
+    
+    int gNumber = gameNumber;
+    if (currentRally != NULL) {
+        gNumber = ((Game *)currentRally.game).number.intValue;
+    }
+    
+    NSArray *games = [self.match.games sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
+    for (int i = 0; i < gNumber-1; i++) {
+        Rally *tempRally = [[[[games objectAtIndex:i] rallies] sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES]]] lastObject];
+        if (tempRally.p1Score.intValue > tempRally.p2Score.intValue) {
+            p1GameScore++;
+        }
+        else if (tempRally.p1Score.intValue < tempRally.p2Score.intValue) {
+            p2GameScore++;
+        }
+    }
+    
+    self.title = [NSString stringWithFormat:@"%@ %u - %u %@", [self.match.player1 getName:kFirstInitialLastName], p1GameScore, p2GameScore, [self.match.player2 getName:kFirstInitialLastName]];
+    
     if (currentRally) {
         
         // Old Shot
-        NSMutableArray *items = [NSMutableArray arrayWithArray:self.topToolbar.items];
-        UIBarButtonItem *item = [items lastObject];
-        if (item.title != @"Edit") {
-            UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleBordered target:self action:@selector(editButtonPressed)];
-
-            [self.topToolbar setItems:[items arrayByAddingObject:editButton] animated:YES];
+        if (self.navigationItem.rightBarButtonItem == NULL) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleBordered target:self action:@selector(rightButtonPressed:)];
         }
-
-        
         
         [self.courtView setX:currentRally.xPosition.doubleValue 
                         andY:currentRally.yPosition.doubleValue];
-        self.scoreItemButton.title = [NSString stringWithFormat:@"%@ %u - %u %@", [self.match.player1 getName:kFirstInitialLastInitial], currentRally.p1Score.intValue, currentRally.p2Score.intValue, [self.match.player2 getName:kFirstInitialLastInitial]];
-        
-        topTitle = [[UIBarButtonItem alloc] initWithTitle: [NSString stringWithFormat:@"%@ %u - %u %@", [self.match.player1 getName:kFirstInitialLastInitial], self.match.p1GameScore, self.match.p2GameScore, [self.match.player2 getName:kFirstInitialLastInitial]] style:UIBarButtonItemStylePlain target:nil action:nil];
+        self.scoreItemButton.title = [NSString stringWithFormat:@"%@ %u - %u %@", [self.match.player1 getName:kFirstInitialLastName], currentRally.p1Score.intValue, currentRally.p2Score.intValue, [self.match.player2 getName:kFirstInitialLastName]];
 
-        NSString *player = (currentRally.p1Finished.boolValue) ? self.match.player1.lastName : self.match.player2.lastName;
+        NSString *player = (currentRally.p1Finished.boolValue) ? [self.match.player1 getName:kFirstInitialLastName] : [self.match.player2 getName:kFirstInitialLastName];
+        
         int prevp1score = [currentRally getPreviousp1Score];
         int prevp2score = [currentRally getPreviousp2Score];
         self.topOverlaySubtitle.text = @"Click Edit To Edit Shot";
         switch (currentRally.finishingShot.intValue) {
             case kWinner:
-                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u, %@ Hits A Winner",prevp1score, prevp2score, player];
+                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u in game %u, %@ Hits A Winner",prevp1score, prevp2score, gNumber, player];
                 break;
             case kUnforcedError:
-                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u, %@ Makes An Unforced Error",prevp1score, prevp2score, player];
+                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u in game %u, %@ Makes An Unforced Error",prevp1score, prevp2score, gNumber, player];
                 break;
             case kError:
-                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u, %@ Makes An Error",prevp1score, prevp2score, player];
+                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u in game %u, %@ Makes An Error",prevp1score, prevp2score, gNumber, player];
                 break;
             case kNoLet:
-                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u, %@ Not Awarded A Let",prevp1score, prevp2score, player];
+                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u in game %u, %@ Not Awarded A Let",prevp1score, prevp2score, gNumber, player];
                 break;
             case kLet:
-                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u, %@ Awarded A Let",prevp1score, prevp2score, player];
+                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u in game %u, %@ Awarded A Let",prevp1score, prevp2score, gNumber, player];
                 break;
             case kStroke:
-                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u, %@ Awarded A Stroke",prevp1score, prevp2score, player];
+                self.topOverlayTitle.text = [NSString stringWithFormat:@"At %u-%u in game %u, %@ Awarded A Stroke",prevp1score, prevp2score, gNumber, player];
                 break;
                 
             default:
@@ -342,22 +322,17 @@
         
         [self.topOverlayView.layer removeAllAnimations];
         [UIView animateWithDuration:0.3 animations:^{
-            self.topOverlayView.frame = CGRectMake(0, 43, 320, 41);
+            self.topOverlayView.frame = CGRectMake(0, 0, 320, 41);
         }];
         
     }
     else  { 
         
-        NSMutableArray *items = [NSMutableArray arrayWithArray:self.topToolbar.items];
-        UIBarButtonItem *item = [items lastObject];
-        if (item.title == @"Edit") {
-            [items removeLastObject];
-            [self.topToolbar setItems:items animated:YES];
-        }
-
+        if (self.navigationItem.rightBarButtonItem) self.navigationItem.rightBarButtonItem = NULL;
         
         // New Shot
-        self.scoreItemButton.title = [NSString stringWithFormat:@"%@ %u - %u %@", self.match.player1.lastName, p1Score, p2Score, self.match.player2.lastName];
+        self.scoreItemButton.title = [NSString stringWithFormat:@"%@ %u - %u %@", [self.match.player1 getName:kFirstInitialLastName], p1Score, p2Score, [self.match.player2 getName:kFirstInitialLastName]];
+        
         self.topOverlayTitle.text = [NSString stringWithFormat:@"Log New Shot",p1Score, p2Score];
         
         self.topOverlaySubtitle.text = [NSString stringWithFormat:@"Tap on court to add location for shot"];
@@ -366,7 +341,7 @@
         
         [self.topOverlayView.layer removeAllAnimations];
         [UIView animateWithDuration:0.3 delay:2.0 options:UIViewAnimationCurveEaseIn animations:^{
-            self.topOverlayView.frame = CGRectMake(0, 43, 320, 0);
+            self.topOverlayView.frame = CGRectMake(0, 0, 320, 0);
             
         }completion:^(BOOL complete){
             
@@ -445,7 +420,8 @@
     [super viewDidLoad];
     
     [self.bottomToolbar setTintColor:[UIColor redColor]];
-    [self.topToolbar setTintColor:[UIColor redColor]];
+//    [self.topToolbar setTintColor:[UIColor redColor]];
+    [self.topToolbar removeFromSuperview];
     
     [self addSteppers];
     
@@ -457,30 +433,39 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:253.0/255.0 green:250.0/255.0 blue:212.0/255.0 alpha:1.0]];
     
     [self.view addSubview:self.entryView];
-    entryViewFrameDown = CGRectMake(0, self.view.frame.size.height+60, self.view.frame.size.width, self.entryView.frame.size.height);
-    entryViewFrameUp = CGRectMake(0, 43, self.view.frame.size.width, self.entryView.frame.size.height);
+    entryViewFrameDown = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.entryView.frame.size.height);
+    entryViewFrameUp = CGRectMake(0, 0, self.view.frame.size.width, self.entryView.frame.size.height);
     
     imageFrameBig = self.courtImage.frame;
-    imageFrameSmall = CGRectMake(90, 28, 140, 212);
+    imageFrameSmallTemp = CGRectMake(90, 5, 140, 212);
+    
+    imageFrameSmall = CGRectMake(90, 28-43, 140, 212);
     entryViewUp = false;
     
     self.entryView.frame = entryViewFrameDown;
     
     [self initEntryView];
     
-    leftTopButton = [[UIBarButtonItem alloc] initWithTitle:@"Finish" style:UIBarButtonItemStyleBordered target:self action:@selector(finishButtonPressed)];
+    leftTopButton = [[UIBarButtonItem alloc] initWithTitle:@"Finish" style:UIBarButtonItemStyleBordered target:self action:@selector(leftButtonPressed:)];
     
-    topTitle = [[UIBarButtonItem alloc] initWithTitle: [NSString stringWithFormat:@"%@ 0 - 0 %@", [self.match.player1 getName:kFirstInitialLastInitial], [self.match.player2 getName:kFirstInitialLastInitial]] style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationItem setHidesBackButton:YES];
+    self.navigationItem.leftBarButtonItem = leftTopButton;
     
-    [self.topToolbar setItems:[NSArray arrayWithObjects:
-                               leftTopButton,  [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], topTitle,
-                               [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] , nil]];
+    self.title = [NSString stringWithFormat:@"%@ 0 - 0 %@", [self.match.player1 getName:kFirstInitialLastName], [self.match.player2 getName:kFirstInitialLastName]];
     
-
-    // Do any additional setup after loading the view from its nib.
-   // SCRAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     self.rallyArray = [[NSMutableArray alloc] initWithCapacity:0];
     
+    NSArray *buttonArray = [NSArray arrayWithObjects:self.rallyDoneButton, self.rallyWithGameDoneButton, nil];
+    for (UIButton *buttion in buttonArray) {
+        [buttion setBackgroundImage:[[UIImage imageNamed:@"RedButton.png"] stretchableImageWithLeftCapWidth:10.0f topCapHeight:0.0f] forState:UIControlStateNormal];
+        buttion.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+        [buttion.titleLabel setAdjustsFontSizeToFitWidth:YES];
+        [buttion.titleLabel setMinimumFontSize:12];
+        buttion.titleLabel.shadowColor = [UIColor lightGrayColor];
+        buttion.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        [buttion setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+    }
 }
 
 - (void)viewDidUnload
@@ -491,7 +476,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
 }
 
@@ -503,8 +488,62 @@
 
 #pragma mark - Entry Shot Actions
 
-- (void)upEntryView {
+- (void)upEntryView:(UIView *)view {
+    [(UIStepper *)self.p1Stepper setValue:p1Score];
+    [(UIStepper *)self.p2Stepper setValue:p2Score];
+    [(UIStepper *)self.gameStepper setValue:gameNumber];
+    [self playerScoreChanged:nil];
+    [self gameNumberChanged:nil];
     
+    leftTopButton.title = @"Cancel Shot";
+    
+    if (currentRally != NULL) {
+        if  (currentRally.p1Finished.boolValue) {
+            [self.playerSegControl setSelectedSegmentIndex:0];
+        }
+        else [self.playerSegControl setSelectedSegmentIndex:1];
+        
+        int shot = currentRally.finishingShot.intValue;
+        if (shot < 3) {
+            [self.shotSegControlTop setSelectedSegmentIndex:shot];
+            [self.shotSegControlBottom setSelectedSegmentIndex:-1];
+            
+        }
+        else {
+            [self.shotSegControlBottom setSelectedSegmentIndex:shot-3];
+            [self.shotSegControlTop setSelectedSegmentIndex:-1];
+        }
+        
+        [self.entryScrollView setContentSize:CGSizeMake(640, 380)];
+        [self.entryScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+        [self.pageControl setAlpha:1.0];
+
+    }
+        
+    [UIView animateWithDuration:0.5 
+                     animations:^{
+                         self.topOverlayView.frame = CGRectMake(0, 0, 320, 0);
+                         
+                         self.entryView.frame = entryViewFrameUp;
+                         view.frame = imageFrameSmall;
+                         CGAffineTransform rotate = CGAffineTransformMakeRotation(M_PI/2.0);
+                         view.transform = rotate;
+                         self.opaqueView.alpha = 0.5;
+                         
+                     }
+                     completion:^(BOOL finished){
+                         //Set Bool
+                         entryViewUp = true;
+                         [self.entryScrollView addSubview:view];
+                         
+                         
+                         
+                         //Add Court View to Entry Scroll View
+//                         [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, view.frame.size.height)];
+                         view.tag = 1024;
+                         
+                         
+                     }];
 }
 
 - (void)courtPanned:(UIGestureRecognizer *)sender {
@@ -541,37 +580,7 @@
         
         if (entryViewUp == false) {
                     
-            [(UIStepper *)self.p1Stepper setValue:p1Score];
-            [(UIStepper *)self.p2Stepper setValue:p2Score];
-            [(UIStepper *)self.gameStepper setValue:gameNumber];
-            [self playerScoreChanged:nil];
-            [self gameNumberChanged:nil];
-            
-            leftTopButton.title = @"Cancel Shot";
-
-            [UIView animateWithDuration:0.5 
-                             animations:^{
-                                 self.topOverlayView.frame = CGRectMake(0, 43, 320, 0);
-                                 
-                                 self.entryView.frame = entryViewFrameUp;
-                                 sender.view.frame = imageFrameSmall;
-                                 CGAffineTransform rotate = CGAffineTransformMakeRotation(M_PI/2.0);
-                                 sender.view.transform = rotate;
-                                 self.opaqueView.alpha = 0.5;
-                                 
-                             }
-                             completion:^(BOOL finished){
-                                 //Set Bool
-                                 entryViewUp = true;
-                                 [self.entryScrollView addSubview:sender.view];
-                                 
-                                 
-                                 //Add Court View to Entry Scroll View
-                                 [sender.view setFrame:CGRectMake(sender.view.frame.origin.x, sender.view.frame.origin.y-43, sender.view.frame.size.width, sender.view.frame.size.height)];
-                                 sender.view.tag = 1024;
-                                 
-                                 
-                             }];
+            [self upEntryView:sender.view];
         }
         
     }
@@ -597,88 +606,172 @@
         [tempCourtView setX:xPercent andY:yPercent];
         
         if (entryViewUp == false) {
-                    [(UIStepper *)self.p1Stepper setValue:p1Score];
-            [(UIStepper *)self.p2Stepper setValue:p2Score];
-            [(UIStepper *)self.gameStepper setValue:gameNumber];
-            [self playerScoreChanged:nil];
-            [self gameNumberChanged:nil];
-            
-            leftTopButton.title = @"Cancel Shot";
-
-            
-            [UIView animateWithDuration:0.5 
-                             animations:^{
-                                 self.topOverlayView.frame = CGRectMake(0, 43, 320, 0);
-                                 
-                                 self.entryView.frame = entryViewFrameUp;
-                                 sender.view.frame = imageFrameSmall;
-                                 CGAffineTransform rotate = CGAffineTransformMakeRotation(M_PI/2.0);
-                                 sender.view.transform = rotate;
-                                 self.opaqueView.alpha = 0.5;
-                                 
-                             }
-                             completion:^(BOOL finished){
-                                 //Set Bool
-                                 entryViewUp = true;
-                                 [self.entryScrollView addSubview:sender.view];
-                                 
-                                 //Add Court View to Entry Scroll View
-                                 [sender.view setFrame:CGRectMake(sender.view.frame.origin.x, sender.view.frame.origin.y-43, sender.view.frame.size.width, sender.view.frame.size.height)];
-                                 sender.view.tag = 1024;
-                                 
-                                 
-                             }];
+            [self upEntryView:sender.view];
         }
         
     }
 }
 
-- (void)saveShot {
-    
+- (void)rightButtonPressed:(UIBarButtonItem *)sender {    
+    if (entryViewUp == false) {
+        [self upEntryView:self.courtView];
+        self.navigationItem.leftBarButtonItem = NULL;
+        self.navigationItem.rightBarButtonItem = NULL;
+    }
 }
 
-
-- (IBAction)doneButtonPressed:(id)sender {
-
-    BOOL newShot = !currentRally;
-    entryViewUp = false;
-    NSMutableArray *items = [NSMutableArray arrayWithArray:self.topToolbar.items];
-    [items removeLastObject];
-    [self.topToolbar setItems:items animated:YES];
-    
-   
-
-    leftTopButton.title = @"Finish";
-    
-    currentRally.p1Score = [NSNumber numberWithDouble: [(UIStepper *)self.p1Stepper value]];
-    currentRally.p2Score = [NSNumber numberWithDouble: [(UIStepper *)self.p2Stepper value]];
-     
+- (void)leftButtonPressed:(UIBarButtonItem *)sender {
+    if (sender.title == @"Cancel Shot") {
+        sender.title = @"Finish";
+        entryViewUp = false;
         
-    p1Score =  [(UIStepper *)self.p1Stepper value];
-    p2Score = [(UIStepper *)self.p2Stepper value];
-    gameNumber = [(UIStepper *)self.gameStepper value];
+        [UIView animateWithDuration:0.5 
+                         animations:^{
+                             self.entryView.frame = entryViewFrameDown;
+                             self.opaqueView.alpha = 0.0;
+                             
+                         }
+                         completion:^(BOOL finished){
+                             
+                             [self addNewCourtImage];
+                             [[self.view viewWithTag:1024] removeFromSuperview];
+                             entryViewUp = false;
+                             
+                             currentRally = NULL;
+                             [self resetEntryView];
+                             [self setCourtView];
+                             
+                             
+                         }];
+        return;
+        
+        
+    }
+    
+//    Finish button was pressed
+    if (gameNumber == 1 && currentGame.rallies.count == 0) {
+        [self.managedObjectContext deleteObject:self.match];
+        
+        int count = [self.navigationController.viewControllers count];
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:count-4] animated:YES];
+        return;
+        
+    }
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Do You Want To Save This Match?" delegate:self cancelButtonTitle:@"Don't End Match" destructiveButtonTitle:@"Yes, Save It" otherButtonTitles:@"No, Don't Save It", nil];
+    actionSheet.tag = 2;
+    [actionSheet showInView:self.view];
+
+//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Are You Sure You Want To End The Match" delegate:self cancelButtonTitle:@"No, Don't End Match" destructiveButtonTitle:@"Yes, End Match" otherButtonTitles:nil];
+//    sheet.tag = 1;
+//    [sheet showInView:self.view];
+}
+
+- (void)saveCurrentRally {
+    SCRAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+
     
     Rally *rally = currentRally;
+    BOOL newrally = FALSE;
     if (!rally) {
-        rally = [self addRallyWithGameNumber:gameNumber andPointNumber:(p1Score + p2Score)];
-
+        rally = [NSEntityDescription insertNewObjectForEntityForName:@"Rally" inManagedObjectContext:moc];
+        newrally = TRUE;
+        
     }
+    currentGame = [[self.match.games objectsPassingTest:^BOOL(id obj, BOOL *stop) {
+        Game *game = (Game *)obj;
+        return (game.number.intValue == gameNumber);
+    }] anyObject];
+    
+    if (!currentGame) {
+        currentGame = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:moc];
+        currentGame.number = [NSNumber numberWithInt:gameNumber];
+        if (newrally) {
+            rally.pointNumber = [NSNumber numberWithInt:0];
+
+        }
+        [self.match addGamesObject:currentGame];
+    }
+    else {
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"pointNumber.intValue" ascending:YES];
+        NSArray *gameRallies = [currentGame.rallies sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+        if (newrally) {
+            rally.pointNumber = [NSNumber numberWithInt:[[gameRallies lastObject] pointNumber].intValue + 1];
+
+        }
+    }
+    
+    
+
     rally.p1Score = [NSNumber numberWithInt:p1Score];
     rally.p2Score = [NSNumber numberWithInt:p2Score];
-    rally.pointNumber = [NSNumber numberWithInt:p1Score+p2Score];
     rally.xPosition = [NSNumber numberWithDouble:xVal];
     rally.yPosition = [NSNumber numberWithDouble:yVal];
+    rally.game = currentGame;
     rally.p1Finished = [NSNumber numberWithBool:(self.playerSegControl.selectedSegmentIndex == 0)];
     rally.player = (rally.p1Finished.boolValue) ? self.match.player1 : self.match.player2;
     
     if (self.shotSegControlTop.selectedSegmentIndex > -1) {
         rally.finishingShot = [NSNumber numberWithInt:self.shotSegControlTop.selectedSegmentIndex];
-
+        
     }
     else     
         rally.finishingShot = [NSNumber numberWithInt:(self.shotSegControlBottom.selectedSegmentIndex+3)];
+    
+    if (newrally) {
+        [self.rallyArray addObject:rally];
+
+    }
+    
+    for (Game *game in self.match.games) {
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"pointNumber.intValue" ascending:YES];
+        NSArray *gameRallies = [game.rallies sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+        
+        for (Rally *rally in gameRallies) {
+            NSLog(@"Game Number - %u, Rally Number - %u", game.number.intValue, rally.pointNumber.intValue);
+        }
+
+    }
+    
+
+}
+- (IBAction)doneWithGameDoneButtonPressed:(UIButton *)sender {
+    
+    
+    [self doneButtonPressed:nil];
+    
+    p1Score = 0;
+    p2Score = 0;
+    gameNumber++;
+    [self setCourtView];
 
     
+    NSRange range = [sender.titleLabel.text rangeOfString:@"Match"]; 
+    if (range.location != NSNotFound) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Do You Want To Save This Match?" delegate:self cancelButtonTitle:@"Don't End Match" destructiveButtonTitle:@"Yes, Save It" otherButtonTitles:@"No, Don't Save It", nil];
+        actionSheet.tag = 2;
+        [actionSheet showInView:self.view];
+    }
+}
+
+- (IBAction)doneButtonPressed:(id)sender {
+
+    BOOL newShot = !currentRally;
+    entryViewUp = false;
+    
+    p1Score =  [(UIStepper *)self.p1Stepper value];
+    p2Score = [(UIStepper *)self.p2Stepper value];
+    gameNumber = [(UIStepper *)self.gameStepper value];
+
+    [self saveCurrentRally];
+    
+    if (self.navigationItem.leftBarButtonItem.title == NULL) {
+        self.navigationItem.leftBarButtonItem = leftTopButton;  
+    }
+    else     self.navigationItem.leftBarButtonItem.title = @"Finish";
+
+    
+
     [UIView animateWithDuration:0.5 
                      animations:^{
                          self.entryView.frame = entryViewFrameDown;
@@ -686,13 +779,6 @@
                          
                      }
                      completion:^(BOOL finished){
-                         
-                         if (p1Score == self.match.pointsPerGame.intValue || p2Score == self.match.pointsPerGame.intValue) {
-                             [(UIStepper *)self.p1Stepper setValue:0];
-                             [(UIStepper *)self.p2Stepper setValue:0];
-                             [(UIStepper *)self.gameStepper setValue:([(UIStepper *)self.gameStepper value] + 1)];
-                         }
-                         
                          [self addNewCourtImage];
                          [[self.view viewWithTag:1024] removeFromSuperview];
                          entryViewUp = false;
@@ -709,10 +795,9 @@
                          
                          
                      }];
-    
-    [self saveShot];
-    
 }
+
+
 
 -(void)checkIfSegsPicked {
     if (([self.shotSegControlTop selectedSegmentIndex] > -1 ||
@@ -803,57 +888,34 @@
     if (self.rallyArray.count == 0) {
         [self.managedObjectContext deleteObject:self.match];
         // Remove match
-        return;
     }
     
-    Game *oldGame = (Game *)[(Rally *)[self.rallyArray objectAtIndex:0] game];
-    Game *newGame;
-    int counter = 0;
-    int p1GameScoreint = 0;
-    int p2GameScoreint = 0;
-    for (int i = 0; i < self.rallyArray.count; i++) {
-        Rally *tempRally = (Rally *)[self.rallyArray objectAtIndex:i];
-        newGame = (Game *)tempRally.game;
-        
-        if (newGame.number.intValue != oldGame.number.intValue) {
-            oldGame = newGame;
-            oldGame.p1Score = [NSNumber numberWithInt:p1GameScoreint];
-            oldGame.p2Score = [NSNumber numberWithInt:p2GameScoreint];
-            counter = 0;
-            
+    int p1GameScore = 0;
+    int p2GameScore = 0;
+    NSArray *games = [self.match.games sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
+    for (Game *game in games) {
+        Rally *tempRally = [[game.rallies sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES]]] lastObject];
+        if (tempRally.p1Score.intValue > tempRally.p2Score.intValue) {
+            p1GameScore++;
         }
-        
-        tempRally.pointNumber = [NSNumber numberWithInt:i];
-        p1GameScoreint = tempRally.p1Score.intValue;
-        p2GameScoreint = tempRally.p2Score.intValue;
-        counter++;
+        else if (tempRally.p1Score.intValue < tempRally.p2Score.intValue) {
+            p2GameScore++;
+        }
     }
     
-    oldGame.p1Score = [NSNumber numberWithInt:p1GameScoreint];
-    oldGame.p2Score = [NSNumber numberWithInt:p2GameScoreint];
+    self.match.p1GameScore = [NSNumber numberWithInt:p1GameScore];
+    self.match.p2GameScore = [NSNumber numberWithInt:p2GameScore];
 
-    if (p1GameScoreint > p2GameScoreint) {
-        self.match.p1GameScore = [NSNumber numberWithInt:self.match.p1GameScore.intValue + 1];
-    }
-    
-    if (p2GameScoreint > p1GameScoreint) {
-        self.match.p2GameScore = [NSNumber numberWithInt:self.match.p2GameScore.intValue + 1];
-    }
-    
-    SCRAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate saveContext];
-    
     
     int count = [self.navigationController.viewControllers count];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:count-4] animated:YES];
-
+    
+    [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 -(void)finishButtonPressed {
-
-    
-    if (leftTopButton.title == @"Cancel Shot") {
-        leftTopButton.title = @"Finish";
+    if (self.navigationItem.leftBarButtonItem.title == @"Cancel Shot") {
+        self.navigationItem.leftBarButtonItem.title = @"Finish";
         entryViewUp = false;
         NSMutableArray *items = [NSMutableArray arrayWithArray:self.topToolbar.items];
         UIBarButtonItem *item = [items lastObject];
@@ -893,9 +955,13 @@
         return;
 
     }
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Are You Sure You Want To End The Match" delegate:self cancelButtonTitle:@"No, Don't End Match" destructiveButtonTitle:@"Yes, End Match" otherButtonTitles:nil];
-    sheet.tag = 1;
-    [sheet showInView:self.view];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Do You Want To Save This Match?" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Yes, Save It" otherButtonTitles:@"No, Don't Save It", nil];
+    actionSheet.tag = 2;
+    [actionSheet showInView:self.view];
+    
+//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Are You Sure You Want To End The Match" delegate:self cancelButtonTitle:@"No, Don't End Match" destructiveButtonTitle:@"Yes, End Match" otherButtonTitles:nil];
+//    sheet.tag = 1;
+//    [sheet showInView:self.view];
 
 }
 
@@ -904,16 +970,52 @@
     self.p1ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)[(UIStepper *)p1Stepper value]];
     self.p2ScoreLabel.text = [NSString stringWithFormat:@"%u", (int)[(UIStepper *)p2Stepper value]];
     
-    self.gameWonLabel.hidden = TRUE;
+    self.rallyWithGameDoneButton.hidden = TRUE;
+    [self.rallyDoneButton setTitle:@"Save Rally" forState:UIControlStateNormal];
     
-    if ((int)[(UIStepper *)p1Stepper value] == self.match.pointsPerGame.intValue) {
-        self.gameWonLabel.hidden = FALSE;
-        self.gameWonLabel.text = [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player1 getName:kFullName], (int)[(UIStepper *)self.gameStepper value]];
+    int p1GameScore = 0;
+    int p2GameScore = 0;
+    NSArray *games = [self.match.games sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
+    for (Game *game in games) {
+        Rally *tempRally = [[game.rallies sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES]]] lastObject];
+        if (tempRally.p1Score.intValue > tempRally.p2Score.intValue) {
+            p1GameScore++;
+        }
+        else if (tempRally.p1Score.intValue < tempRally.p2Score.intValue) {
+            p2GameScore++;
+        }
     }
-    else if ((int)[(UIStepper *)p2Stepper value] == self.match.pointsPerGame.intValue) {
-        self.gameWonLabel.hidden = FALSE;
-        self.gameWonLabel.text = [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player2 getName:kFullName], (int)[(UIStepper *)self.gameStepper value]];
+    
+    self.match.p1GameScore = [NSNumber numberWithInt:p1GameScore];
+    self.match.p2GameScore = [NSNumber numberWithInt:p2GameScore];
+
+    
+    BOOL endMatch = (gameNumber >= self.match.numberOfGames.intValue/2+1);
+    
+    if ((int)[(UIStepper *)p1Stepper value] >= self.match.pointsPerGame.intValue && (int)[(UIStepper *)p1Stepper value] > (int)[(UIStepper *)p2Stepper value]) {
+        self.rallyWithGameDoneButton.hidden = FALSE;
+        [self.rallyDoneButton setTitle:[NSString stringWithFormat:@"%@ Didn't Win Game %u", [self.match.player1 getName:kFirstInitialLastName], (int)[(UIStepper *)self.gameStepper value]] forState:UIControlStateNormal];
+
         
+        [self.rallyWithGameDoneButton setTitle:[NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player1 getName:kFirstInitialLastName], (int)[(UIStepper *)self.gameStepper value]] forState:UIControlStateNormal];
+        
+        if (p1GameScore >= ceil(self.match.numberOfGames.intValue/2) && p1GameScore >= p2GameScore) {
+            [self.rallyWithGameDoneButton setTitle:[self.rallyWithGameDoneButton.titleLabel.text stringByAppendingString:@" and Match"] forState:UIControlStateNormal];
+
+        }
+        
+    }
+    else if ((int)[(UIStepper *)p2Stepper value] >= self.match.pointsPerGame.intValue && (int)[(UIStepper *)p2Stepper value] > (int)[(UIStepper *)p1Stepper value]) {
+        self.rallyWithGameDoneButton.hidden = FALSE;
+        [self.rallyDoneButton setTitle:[NSString stringWithFormat:@"%@ Didn't Win Game %u", [self.match.player2 getName:kFirstInitialLastName], (int)[(UIStepper *)self.gameStepper value]] forState:UIControlStateNormal];
+
+        [self.rallyWithGameDoneButton setTitle: [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player2 getName:kFirstInitialLastName], (int)[(UIStepper *)self.gameStepper value]] forState:UIControlStateNormal];
+        
+        if (p2GameScore >= ceil(self.match.numberOfGames.intValue/2) && p2GameScore >= p1GameScore) {
+            [self.rallyWithGameDoneButton setTitle:[self.rallyWithGameDoneButton.titleLabel.text stringByAppendingString:@" and Match"] forState:UIControlStateNormal];
+            
+        }
+
     }
     
 }

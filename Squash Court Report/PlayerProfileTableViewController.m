@@ -116,22 +116,31 @@
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"datePlayed" ascending:NO];
     recentMatches = [self.player.matches sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
 
+    
     int i = 0;
-    for (Match *match in self.player.matches) {
+    for (Match *match in recentMatches) {
         if (i == 3) break;
         if (match.player1 == self.player) {
             if (match.winner == self.player) {
-                [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"W  %u, %u against %@", match.p1GameScore.intValue, match.p2GameScore.intValue, [match.player2 getName:kFirstInitialLastName]]];
+                [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"W  %u - %u against %@", match.p1GameScore.intValue, match.p2GameScore.intValue, [match.player2 getName:kFirstInitialLastName]]];
             }
-            else [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"L  %u, %u to %@", match.p1GameScore.intValue, match.p2GameScore.intValue, [match.player2 getName:kFirstInitialLastName]]];
+            else if (match.loser == self.player)
+                [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"L  %u - %u to %@", match.p1GameScore.intValue, match.p2GameScore.intValue, [match.player2 getName:kFirstInitialLastName]]];
+            
+            else [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"T  %u - %u with %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player2 getName:kFirstInitialLastName]]];
+
                   
         }
         else {
             if (match.winner == self.player) {
-                [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"W  %u, %u against %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player1 getName:kFirstInitialLastName]]];
+                [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"W  %u - %u against %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player1 getName:kFirstInitialLastName]]];
             }
-            else [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"L  %u, %u to %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player1 getName:kFirstInitialLastName]]];
+            else if (match.loser == self.player) [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"L  %u - %u to %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player1 getName:kFirstInitialLastName]]];
+            
+            else [recentMatchesLeftLabels addObject:[NSString stringWithFormat:@"T  %u - %u with %@", match.p2GameScore.intValue, match.p1GameScore.intValue, [match.player1 getName:kFirstInitialLastName]]];
         }
+        
+        
         i++;
     }
     
