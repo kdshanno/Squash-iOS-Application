@@ -122,6 +122,8 @@
     [currentMatch setPlayer1:p1];
     [currentMatch setPlayer2:p2];
     
+    [currentMatch setNumberOfGames:[NSNumber numberWithInt:5]];
+    
     [currentMatch setGames:[NSSet set]];
     [currentMatch setCity:cityField.text];
     [currentMatch setComplex:buildingField.text];

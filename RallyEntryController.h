@@ -20,6 +20,8 @@
     CGRect entryViewFrameUp;
     CGRect entryViewFrameDown;
     CGRect imageFrameBig;
+    CGRect imageFrameSmallTemp;
+
     CGRect imageFrameSmall;
     bool entryViewUp;
     UIBarButtonItem *doneButton;
@@ -63,7 +65,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *topOverlayTitle;
 @property (strong, nonatomic) IBOutlet UILabel *topOverlaySubtitle;
 @property (strong, nonatomic) IBOutlet UILabel *gameWonLabel;
-
+@property (strong, nonatomic) IBOutlet UIButton *rallyDoneButton;
+@property (strong, nonatomic) IBOutlet UIButton *rallyWithGameDoneButton;
 
 
 
@@ -76,6 +79,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch;
 - (id)initWithMatch:(Match *)currentMatch;
 
+-(void)leftButtonPressed:(UIBarButtonItem *)sender;
+-(void)rightButtonPressed:(UIBarButtonItem *)sender;
 -(void)finishButtonPressed;
 -(IBAction)animateImage:(id)sender;
 -(IBAction)playerSegChanged:(id)sender;
@@ -90,6 +95,7 @@
 - (IBAction)fastFowardButtonPressed:(id)sender;
 - (IBAction)scoreButtonPressed:(id)sender;
 - (IBAction)infoButtonPressed:(id)sender;
+- (IBAction)doneWithGameDoneButtonPressed:(id)sender;
 
 
 

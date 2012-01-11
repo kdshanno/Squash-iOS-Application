@@ -11,22 +11,27 @@
 #import "MatchOverviewCustomCell.h"
 #import "ShotFilter.h"
 
-#define ROW_WINNERS 0
-#define ROW_ERRORS 1
-#define ROW_UNFORCED_ERRORS 2
-#define ROW_TOTAL_ERRORS 3
-#define ROW_NO_LET 4
-#define ROW_LET 5
-#define ROW_STROKE 6
-#define ROW_TOTAL_STOKE_LET_NO_LET 7
-#define ROW_WE_RATIO 8
-#define ROW_RALLY_CONTROL_MARGIN 9
+#define ROW_POINTS 0
+#define ROW_WINNERS 1
+#define ROW_ERRORS 2
+#define ROW_UNFORCED_ERRORS 3
+#define ROW_TOTAL_ERRORS 4
+#define ROW_NO_LET 5
+#define ROW_LET 6
+#define ROW_STROKE 7
+#define ROW_TOTAL_STOKE_LET_NO_LET 8
+#define ROW_WE_RATIO 9
+#define ROW_RALLY_CONTROL_MARGIN 10
 
 
 @interface MatchOverviewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, MatchOverviewCustomCellDelegate> {
     NSMutableArray *statHeaders;
+    NSMutableArray *p1StatHeadersByGame;
+    NSMutableArray *p2StatHeadersByGame;
+
     NSMutableArray *p1Stats;
     NSMutableArray *p2Stats;
+    
     CGRect pickerDown;
     CGRect pickerUp;
     NSMutableArray *courtAreaPickerOptions;
