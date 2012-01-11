@@ -17,6 +17,7 @@
     ShotFilter *filters[2];
     NSMutableArray *games;
     NSMutableArray *pointArrays;
+    NSMutableArray *arrowImages;
     BOOL expandedGames[5];
 }
 
