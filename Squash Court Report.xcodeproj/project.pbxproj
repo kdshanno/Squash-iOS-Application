@@ -43,9 +43,6 @@
 		504ECB21145209BE00FE7B45 /* CourtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 504ECB20145209BE00FE7B45 /* CourtView.m */; };
 		504ECB241455E8EC00FE7B45 /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 504ECB231455E8EC00FE7B45 /* CustomImageView.m */; };
 		50593F611458C34D00C5F021 /* PlayerEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50593F5F1458C34C00C5F021 /* PlayerEditController.m */; };
-		509FEEC214B3D6B3008AC7D4 /* BigRedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 509FEEC114B3D6B3008AC7D4 /* BigRedButton.png */; };
-		509FEEC914B611E8008AC7D4 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 509FEEC814B611E8008AC7D4 /* RedButton.png */; };
-		509FEECB14B612EB008AC7D4 /* RedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 509FEECA14B612EA008AC7D4 /* RedButton@2x.png */; };
 		50A0EBD91445424B00A8B3CF /* startImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBD71445424B00A8B3CF /* startImage.png */; };
 		50A0EBDA1445424B00A8B3CF /* startImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBD81445424B00A8B3CF /* startImage@2x.png */; };
 		50A0EBDE1445427400A8B3CF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBDD1445427400A8B3CF /* Default.png */; };
@@ -59,7 +56,6 @@
 		50A0EC36144562B400A8B3CF /* PlayerProfileEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC34144562B400A8B3CF /* PlayerProfileEditController.m */; };
 		50A0EC3A1445695F00A8B3CF /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC391445695E00A8B3CF /* TextFieldCell.m */; };
 		50A0EC3D14457CA900A8B3CF /* PlayerProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC3C14457CA800A8B3CF /* PlayerProfileController.m */; };
-		50A96B471448D723003AC92D /* MatchEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B461448D723003AC92D /* MatchEditController.m */; };
 		50A96B4A1448F70C003AC92D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50A96B491448F70C003AC92D /* QuartzCore.framework */; };
 		50A96B4C144A0565003AC92D /* ProfileBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A96B4B144A0565003AC92D /* ProfileBar.png */; };
 		50A96B4F144A13D9003AC92D /* PlayerProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B4E144A13D9003AC92D /* PlayerProfileTableViewController.m */; };
@@ -190,8 +186,6 @@
 		50A0EC391445695E00A8B3CF /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		50A0EC3B14457CA800A8B3CF /* PlayerProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileController.h; sourceTree = "<group>"; };
 		50A0EC3C14457CA800A8B3CF /* PlayerProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileController.m; sourceTree = "<group>"; };
-		50A96B451448D723003AC92D /* MatchEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchEditController.h; sourceTree = "<group>"; };
-		50A96B461448D723003AC92D /* MatchEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchEditController.m; sourceTree = "<group>"; };
 		50A96B491448F70C003AC92D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		50A96B4B144A0565003AC92D /* ProfileBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileBar.png; sourceTree = "<group>"; };
 		50A96B4D144A13D9003AC92D /* PlayerProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileTableViewController.h; sourceTree = "<group>"; };
@@ -488,8 +482,6 @@
 				50343C1914453B2E00EDC043 /* MainViewCell.m */,
 				50343C061445359600EDC043 /* MainViewController.h */,
 				50343C071445359600EDC043 /* MainViewController.m */,
-				50A96B451448D723003AC92D /* MatchEditController.h */,
-				50A96B461448D723003AC92D /* MatchEditController.m */,
 			);
 			name = "Main View";
 			sourceTree = "<group>";
@@ -730,7 +722,6 @@
 				50A0EC3A1445695F00A8B3CF /* TextFieldCell.m in Sources */,
 				50A0EC3D14457CA900A8B3CF /* PlayerProfileController.m in Sources */,
 				5002AA601448D3E200FB0B8F /* ShotEntryController.m in Sources */,
-				50A96B471448D723003AC92D /* MatchEditController.m in Sources */,
 				50A96B4F144A13D9003AC92D /* PlayerProfileTableViewController.m in Sources */,
 				50A96B5A144A16EB003AC92D /* SectionHeaderView.m in Sources */,
 				50A96B5F144A1A45003AC92D /* PlayerProfileCell.m in Sources */,

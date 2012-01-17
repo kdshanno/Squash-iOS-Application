@@ -106,7 +106,7 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    UIColor *tan = [UIColor colorWithRed:254.0/255.0 green:241.0/255.0 blue:183.0/255.0 alpha:1.0];
+   // UIColor *tan = [UIColor colorWithRed:254.0/255.0 green:241.0/255.0 blue:183.0/255.0 alpha:1.0];
     CGContextSetFillColorWithColor(context, [[UIColor whiteColor] colorWithAlphaComponent:0.5].CGColor);
     CGContextFillRect(context, self.bounds);
     
