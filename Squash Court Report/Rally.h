@@ -12,6 +12,16 @@
 @class Player;
 
 typedef enum {
+    CourtAreaFrontLeft = 0,
+    CourtAreaFrontRight = 1,
+    CourtAreaMiddleLeft = 2,
+    CourtAreaMiddleRight = 3,
+    CourtAreaBackLeft = 4,
+    CourtAreaBackRight = 5,
+    CourtAreaFullCourt = 6
+} courtAreaType;
+
+typedef enum {
     kWinner = 0,
     kUnforcedError = 1,
     kError = 2,
@@ -36,5 +46,7 @@ typedef enum {
 
 -(int)getPreviousp1Score;
 -(int)getPreviousp2Score;
+- (courtAreaType)courtAreaType;
+- (NSString *)courtAreaString;
 
 @end

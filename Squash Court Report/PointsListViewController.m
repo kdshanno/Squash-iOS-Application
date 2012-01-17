@@ -97,32 +97,38 @@
     else
         index = 1;
     
+    BOOL correctFinishingShot;
     switch ([rally.finishingShot intValue]) {
         case kError:
-            return [filters[index] errors];
+            correctFinishingShot = [filters[index] errors];
             break;
         case kLet:
-            return [filters[index] lets];
+            correctFinishingShot = [filters[index] lets];
             break; 
         case kNoLet:
-            return [filters[index] noLets];
+            correctFinishingShot = [filters[index] noLets];
             break; 
         case kStroke:
-            return [filters[index] strokes];
+            correctFinishingShot = [filters[index] strokes];
             break; 
         case kWinner:
-            return [filters[index] winners];
+            correctFinishingShot = [filters[index] winners];
             break; 
         case kUnforcedError:
-            return [filters[index] unforcedErrors];
+            correctFinishingShot = [filters[index] unforcedErrors];
             break;
         default:
             abort();
             break;
-;
     }
     
     
+    if (!correctFinishingShot)
+        return NO;
+    else if ([filters[index] courtArea] == CourtAreaFullCourt)
+        return YES;
+    else
+        return [filters[index] courtArea] == [rally courtAreaType];
 }
 
 - (void)didReceiveMemoryWarning

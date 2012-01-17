@@ -19,6 +19,5 @@
 }
 
 - (void)setContentWithRally:(Rally *)r inMatch:(Match *)m;
-- (NSString *)relativeLocationForX:(double)x andY:(double)y;
 
 @end

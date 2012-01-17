@@ -75,5 +75,67 @@
     
 }
 
+- (courtAreaType)courtAreaType
+{
+    double x = [self.xPosition doubleValue];
+    double y = [self.yPosition doubleValue];
+    courtAreaType t;
+    
+    if(x < 0.5)
+    {
+        if(y < 0.46)
+            t = CourtAreaFrontLeft;
+        else if (y > 0.75)
+            t = CourtAreaBackLeft;
+        else
+            t = CourtAreaMiddleLeft;
+    }
+    else
+    {
+        if(y < 0.46)
+            t = CourtAreaFrontRight;
+        else if (y > 0.75)
+            t = CourtAreaBackRight;
+        else
+            t = CourtAreaMiddleRight;
+    }
+    
+    return t;
+}
+
+- (NSString *)courtAreaString
+{
+    courtAreaType t = [self courtAreaType];
+    switch (t) {
+        case CourtAreaBackLeft:
+            return @"Back-Left";
+            break;
+
+        case CourtAreaBackRight:
+            return @"Back-Right";
+            break;
+            
+        case CourtAreaMiddleLeft:
+            return @"Mid-Left";
+            break;
+            
+        case CourtAreaMiddleRight:
+            return @"Mid-Right";
+            break;
+            
+        case CourtAreaFrontLeft:
+            return @"Front-Left";
+            break;
+            
+        case CourtAreaFrontRight:
+            return @"Front-Right";
+            break;
+            
+        default:
+            abort();
+            break;
+    }
+}
+
 
 @end

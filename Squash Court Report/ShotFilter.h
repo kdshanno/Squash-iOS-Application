@@ -9,16 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Rally.h"
 
-typedef enum {
-    CourtAreaFrontLeft = 0,
-    CourtAreaFrontRight = 1,
-    CourtAreaMiddleLeft = 2,
-    CourtAreaMiddleRight = 3,
-    CourtAreaBackLeft = 4,
-    CourtAreaBackRight = 5,
-    CourtAreaFullCourt = 6
-} courtAreaType;
-
 @interface ShotFilter : NSObject {    
     BOOL winners;
     BOOL errors;
