@@ -43,9 +43,6 @@
 		504ECB21145209BE00FE7B45 /* CourtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 504ECB20145209BE00FE7B45 /* CourtView.m */; };
 		504ECB241455E8EC00FE7B45 /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 504ECB231455E8EC00FE7B45 /* CustomImageView.m */; };
 		50593F611458C34D00C5F021 /* PlayerEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50593F5F1458C34C00C5F021 /* PlayerEditController.m */; };
-		509FEEC214B3D6B3008AC7D4 /* BigRedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 509FEEC114B3D6B3008AC7D4 /* BigRedButton.png */; };
-		509FEEC914B611E8008AC7D4 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 509FEEC814B611E8008AC7D4 /* RedButton.png */; };
-		509FEECB14B612EB008AC7D4 /* RedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 509FEECA14B612EA008AC7D4 /* RedButton@2x.png */; };
 		50A0EBD91445424B00A8B3CF /* startImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBD71445424B00A8B3CF /* startImage.png */; };
 		50A0EBDA1445424B00A8B3CF /* startImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBD81445424B00A8B3CF /* startImage@2x.png */; };
 		50A0EBDE1445427400A8B3CF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBDD1445427400A8B3CF /* Default.png */; };
@@ -59,7 +56,6 @@
 		50A0EC36144562B400A8B3CF /* PlayerProfileEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC34144562B400A8B3CF /* PlayerProfileEditController.m */; };
 		50A0EC3A1445695F00A8B3CF /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC391445695E00A8B3CF /* TextFieldCell.m */; };
 		50A0EC3D14457CA900A8B3CF /* PlayerProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A0EC3C14457CA800A8B3CF /* PlayerProfileController.m */; };
-		50A96B471448D723003AC92D /* MatchEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B461448D723003AC92D /* MatchEditController.m */; };
 		50A96B4A1448F70C003AC92D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50A96B491448F70C003AC92D /* QuartzCore.framework */; };
 		50A96B4C144A0565003AC92D /* ProfileBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A96B4B144A0565003AC92D /* ProfileBar.png */; };
 		50A96B4F144A13D9003AC92D /* PlayerProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A96B4E144A13D9003AC92D /* PlayerProfileTableViewController.m */; };
@@ -102,6 +98,7 @@
 		5B69524314AE74690084C38C /* ShotFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B69524214AE74690084C38C /* ShotFilter.m */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
 		5B804D2914AE9ACC00F8D948 /* MatchListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B804D2714AE9ACC00F8D948 /* MatchListController.m */; };
+		5BE029FB14BD217200C24ED2 /* expanded.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE029FA14BD217200C24ED2 /* expanded.png */; };
 		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
 		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
 		5BF1F746144CDBED000455BC /* MatchSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1F743144CDBED000455BC /* MatchSetupViewController.m */; };
@@ -189,8 +186,6 @@
 		50A0EC391445695E00A8B3CF /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		50A0EC3B14457CA800A8B3CF /* PlayerProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileController.h; sourceTree = "<group>"; };
 		50A0EC3C14457CA800A8B3CF /* PlayerProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileController.m; sourceTree = "<group>"; };
-		50A96B451448D723003AC92D /* MatchEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchEditController.h; sourceTree = "<group>"; };
-		50A96B461448D723003AC92D /* MatchEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchEditController.m; sourceTree = "<group>"; };
 		50A96B491448F70C003AC92D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		50A96B4B144A0565003AC92D /* ProfileBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileBar.png; sourceTree = "<group>"; };
 		50A96B4D144A13D9003AC92D /* PlayerProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProfileTableViewController.h; sourceTree = "<group>"; };
@@ -253,6 +248,7 @@
 		5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedUIDatePicker.m; sourceTree = "<group>"; };
 		5B804D2614AE9ACC00F8D948 /* MatchListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchListController.h; sourceTree = "<group>"; };
 		5B804D2714AE9ACC00F8D948 /* MatchListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchListController.m; sourceTree = "<group>"; };
+		5BE029FA14BD217200C24ED2 /* expanded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expanded.png; sourceTree = "<group>"; };
 		5BF1F740144CDBED000455BC /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_back.png; sourceTree = "<group>"; };
 		5BF1F741144CDBED000455BC /* MatchSetupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchSetupView.xib; sourceTree = "<group>"; };
 		5BF1F742144CDBED000455BC /* MatchSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchSetupViewController.h; sourceTree = "<group>"; };
@@ -486,8 +482,6 @@
 				50343C1914453B2E00EDC043 /* MainViewCell.m */,
 				50343C061445359600EDC043 /* MainViewController.h */,
 				50343C071445359600EDC043 /* MainViewController.m */,
-				50A96B451448D723003AC92D /* MatchEditController.h */,
-				50A96B461448D723003AC92D /* MatchEditController.m */,
 			);
 			name = "Main View";
 			sourceTree = "<group>";
@@ -519,6 +513,7 @@
 		50F6D98514B3CFA70046F0F5 /* Points List View */ = {
 			isa = PBXGroup;
 			children = (
+				5BE029FA14BD217200C24ED2 /* expanded.png */,
 				50F6D96F14B28CFC0046F0F5 /* PointsListCell.h */,
 				50F6D97014B28CFC0046F0F5 /* PointsListCell.m */,
 				50F6D97114B28CFC0046F0F5 /* PointsListViewController.h */,
@@ -699,9 +694,7 @@
 				50E9696714ABB3A7000AA1A5 /* PlayersViewController.xib in Resources */,
 				5005644E14B14C5300E431C3 /* MatchOverviewController.xib in Resources */,
 				50F6D97A14B2CDD70046F0F5 /* PointsCourtViewController.xib in Resources */,
-				509FEEC214B3D6B3008AC7D4 /* BigRedButton.png in Resources */,
-				509FEEC914B611E8008AC7D4 /* RedButton.png in Resources */,
-				509FEECB14B612EB008AC7D4 /* RedButton@2x.png in Resources */,
+				5BE029FB14BD217200C24ED2 /* expanded.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,7 +722,6 @@
 				50A0EC3A1445695F00A8B3CF /* TextFieldCell.m in Sources */,
 				50A0EC3D14457CA900A8B3CF /* PlayerProfileController.m in Sources */,
 				5002AA601448D3E200FB0B8F /* ShotEntryController.m in Sources */,
-				50A96B471448D723003AC92D /* MatchEditController.m in Sources */,
 				50A96B4F144A13D9003AC92D /* PlayerProfileTableViewController.m in Sources */,
 				50A96B5A144A16EB003AC92D /* SectionHeaderView.m in Sources */,
 				50A96B5F144A1A45003AC92D /* PlayerProfileCell.m in Sources */,
@@ -841,14 +833,14 @@
 		50343BF714452F6A00EDC043 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Max Shaw (3FH82D22YB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56AD1EC7-6355-457A-B4EA-6C981E93CA90";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -860,14 +852,14 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Max Shaw (3FH82D22YB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Squash Court Report/Squash Court Report-Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INFOPLIST_FILE = "Squash Court Report/Squash Court Report-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56AD1EC7-6355-457A-B4EA-6C981E93CA90";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

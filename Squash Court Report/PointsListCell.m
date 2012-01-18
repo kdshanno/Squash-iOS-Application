@@ -70,7 +70,8 @@
 
     [playerLabel setText:name];
     [outcomeLabel setText:[ShotFilter stringForShotType:[r.finishingShot intValue]]];
-    [locationLabel setText:[self relativeLocationForX:[r.xPosition doubleValue] andY:[r.yPosition doubleValue]]];
+    [locationLabel setText:[r courtAreaString]];
+    //[locationLabel setText:[self relativeLocationForX:[r.xPosition doubleValue] andY:[r.yPosition doubleValue]]];
     
     UIColor *color = [ShotFilter colorForShotType:[r.finishingShot intValue]];
     [pointNumberLabel setTextColor:color];
@@ -81,27 +82,6 @@
     
 }
 
-- (NSString *)relativeLocationForX:(double)x andY:(double)y
-{
-    NSString *xPos;
-    if(x < 0.5)
-        xPos = @"Left";
-    else
-        xPos = @"Right";
-    
-    NSString *yPos;
-    if(y < 0.46)
-        yPos = @"Front";
-    else if (y > 0.75)
-        yPos = @"Back";
-    else
-        yPos = @"Mid";
-    
-   // if([xPos compare:yPos] == NSOrderedSame)
-   //     return @"Center";
-   // else
-        return [NSString stringWithFormat:@"%@-%@", yPos, xPos];
-}
                            
                         
 @end
