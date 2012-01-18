@@ -44,7 +44,7 @@
         <attribute name="style" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="matchesIAmPlayer1" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Match" inverseName="player1" inverseEntity="Match" syncable="YES"/>
         <relationship name="matchesIAmPlayer2" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Match" inverseName="player2" inverseEntity="Match" syncable="YES"/>
-        <relationship name="rallies" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rally" inverseName="player" inverseEntity="Rally" syncable="YES"/>
+        <relationship name="rallies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rally" inverseName="player" inverseEntity="Rally" syncable="YES"/>
     </entity>
     <entity name="Rally" representedClassName="Rally" syncable="YES">
         <attribute name="finishingShot" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>

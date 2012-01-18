@@ -901,6 +901,8 @@
         else if (tempRally.p1Score.intValue < tempRally.p2Score.intValue) {
             p2GameScore++;
         }
+        game.p1Score = [NSNumber numberWithInt:tempRally.p1Score.intValue];
+        game.p2Score = [NSNumber numberWithInt:tempRally.p2Score.intValue];
     }
     
     self.match.p1GameScore = [NSNumber numberWithInt:p1GameScore];

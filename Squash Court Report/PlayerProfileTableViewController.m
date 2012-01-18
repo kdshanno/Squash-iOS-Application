@@ -76,31 +76,51 @@
         return;
     }
     
-    if (true) {
-        [statsLeftLabels addObject:@"Number Of Matches:"];
-        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfMatches]]];
-    }
-//    if (true) {
-//        [statsLeftLabels addObject:@"Number of Wins:"];
-//        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfWins]]];
-//    }
-//    if (true) {
-//        [statsLeftLabels addObject:@"Number Of Losses:"];
-//        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberOfLosses]]];
-//    }
+    [statsLeftLabels addObject:@"Number Of Matches:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.numberOfMatches]];
     
-    if (true) {
-        [statsLeftLabels addObject:@"Winners per Match:"];
-        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberofWinnersPerMatch]]];
-    }
+    [statsLeftLabels addObject:@"Number Of Wins:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.numberOfWins]];
+
+    [statsLeftLabels addObject:@"Number Of Losses:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.numberOfLosses]];
+
+    [statsLeftLabels addObject:@"Total Number Of Winners:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.totalWinners]];
+
+    [statsLeftLabels addObject:@"Total Number Of Errors:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.totalErrors]];
+
+    [statsLeftLabels addObject:@"Total Number Of Unforced Errors:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.totalUnforcedErrors]];
+
+    [statsLeftLabels addObject:@"Total Number Of Lets:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.totalLets]];
+
+    [statsLeftLabels addObject:@"Total Number Of No-Lets:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.totalNoLets]];
+
+    [statsLeftLabels addObject:@"Total Number Of Strokes:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%u", self.player.totalStrokes]];
     
-    if (true) {
-        [statsLeftLabels addObject:@"Errors per Match:"];
-        [statsRightLabels addObject:[NSString stringWithFormat:@"%u", [self.player getNumberofErrorsPerMatch]]];
-    }
-    
-    [statsLeftLabels addObject:@"See All Stats"];
-    [statsRightLabels addObject:@""];
+    [statsLeftLabels addObject:@"Winners Per Match:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%.1f", self.player.averageWinnersPerMatch]];
+
+    [statsLeftLabels addObject:@"Errors Per Match:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%.1f", self.player.averageErrorsPerMatch]];
+
+    [statsLeftLabels addObject:@"Unforced Errors Per Match:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%.1f", self.player.averageUnforcedErrorsPerMatch]];
+
+    [statsLeftLabels addObject:@"Lets Per Match:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%.1f", self.player.averageLetsPerMatch]];
+
+    [statsLeftLabels addObject:@"No-Lets Per Match:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%.1f", self.player.averageNoLetsPerMatch]];
+
+    [statsLeftLabels addObject:@"Strokes Per Match:"];
+    [statsRightLabels addObject:[NSString stringWithFormat:@"%.1f", self.player.averageStrokesPerMatch]];
+
 
 }
 
@@ -362,9 +382,6 @@
             case 3: {
                 cell.leftLabel.text = [statsLeftLabels objectAtIndex:indexPath.row];
                 cell.rightLabel.text = [statsRightLabels objectAtIndex:indexPath.row];
-                if (indexPath.row == statsLeftLabels.count-1 && statsLeftLabels.count > 1) {
-                    cell.showDisclosure = TRUE;
-                }
                 break;
             }
             default:
