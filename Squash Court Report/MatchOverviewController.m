@@ -14,7 +14,8 @@
 
 @implementation MatchOverviewController
 
-@synthesize gameSegControl, courtAreaPicker, match, statsTableView, tempCell, filterView;
+@synthesize gameSegControl, courtAreaPicker, match, statsTableView, tempCell, filterView, courtAreaButton;
+
 - (void)initStatHeaders {
     statHeaders = [[NSMutableArray alloc] initWithObjects:@"WINNERS", @"ERRORS", @"UNFORCED", @"TOTAL", @"NO-LET", @"LET", @"STROKE", @"TOTAL", @"W:E RATIO", @"RALLY CONTROL MARGIN", nil];
 }
@@ -104,6 +105,15 @@
     }
 //    Shot Location Filter
     
+    courtAreaType selectedCourtArea = [Rally typeForString:[courtAreaPickerOptions objectAtIndex:[self.courtAreaPicker selectedRowInComponent:0]]];
+
+    if (selectedCourtArea != CourtAreaFullCourt) {
+        NSPredicate *areaPredicate = [NSPredicate predicateWithFormat:@"courtArea == %u", selectedCourtArea];
+        player1Stat = [player1Stat filteredSetUsingPredicate:areaPredicate];
+        player2Stat = [player2Stat filteredSetUsingPredicate:areaPredicate];
+
+    }
+    
     if (index != ROW_WE_RATIO && index != ROW_RALLY_CONTROL_MARGIN) {
         [strings replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%u", player1Stat.count]];
         [strings replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%u", player2Stat.count]];
@@ -112,79 +122,6 @@
     
     return strings;
 }
-//- (void)initP1Stats {
-//    p1Stats = [[NSMutableArray alloc] init];
-//    NSSet *rallies = self.match.rallies;
-//    NSSet *p1Winners = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == YES)", kWinner]];
-//    NSSet *p1Errors = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == YES)", kError]];
-//    NSSet *p1Unforced = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == YES)", kUnforcedError]];
-//    NSSet *p1NoLet = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == YES)", kNoLet]];
-//    NSSet *p1Let = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == YES)", kLet]];
-//    NSSet *p1Stroke = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == YES)", kStroke]];
-//    
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1Winners.count]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1Errors.count]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1Unforced.count]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1Errors.count + p1Unforced.count]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1NoLet.count]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1Let.count]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1Stroke.count]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", p1Stroke.count + p1NoLet.count + p1Let.count]];
-//
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", self.match.p1WERatio]];
-//    [p1Stats addObject:[NSString stringWithFormat:@"%u", self.match.p1RallyControlMargin]];
-//
-//}
-//
-//- (void)initP2Stats {
-//    p2Stats = [[NSMutableArray alloc] init];
-//    NSSet *rallies = self.match.rallies;
-//    NSSet *p2Winners = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == NO)", kWinner]];
-//    NSSet *p2Errors = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == NO)", kError]];
-//    NSSet *p2Unforced = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == NO)", kUnforcedError]];
-//    NSSet *p2NoLet = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == NO)", kNoLet]];
-//    NSSet *p2Let = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == NO)", kNoLet]];
-//    NSSet *p2Stroke = [rallies filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"(finishingShot.intValue == %u) AND (p1Finished == NO)", kStroke]];
-//    
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2Winners.count]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2Errors.count]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2Unforced.count]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2Errors.count + p2Unforced.count]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2NoLet.count]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2Let.count]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2Stroke.count]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", p2Stroke.count + p2NoLet.count + p2Let.count]];
-//
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", self.match.p2WERatio]];
-//    [p2Stats addObject:[NSString stringWithFormat:@"%u", self.match.p2RallyControlMargin]];
-//    
-//    p2StatHeadersByGame = [[NSMutableArray alloc] initWithCapacity:self.match.numberOfGames.intValue];
-//    for (Game *game in self.match.games) {
-//        NSMutableArray *tempStatArray = [[NSMutableArray alloc] init];
-//        NSPredicate *gamePredicate = [NSPredicate predicateWithFormat:@"game == %@", game];
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", [p2Winners filteredSetUsingPredicate:gamePredicate].count]];
-//        int errors = [p2Errors filteredSetUsingPredicate:gamePredicate].count;
-//        int unforced = [p2Unforced filteredSetUsingPredicate:gamePredicate].count;
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", errors]];
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", unforced]];
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", errors + unforced]];
-//        
-//        int nolet = [p2NoLet filteredSetUsingPredicate:gamePredicate].count;
-//        int let = [p2Let filteredSetUsingPredicate:gamePredicate].count;
-//        int stroke = [p2Stroke filteredSetUsingPredicate:gamePredicate].count;
-//
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", nolet]];
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", let]];
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", stroke]];
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", nolet + let + stroke]];
-//
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", self.match.p2WERatio]];
-//        [tempStatArray addObject:[NSString stringWithFormat:@"%u", self.match.p2RallyControlMargin]];
-//        
-//        [p2StatHeadersByGame replaceObjectAtIndex:game.number.intValue withObject:tempStatArray];
-//    }
-//
-//}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch
 {
@@ -194,7 +131,7 @@
         cells = [[NSMutableDictionary alloc] init];
         pickerDown = CGRectMake(0, 416, 320, 216);
         pickerUp = CGRectMake(0, 200, 320, 216);
-        courtAreaPickerOptions = [[NSMutableArray alloc] initWithObjects:@"Front Left", @"Front Middle", @"Front Right", @"Middle Left", @"Middle Middle", @"Middle Right", @"Back Left", @"Back Middle", @"Back Right", nil];
+        courtAreaPickerOptions = [Rally courtAreaTypes];
 
 
 
@@ -247,6 +184,17 @@
 - (void)gameSegControlChanged {
     [self.statsTableView reloadData];
 }
+
+- (void)resetCourtAreaSelection {
+    
+    if ([self.courtAreaPicker selectedRowInComponent:0] != -1) {
+        self.courtAreaButton.title = [NSString stringWithFormat:@"Court Area: %@", [courtAreaPickerOptions objectAtIndex:[self.courtAreaPicker selectedRowInComponent:0]]];
+
+    }
+    [self.statsTableView reloadData];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -267,6 +215,9 @@
     [self.gameSegControl setSelectedSegmentIndex:self.gameSegControl.numberOfSegments-1];
     
     [self.gameSegControl addTarget:self action:@selector(gameSegControlChanged) forControlEvents:UIControlEventValueChanged];
+    
+    [self.courtAreaPicker selectRow:0 inComponent:0 animated:NO];
+    [self resetCourtAreaSelection];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -286,6 +237,19 @@
 #pragma mark - Buttons
 
 -(void)fillFiltersP1:(ShotFilter *)p1Filter andP2:(ShotFilter *)p2Filter {
+    
+    p1Filter.courtArea = [Rally typeForString:[courtAreaPickerOptions objectAtIndex:[courtAreaPicker selectedRowInComponent:0]]];
+    p2Filter.courtArea = [Rally typeForString:[courtAreaPickerOptions objectAtIndex:[courtAreaPicker selectedRowInComponent:0]]];
+
+    if (gameSegControl.selectedSegmentIndex+1 != gameSegControl.numberOfSegments) {
+        p1Filter.gameNumber = gameSegControl.selectedSegmentIndex+1;
+        p2Filter.gameNumber = gameSegControl.selectedSegmentIndex+1;
+    }
+    else {
+        p1Filter.gameNumber = 0;
+        p2Filter.gameNumber = 0;
+
+    }
 
     MatchOverviewCustomCell *winnerCell = [cells objectForKey:[NSString stringWithFormat:@"%u_%u", ROW_WINNERS, 0]];
     p1Filter.winners = winnerCell.centerButton.filterOn;
@@ -341,6 +305,8 @@
     }
     else {
         [UIView animateWithDuration:0.3 animations:^(void){self.courtAreaPicker.frame = pickerDown;}];
+        [self resetCourtAreaSelection];
+
 
     }
     
@@ -602,6 +568,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [UIView animateWithDuration:0.3 animations:^(void){pickerView.frame = pickerDown;}];
+    [self resetCourtAreaSelection];
     
 }
 

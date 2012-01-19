@@ -83,7 +83,9 @@
     
     NSPredicate *playerPredicate = player1 ? [NSPredicate predicateWithFormat:@"p1Finished == YES"] : [NSPredicate predicateWithFormat:@"p1Finished == NO"];
     
-    NSCompoundPredicate *p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, nil]];
+    NSPredicate *gamePredicate = [NSPredicate predicateWithFormat:@"game.number.intValue == %u", filter.gameNumber];
+    
+    NSCompoundPredicate *p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, gamePredicate, nil]];
     
     return [[rallies filteredSetUsingPredicate:p1CompoundPredicate] sortedArrayUsingDescriptors:NULL];
 }

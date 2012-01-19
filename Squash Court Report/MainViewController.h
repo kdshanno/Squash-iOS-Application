@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreDataModel.h"
+#import "RallyEntryController.h"
 
 
-@interface MainViewController : UITableViewController
+@interface MainViewController : UITableViewController <rallyEntryDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

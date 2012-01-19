@@ -43,10 +43,14 @@ typedef enum {
 @property (nonatomic, retain) NSString * note;
 @property (nonatomic, retain) Player *player;
 @property (nonatomic, retain) NSManagedObject *game;
+@property (readonly) courtAreaType courtArea;
 
 -(int)getPreviousp1Score;
 -(int)getPreviousp2Score;
 - (courtAreaType)courtAreaType;
 - (NSString *)courtAreaString;
++ (courtAreaType)typeForString:(NSString *)string;
++ (NSArray *)courtAreaTypes;
+
 
 @end

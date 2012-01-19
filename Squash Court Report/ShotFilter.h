@@ -17,7 +17,7 @@
     BOOL noLets;
     BOOL strokes;
     int gameNumber;
-    int courtArea;
+    courtAreaType courtArea;
 }
 
 @property(nonatomic, assign) BOOL winners;
@@ -26,8 +26,8 @@
 @property(nonatomic, assign) BOOL lets;
 @property(nonatomic, assign) BOOL noLets;
 @property(nonatomic, assign) BOOL strokes;
-@property(nonatomic, assign) int gameNumber;
-@property(nonatomic, assign) int courtArea;
+@property(nonatomic, assign) int gameNumber; //0 For Full Game
+@property(nonatomic, assign) courtAreaType courtArea;
 
 +(UIColor *)winnersColor;
 +(UIColor *)errorsColor;

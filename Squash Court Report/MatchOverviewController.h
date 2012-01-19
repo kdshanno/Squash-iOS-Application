@@ -10,6 +10,7 @@
 #import "Match.h"
 #import "MatchOverviewCustomCell.h"
 #import "ShotFilter.h"
+#import "CoreDataModel.h"
 
 #define ROW_POINTS 0
 #define ROW_WINNERS 1
@@ -34,8 +35,7 @@
     
     CGRect pickerDown;
     CGRect pickerUp;
-    NSMutableArray *courtAreaPickerOptions;
-    NSString *selectedCourtArea;
+    NSArray *courtAreaPickerOptions;
     NSMutableDictionary *cells;
 //    ShotFilter *p1Filter;
 //    ShotFilter *p2Filter;
@@ -49,6 +49,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *statsTableView;
 @property (nonatomic, strong) IBOutlet MatchOverviewCustomCell *tempCell;
 @property (nonatomic, strong) IBOutlet UIView *filterView;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *courtAreaButton;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil match:(Match *)currentMatch;

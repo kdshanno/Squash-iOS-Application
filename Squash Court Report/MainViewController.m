@@ -12,6 +12,7 @@
 #import "RallyEntryController.h"
 #import "MatchSetupViewController.h"
 #import "MatchListController.h"
+#import "MatchOverviewController.h"
 
 @implementation MainViewController
 
@@ -249,5 +250,13 @@
     
     
 }
+
+#pragma mark - Rally Entry Delegate
+- (void)popToMatchOverview:(Match *)match {
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    MatchOverviewController *vc = [[MatchOverviewController alloc] initWithNibName:@"MatchOverviewController" bundle:nil match:match];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end

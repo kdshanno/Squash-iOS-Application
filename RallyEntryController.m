@@ -9,10 +9,11 @@
 #import "RallyEntryController.h"
 #import "SCRAppDelegate.h"
 #import "SQRStepper.h"
+#import "MatchOverviewController.h"
 
 @implementation RallyEntryController
 
-@synthesize managedObjectContext, match, courtImage, bottomToolbar, titleButton, entryView, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel, topToolbar, opaqueView, playerSegControl, shotSegControlTop, shotSegControlBottom, pageControl, scoreItemButton, gameArray, gameDic, rallyArray, courtView, previousRallyButton, nextRallyButton, topOverlayView, topOverlayTitle, topOverlaySubtitle, gameWonLabel, rallyDoneButton, rallyWithGameDoneButton;
+@synthesize managedObjectContext, match, courtImage, bottomToolbar, titleButton, entryView, entryScrollView, p1NameLabel, p1ScoreLabel, p2NameLabel, p2ScoreLabel, gameNumberLabel, p1Stepper, p2Stepper, gameStepper, p1ScoreNameLabel, p2ScoreNameLabel, topToolbar, opaqueView, playerSegControl, shotSegControlTop, shotSegControlBottom, pageControl, scoreItemButton, gameArray, gameDic, rallyArray, courtView, previousRallyButton, nextRallyButton, topOverlayView, topOverlayTitle, topOverlaySubtitle, gameWonLabel, rallyDoneButton, rallyWithGameDoneButton, delegate;
 
 - (void)addSteppers {
     float version = [[UIDevice currentDevice].systemVersion floatValue];
@@ -456,14 +457,14 @@
     self.rallyArray = [[NSMutableArray alloc] initWithCapacity:0];
     
     NSArray *buttonArray = [NSArray arrayWithObjects:self.rallyDoneButton, self.rallyWithGameDoneButton, nil];
-    for (UIButton *buttion in buttonArray) {
-        [buttion setBackgroundImage:[[UIImage imageNamed:@"RedButton.png"] stretchableImageWithLeftCapWidth:10.0f topCapHeight:0.0f] forState:UIControlStateNormal];
-        buttion.titleLabel.font = [UIFont boldSystemFontOfSize:20];
-        [buttion.titleLabel setAdjustsFontSizeToFitWidth:YES];
-        [buttion.titleLabel setMinimumFontSize:12];
-        buttion.titleLabel.shadowColor = [UIColor lightGrayColor];
-        buttion.titleLabel.shadowOffset = CGSizeMake(0, -1);
-        [buttion setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    for (UIButton *button in buttonArray) {
+        [button setBackgroundImage:[[UIImage imageNamed:@"RedButton.png"] stretchableImageWithLeftCapWidth:10.0f topCapHeight:0.0f] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+        [button.titleLabel setAdjustsFontSizeToFitWidth:YES];
+        [button.titleLabel setMinimumFontSize:12];
+        button.titleLabel.shadowColor = [UIColor lightGrayColor];
+        button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
     }
 }
@@ -908,11 +909,9 @@
     self.match.p1GameScore = [NSNumber numberWithInt:p1GameScore];
     self.match.p2GameScore = [NSNumber numberWithInt:p2GameScore];
 
-    
-    int count = [self.navigationController.viewControllers count];
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:count-4] animated:YES];
-    
     [(SCRAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+
+    [self.delegate popToMatchOverview:self.match];  
 }
 
 -(void)finishButtonPressed {

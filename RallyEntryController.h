@@ -12,6 +12,11 @@
 #import <CoreData/CoreData.h>
 #import "CourtView.h"
 
+@protocol rallyEntryDelegate <NSObject>
+
+-(void)popToMatchOverview:(Match *)match;
+
+@end
 
 @interface RallyEntryController : UIViewController <UIScrollViewDelegate, UIPageViewControllerDelegate, UIActionSheetDelegate> {
     int gameNumber;
@@ -32,6 +37,7 @@
     Game *currentGame;
     double xVal;
     double yVal;
+    id delegate;
     
 }
 
@@ -67,6 +73,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *gameWonLabel;
 @property (strong, nonatomic) IBOutlet UIButton *rallyDoneButton;
 @property (strong, nonatomic) IBOutlet UIButton *rallyWithGameDoneButton;
+@property (strong, nonatomic) id delegate;
 
 
 

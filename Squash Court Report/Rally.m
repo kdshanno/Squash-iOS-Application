@@ -75,6 +75,33 @@
     
 }
 
+- (courtAreaType)courtArea {
+    double x = [self.xPosition doubleValue];
+    double y = [self.yPosition doubleValue];
+    courtAreaType t;
+    
+    if(x < 0.5)
+    {
+        if(y < 0.46)
+            t = CourtAreaFrontLeft;
+        else if (y > 0.75)
+            t = CourtAreaBackLeft;
+        else
+            t = CourtAreaMiddleLeft;
+    }
+    else
+    {
+        if(y < 0.46)
+            t = CourtAreaFrontRight;
+        else if (y > 0.75)
+            t = CourtAreaBackRight;
+        else
+            t = CourtAreaMiddleRight;
+    }
+    
+    return t;
+}
+
 - (courtAreaType)courtAreaType
 {
     double x = [self.xPosition doubleValue];
@@ -101,6 +128,32 @@
     }
     
     return t;
+}
+
++ (NSArray *)courtAreaTypes {
+    return [NSArray arrayWithObjects:@"Full Court", @"Back-Left", @"Back-Right", @"Mid-Left", @"Mid-Right", @"Front-Left", @"Front-Right", nil];
+}
+
++ (courtAreaType)typeForString:(NSString *)string {
+    if ([string isEqualToString:@"Back-Left"]) {
+        return CourtAreaBackLeft;
+    }
+    if ([string isEqualToString:@"Back-Right"]) {
+        return CourtAreaBackRight;
+    }
+    if ([string isEqualToString:@"Mid-Left"]) {
+        return CourtAreaMiddleLeft;
+    }
+    if ([string isEqualToString:@"Mid-Right"]) {
+        return CourtAreaMiddleRight;
+    }
+    if ([string isEqualToString:@"Front-Left"]) {
+        return CourtAreaFrontLeft;
+    }
+    if ([string isEqualToString:@"Front-Right"]) {
+        return CourtAreaFrontRight;
+    }
+    return CourtAreaFullCourt;
 }
 
 - (NSString *)courtAreaString
@@ -132,10 +185,11 @@
             break;
             
         default:
-            abort();
             break;
     }
 }
+
+
 
 
 @end

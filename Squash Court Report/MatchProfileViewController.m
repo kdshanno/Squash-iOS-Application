@@ -153,6 +153,7 @@
 
     
     RallyEntryController *vc = [[RallyEntryController alloc] initWithMatch:currentMatch];
+    vc.delegate = [[self.navigationController viewControllers] objectAtIndex:0];
     [self.navigationController pushViewController:vc animated:YES];
 
 }

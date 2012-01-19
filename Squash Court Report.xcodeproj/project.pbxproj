@@ -43,6 +43,8 @@
 		504ECB21145209BE00FE7B45 /* CourtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 504ECB20145209BE00FE7B45 /* CourtView.m */; };
 		504ECB241455E8EC00FE7B45 /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 504ECB231455E8EC00FE7B45 /* CustomImageView.m */; };
 		50593F611458C34D00C5F021 /* PlayerEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50593F5F1458C34C00C5F021 /* PlayerEditController.m */; };
+		5066893D14C7B95B003DC95A /* RedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5066893B14C7B95B003DC95A /* RedButton@2x.png */; };
+		5066893E14C7B95B003DC95A /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 5066893C14C7B95B003DC95A /* RedButton.png */; };
 		50A0EBD91445424B00A8B3CF /* startImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBD71445424B00A8B3CF /* startImage.png */; };
 		50A0EBDA1445424B00A8B3CF /* startImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBD81445424B00A8B3CF /* startImage@2x.png */; };
 		50A0EBDE1445427400A8B3CF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A0EBDD1445427400A8B3CF /* Default.png */; };
@@ -165,9 +167,9 @@
 		504ECB231455E8EC00FE7B45 /* CustomImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageView.m; sourceTree = "<group>"; };
 		50593F5E1458C34C00C5F021 /* PlayerEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerEditController.h; path = ../PlayerEditController.h; sourceTree = "<group>"; };
 		50593F5F1458C34C00C5F021 /* PlayerEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerEditController.m; path = ../PlayerEditController.m; sourceTree = "<group>"; };
+		5066893B14C7B95B003DC95A /* RedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedButton@2x.png"; sourceTree = "<group>"; };
+		5066893C14C7B95B003DC95A /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButton.png; sourceTree = "<group>"; };
 		509FEEC114B3D6B3008AC7D4 /* BigRedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BigRedButton.png; sourceTree = "<group>"; };
-		509FEEC814B611E8008AC7D4 /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RedButton.png; path = "Squash Court Report/RedButton.png"; sourceTree = "<group>"; };
-		509FEECA14B612EA008AC7D4 /* RedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RedButton@2x.png"; path = "Squash Court Report/RedButton@2x.png"; sourceTree = "<group>"; };
 		50A0EBD71445424B00A8B3CF /* startImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startImage.png; sourceTree = "<group>"; };
 		50A0EBD81445424B00A8B3CF /* startImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startImage@2x.png"; sourceTree = "<group>"; };
 		50A0EBDD1445427400A8B3CF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -294,9 +296,9 @@
 				504ECB231455E8EC00FE7B45 /* CustomImageView.m */,
 				50211E9E1450CC6200EF9AD4 /* RallyEntryController.h */,
 				50211E9F1450CC6200EF9AD4 /* RallyEntryController.m */,
-				509FEECA14B612EA008AC7D4 /* RedButton@2x.png */,
-				509FEEC814B611E8008AC7D4 /* RedButton.png */,
 				50211EA01450CC6200EF9AD4 /* RallyEntryController.xib */,
+				5066893B14C7B95B003DC95A /* RedButton@2x.png */,
+				5066893C14C7B95B003DC95A /* RedButton.png */,
 				50D1A2181451EA9300CCE657 /* ShotEntryBackground@2x.png */,
 				50D1A21B1451F7D900CCE657 /* ShotEntryBackground.png */,
 			);
@@ -695,6 +697,8 @@
 				5005644E14B14C5300E431C3 /* MatchOverviewController.xib in Resources */,
 				50F6D97A14B2CDD70046F0F5 /* PointsCourtViewController.xib in Resources */,
 				5BE029FB14BD217200C24ED2 /* expanded.png in Resources */,
+				5066893D14C7B95B003DC95A /* RedButton@2x.png in Resources */,
+				5066893E14C7B95B003DC95A /* RedButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
