@@ -51,22 +51,31 @@
         int numGames = 0;
         for(Game *game in match.games)
         {
-            arrayOfGames[[game.number intValue] - 1] = game;
-            numGames++;
+            if(filters[0].gameNumber == 0 || [game.number intValue] == filters[0].gameNumber)
+            {
+                arrayOfGames[[game.number intValue] - 1] = game;
+                numGames++;
+            }
         }
         
         pointArrays = [NSMutableArray arrayWithCapacity:numGames];
-        for(int i = 0; i < numGames; i++)
+        int gamesArrayLocation = 0;
+        for(int i = 0; i < 5; i++)
         {
             Game *g = arrayOfGames[i];
-            [games insertObject:g atIndex:i];
-            
-            NSSortDescriptor *sd =[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES];
-            NSArray *sdArray = [NSArray arrayWithObjects:sd, nil];
-            NSMutableArray *points = [NSMutableArray arrayWithArray:[[g rallies] 
-                                                                     sortedArrayUsingDescriptors:sdArray]];
-            points = [self filterOutPoints:points];
-            [pointArrays insertObject:points atIndex:i];
+            if(g != nil)
+            {
+                [games insertObject:g atIndex:gamesArrayLocation];
+                
+                NSSortDescriptor *sd =[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES];
+                NSArray *sdArray = [NSArray arrayWithObjects:sd, nil];
+                NSMutableArray *points = [NSMutableArray arrayWithArray:[[g rallies] 
+                                                                         sortedArrayUsingDescriptors:sdArray]];
+                points = [self filterOutPoints:points];
+                [pointArrays insertObject:points atIndex:gamesArrayLocation];
+                gamesArrayLocation++;
+
+            }
         }
         arrowImages = [NSMutableArray arrayWithCapacity:numGames];
     }
@@ -288,7 +297,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"Game %d", section + 1];
+    return @" "; /* Edit title in viewForHeaderInSection method*/
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -298,7 +307,7 @@
     //UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(14, -2, 100, 50)];
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(29, -2, 100, 50)];
     [title setBackgroundColor:[UIColor clearColor]];
-    [title setText:[NSString stringWithFormat:@"Game %d", section + 1]];
+    [title setText:[NSString stringWithFormat:@"Game %d", [((Game *)[games objectAtIndex:section]).number intValue]]];
     [title setFont:[UIFont boldSystemFontOfSize:17]];
     [title setTextColor:[UIColor darkGrayColor]];
     [header addSubview:title];

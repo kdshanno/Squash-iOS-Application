@@ -79,13 +79,33 @@
         [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kNoLet]];
     }
     
+    //filter by court area
+    NSPredicate *courtAreaPredicate = [NSPredicate predicateWithFormat:@"courtArea == %u", filter.courtArea];
+            
     NSCompoundPredicate *compoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSOrPredicateType subpredicates:predicates];
     
     NSPredicate *playerPredicate = player1 ? [NSPredicate predicateWithFormat:@"p1Finished == YES"] : [NSPredicate predicateWithFormat:@"p1Finished == NO"];
     
+    
     NSPredicate *gamePredicate = [NSPredicate predicateWithFormat:@"game.number.intValue == %u", filter.gameNumber];
     
-    NSCompoundPredicate *p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, gamePredicate, nil]];
+    NSCompoundPredicate *p1CompoundPredicate;
+    
+    if(filter.courtArea != CourtAreaFullCourt)
+    {
+        if(filter.gameNumber != 0)
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, gamePredicate, courtAreaPredicate, nil]];
+        else
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, courtAreaPredicate, nil]];        
+    }
+    else
+    {
+        if(filter.gameNumber != 0)
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, gamePredicate, nil]];
+        else
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, nil]];
+    }
+    
     
     return [[rallies filteredSetUsingPredicate:p1CompoundPredicate] sortedArrayUsingDescriptors:NULL];
 }

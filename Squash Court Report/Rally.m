@@ -76,30 +76,7 @@
 }
 
 - (courtAreaType)courtArea {
-    double x = [self.xPosition doubleValue];
-    double y = [self.yPosition doubleValue];
-    courtAreaType t;
-    
-    if(x < 0.5)
-    {
-        if(y < 0.46)
-            t = CourtAreaFrontLeft;
-        else if (y > 0.75)
-            t = CourtAreaBackLeft;
-        else
-            t = CourtAreaMiddleLeft;
-    }
-    else
-    {
-        if(y < 0.46)
-            t = CourtAreaFrontRight;
-        else if (y > 0.75)
-            t = CourtAreaBackRight;
-        else
-            t = CourtAreaMiddleRight;
-    }
-    
-    return t;
+    return [self courtAreaType];
 }
 
 - (courtAreaType)courtAreaType
@@ -110,19 +87,19 @@
     
     if(x < 0.5)
     {
-        if(y < 0.46)
-            t = CourtAreaFrontLeft;
-        else if (y > 0.75)
+        if(y < 0.25)
             t = CourtAreaBackLeft;
+        else if (y > 0.54)
+            t = CourtAreaFrontLeft;
         else
             t = CourtAreaMiddleLeft;
     }
     else
     {
-        if(y < 0.46)
-            t = CourtAreaFrontRight;
-        else if (y > 0.75)
+        if(y < 0.25)
             t = CourtAreaBackRight;
+        else if (y > 0.54)
+            t = CourtAreaFrontRight;
         else
             t = CourtAreaMiddleRight;
     }
@@ -185,6 +162,7 @@
             break;
             
         default:
+            abort();
             break;
     }
 }
