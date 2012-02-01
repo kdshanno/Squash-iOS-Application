@@ -179,13 +179,24 @@
     
     NSPredicate *playerPredicate = player1 ? [NSPredicate predicateWithFormat:@"p1Finished == YES"] : [NSPredicate predicateWithFormat:@"p1Finished == NO"];
     
-    NSCompoundPredicate *p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, nil]];
-
     
-    if (filter.gameNumber <= 5 && filter.gameNumber > 0) {
-        NSPredicate *gamePredicate = [NSPredicate predicateWithFormat:@"game.number.intValue == %u", filter.gameNumber];
-        p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:p1CompoundPredicate, gamePredicate, nil]];
-
+    NSPredicate *gamePredicate = [NSPredicate predicateWithFormat:@"game.number.intValue == %u", filter.gameNumber];
+    
+    NSCompoundPredicate *p1CompoundPredicate;
+    
+    if(filter.courtArea != CourtAreaFullCourt)
+    {
+        if(filter.gameNumber != 0)
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, gamePredicate, courtAreaPredicate, nil]];
+        else
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, courtAreaPredicate, nil]];        
+    }
+    else
+    {
+        if(filter.gameNumber != 0)
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, gamePredicate, nil]];
+        else
+            p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, nil]];
     }
     
     

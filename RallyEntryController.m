@@ -1000,10 +1000,6 @@
         
         [self.rallyWithGameDoneButton setTitle:[NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player1 getName:kFirstInitialLastName], (int)[(UIStepper *)self.gameStepper value]] forState:UIControlStateNormal];
         
-        NSLog(@" Number of Games = %u", self.match.numberOfGames.intValue);
-        NSLog(@" p1 Game Score = %u", p1GameScore);
-
-        NSLog(@"%u", self.match.numberOfGames.intValue/2);
         if (p1GameScore >= self.match.numberOfGames.intValue/2 && p1GameScore >= p2GameScore) {
             [self.rallyWithGameDoneButton setTitle:[self.rallyWithGameDoneButton.titleLabel.text stringByAppendingString:@" and Match"] forState:UIControlStateNormal];
 
@@ -1016,8 +1012,6 @@
 
         [self.rallyWithGameDoneButton setTitle: [NSString stringWithFormat:@"%@ Wins Game %u", [self.match.player2 getName:kFirstInitialLastName], (int)[(UIStepper *)self.gameStepper value]] forState:UIControlStateNormal];
         
-        NSLog(@" Number of Games = %u", self.match.numberOfGames.intValue);
-        NSLog(@" p2 Game Score = %u", p2GameScore);
         if (p2GameScore >= self.match.numberOfGames.intValue/2 && p2GameScore >= p1GameScore) {
             [self.rallyWithGameDoneButton setTitle:[self.rallyWithGameDoneButton.titleLabel.text stringByAppendingString:@" and Match"] forState:UIControlStateNormal];
             
