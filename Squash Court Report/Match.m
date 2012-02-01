@@ -41,19 +41,112 @@
     
 }
 
--(int)p1WERatio {
-    return 1;
-}
--(int)p2WERatio {
-    return 1;
+-(float)p1WERatio {
+    float p1winners = 0;
+    float p1errors = 0;
+    NSSet *tempRallies = self.rallies;
+    for (Rally *rally in tempRallies) {
+        if (rally.finishingShot.intValue == kWinner && rally.p1Finished.boolValue == YES) {
+            p1winners++;
+        }
+        else if ((rally.finishingShot.intValue == kUnforcedError || rally.finishingShot.intValue == kError) && rally.p1Finished.boolValue == YES) {
+            p1errors++;
+        }
+    }
+    return p1winners/p1errors;
 }
 
--(int)p1RallyControlMargin {
-    return 30;
+-(float)p2WERatio {
+    float p2winners = 0;
+    float p2errors = 0;
+    NSSet *tempRallies = self.rallies;
+    for (Rally *rally in tempRallies) {
+        if (rally.finishingShot.intValue == kWinner && rally.p1Finished.boolValue == NO) {
+            p2winners++;
+        }
+        else if ((rally.finishingShot.intValue == kUnforcedError || rally.finishingShot.intValue == kError) && rally.p1Finished.boolValue == NO) {
+            p2errors++;
+        }
+    }
+    return p2winners/p2errors;
 }
 
--(int)p2RallyControlMargin {
-    return 5;
+-(float)p1RallyControlMargin {
+    float p1Winners = 0;
+    float p1UnforcedErrors = 0;
+    float p1TotalErrors = 0;
+    float p2Winners = 0;
+    float p2TotalErrors = 0;
+    float p2Errors = 0;
+    NSSet *tempRallies = self.rallies;
+    for (Rally *rally in tempRallies) {
+        switch (rally.finishingShot.intValue) {
+            case kWinner:
+                if (rally.p1Finished.boolValue) p1Winners++;
+                else p2Winners++;
+                break;
+            case kError:
+                if (rally.p1Finished.boolValue) p1TotalErrors++;
+                else {
+                    p2TotalErrors++;
+                    p2Errors++;
+                }
+                break;
+            case kUnforcedError:
+                if (rally.p1Finished.boolValue) {
+                    p1UnforcedErrors++;
+                    p1TotalErrors++;
+                }
+                else p2TotalErrors++;
+                break;
+            default:
+                break;
+        }
+        
+    }
+    return (p1Winners + p2Errors - p1UnforcedErrors)/(p1Winners + p1TotalErrors + p2Winners + p2TotalErrors);
+}
+
+-(float)p2RallyControlMargin {
+    float p2Winners = 0;
+    float p2TotalErrors = 0;
+    float p2UnforcedErros = 0;
+
+    float p1Winners = 0;
+    float p1Errors = 0;
+    float p1TotalErrors = 0;
+    
+    NSSet *tempRallies = self.rallies;
+    for (Rally *rally in tempRallies) {
+        switch (rally.finishingShot.intValue) {
+            case kWinner:
+                if (rally.p1Finished.boolValue) p1Winners++;
+                else p2Winners++;
+                break;
+            case kError:
+                if (rally.p1Finished.boolValue) {
+                    p1TotalErrors++;
+                    p1Errors++;
+                }
+                else {
+                    p2TotalErrors++;
+                }
+                break;
+            case kUnforcedError:
+                if (rally.p1Finished.boolValue) {
+                    p1TotalErrors++;
+                }
+                else {
+                    p2TotalErrors++;
+                    p2UnforcedErros++;
+                }
+                break;
+            default:
+                break;
+        }
+        
+    }
+    return (p2Winners + p1Errors - p2UnforcedErros)/(p2Winners + p2TotalErrors + p1Winners + p1TotalErrors);
 }
 
 -(NSArray *)getShotsWithFilter:(ShotFilter *)filter withPlayer1:(BOOL)player1 {
@@ -83,9 +176,15 @@
     
     NSPredicate *playerPredicate = player1 ? [NSPredicate predicateWithFormat:@"p1Finished == YES"] : [NSPredicate predicateWithFormat:@"p1Finished == NO"];
     
-    NSPredicate *gamePredicate = [NSPredicate predicateWithFormat:@"game.number.intValue == %u", filter.gameNumber];
+    NSCompoundPredicate *p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, nil]];
+
     
-    NSCompoundPredicate *p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:compoundPredicate, playerPredicate, gamePredicate, nil]];
+    if (filter.gameNumber <= 5 && filter.gameNumber > 0) {
+        NSPredicate *gamePredicate = [NSPredicate predicateWithFormat:@"game.number.intValue == %u", filter.gameNumber];
+        p1CompoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:[NSArray arrayWithObjects:p1CompoundPredicate, gamePredicate, nil]];
+
+    }
+    
     
     return [[rallies filteredSetUsingPredicate:p1CompoundPredicate] sortedArrayUsingDescriptors:NULL];
 }

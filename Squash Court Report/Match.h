@@ -44,11 +44,11 @@ typedef enum {
 @property (nonatomic, retain) NSNumber * recordingType;
 @property (readonly) NSSet *rallies;
 
-@property (readonly) int p1WERatio;
-@property (readonly) int p1RallyControlMargin;
+@property (readonly) float p1WERatio;
+@property (readonly) float p1RallyControlMargin;
 
-@property (readonly) int p2WERatio;
-@property (readonly) int p2RallyControlMargin;
+@property (readonly) float p2WERatio;
+@property (readonly) float p2RallyControlMargin;
 
 -(Player *)winner;
 -(Player *)loser;
