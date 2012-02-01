@@ -172,6 +172,9 @@
         [predicates addObject:[NSPredicate predicateWithFormat:@"finishingShot.intValue == %u", kNoLet]];
     }
     
+    //filter by court area
+    NSPredicate *courtAreaPredicate = [NSPredicate predicateWithFormat:@"courtArea == %u", filter.courtArea];
+            
     NSCompoundPredicate *compoundPredicate = [[NSCompoundPredicate alloc] initWithType:NSOrPredicateType subpredicates:predicates];
     
     NSPredicate *playerPredicate = player1 ? [NSPredicate predicateWithFormat:@"p1Finished == YES"] : [NSPredicate predicateWithFormat:@"p1Finished == NO"];
