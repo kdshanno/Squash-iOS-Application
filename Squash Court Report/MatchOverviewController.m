@@ -85,13 +85,13 @@
             break;
         case ROW_WE_RATIO:
             [strings replaceObjectAtIndex:0 withObject:@"W:E RATIO"];
-            [strings replaceObjectAtIndex:1 withObject:@"2"];
-            [strings replaceObjectAtIndex:2 withObject:@"2"];
+            [strings replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%.f", self.match.p1WERatio]];
+            [strings replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%.f", self.match.p2WERatio]];
             break;
         case ROW_RALLY_CONTROL_MARGIN:
             [strings replaceObjectAtIndex:0 withObject:@"RALLY CONTROL MARGIN"];
-            [strings replaceObjectAtIndex:1 withObject:@"2"];
-            [strings replaceObjectAtIndex:2 withObject:@"2"];
+            [strings replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%.f%%", self.match.p1RallyControlMargin*100]];
+            [strings replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%.f%%", self.match.p2RallyControlMargin*100]];
             break;
         default:
             break;
