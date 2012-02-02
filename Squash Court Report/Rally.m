@@ -85,20 +85,22 @@
     double y = [self.yPosition doubleValue];
     courtAreaType t;
     
+    //Back Court = 25% , Mid Court = 29% , Front Court = 46%
+    
     if(x < 0.5)
     {
-        if(y < 0.25)
+        if(y > 0.75)
             t = CourtAreaBackLeft;
-        else if (y > 0.54)
+        else if (y < 0.46)
             t = CourtAreaFrontLeft;
         else
             t = CourtAreaMiddleLeft;
     }
     else
     {
-        if(y < 0.25)
+        if(y > 0.75)
             t = CourtAreaBackRight;
-        else if (y > 0.54)
+        else if (y < 0.46)
             t = CourtAreaFrontRight;
         else
             t = CourtAreaMiddleRight;
