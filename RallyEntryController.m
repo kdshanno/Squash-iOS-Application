@@ -979,10 +979,10 @@
     NSArray *games = [self.match.games sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
     for (Game *game in games) {
         Rally *tempRally = [[game.rallies sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pointNumber" ascending:YES]]] lastObject];
-        if (tempRally.p1Score.intValue > tempRally.p2Score.intValue) {
+        if (tempRally.p1Score.intValue > tempRally.p2Score.intValue && tempRally.p1Score.intValue >= self.match.pointsPerGame.intValue) {
             p1GameScore++;
         }
-        else if (tempRally.p1Score.intValue < tempRally.p2Score.intValue) {
+        else if (tempRally.p1Score.intValue < tempRally.p2Score.intValue && tempRally.p2Score.intValue >= self.match.pointsPerGame.intValue) {
             p2GameScore++;
         }
     }
@@ -993,6 +993,8 @@
     
     BOOL endMatch = (gameNumber >= self.match.numberOfGames.intValue/2+1);
     
+    NSLog(@"Game 1 - %u", p1GameScore);
+    NSLog(@"Game 2 - %u", p2GameScore);
     if ((int)[(UIStepper *)p1Stepper value] >= self.match.pointsPerGame.intValue && (int)[(UIStepper *)p1Stepper value] > (int)[(UIStepper *)p2Stepper value]) {
         self.rallyWithGameDoneButton.hidden = FALSE;
         [self.rallyDoneButton setTitle:[NSString stringWithFormat:@"%@ Didn't Win Game %u", [self.match.player1 getName:kFirstInitialLastName], (int)[(UIStepper *)self.gameStepper value]] forState:UIControlStateNormal];
