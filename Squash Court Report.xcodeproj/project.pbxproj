@@ -100,6 +100,7 @@
 		5B69524314AE74690084C38C /* ShotFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B69524214AE74690084C38C /* ShotFilter.m */; };
 		5B7973E51460FD7500569407 /* AnimatedUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7973E41460FD7500569407 /* AnimatedUIDatePicker.m */; };
 		5B804D2914AE9ACC00F8D948 /* MatchListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B804D2714AE9ACC00F8D948 /* MatchListController.m */; };
+		5BACAC2E14D8F79300BA9BC2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0712581485DB3E00BDEC1F /* Icon.png */; };
 		5BE029FB14BD217200C24ED2 /* expanded.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE029FA14BD217200C24ED2 /* expanded.png */; };
 		5BF1F744144CDBED000455BC /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F740144CDBED000455BC /* button_back.png */; };
 		5BF1F745144CDBED000455BC /* MatchSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF1F741144CDBED000455BC /* MatchSetupView.xib */; };
@@ -699,6 +700,7 @@
 				5BE029FB14BD217200C24ED2 /* expanded.png in Resources */,
 				5066893D14C7B95B003DC95A /* RedButton@2x.png in Resources */,
 				5066893E14C7B95B003DC95A /* RedButton.png in Resources */,
+				5BACAC2E14D8F79300BA9BC2 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
